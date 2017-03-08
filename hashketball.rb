@@ -1,4 +1,4 @@
-require "pry"
+require 'pry'
 
 def game_hash
   {
@@ -120,26 +120,113 @@ def game_hash
 end
 
 
-def num_points_scored(name)
+def num_points_scored(name_fed)
 
-find_the_player(name).fetch(:points) 
+points_scored = ""
 
+  game_hash.each do |home_or_away, info_group|
+
+    info_group.each do |label, specifics|
+
+      if label == :players
+        specifics.each do |stat|
+
+
+            stat.each do |category, value|
+              if value == name_fed
+                stat.each do |category, value|
+                  if category == :points
+
+                  points_scored = value
+
+                end
+
+
+              end
+
+
+            end
+
+          end
+
+
+        end
+
+
+      end
+
+    end
+
+
+  end
+
+
+
+points_scored
 
 
 
 end
 
 
-def shoe_size(name)
+def shoe_size(name_fed)
 
-  find_the_player(name).fetch(:shoe)
 
-end
+  the_shoe = ""
+
+    game_hash.each do |home_or_away, info_group|
+
+      info_group.each do |label, specifics|
+
+        if label == :players
+          specifics.each do |stat|
+
+
+              stat.each do |category, value|
+                if value == name_fed
+                  stat.each do |category, value|
+                    if category == :shoe
+
+                    the_shoe = value
+
+                  end
+
+
+                end
+
+
+              end
+
+            end
+
+
+          end
+
+
+        end
+
+      end
+
+
+    end
+
+
+
+  the_shoe
+
+
+
+  end
+
+
+
+
+
 
 
 def team_colors(team_name)
 
-  #team = find_the_team(team_name) - trying to do things without the helper classes
+
 
 home_team = game_hash[:home][:team_name]
 away_team = game_hash[:away][:team_name]
@@ -147,7 +234,7 @@ away_team = game_hash[:away][:team_name]
 if team_name == home_team
 
 colors = game_hash[:home][:colors]
-  
+
 elsif team_name == away_team
 
   colors = game_hash[:away][:colors]
@@ -170,22 +257,23 @@ away_players = away_players.fetch(:players)
 players = away_players + home_players
 
 
+
 end
 
-puts "#{players}"
+
 
 
 
 def find_the_player(name)
 
-players.find {|player| player.fetch(:player_name) == name}
+
 
 
 end
 
 
 def find_the_team(team_name)
-    teams.find {|team| team.fetch(:team_name) == team_name}
+
 
 
 end
@@ -214,42 +302,108 @@ end
 
 
 def player_numbers(team_name)
-  find_the_team(team_name)[:players].map do |player|
-    player[:number]
-  end
+
+  the_numbers = []
+
+    game_hash.each do |home_or_away, info_group|
+
+  info_group.each do |label, specifics|
+
+    if specifics == team_name
+
+      info_group.each do |label, specifics|
+
+        if label == :players
+
+              specifics.each do |player_blob|
+                player_blob.each do |inner_label, inner_value|
+
+                if inner_label == :number
+
+                    the_numbers << inner_value
+
+
+                  end
+
+
+              end
+
+            end
+
+
+          end
+
+        end
+        end
+
+      end
+
+
+    end
+
+
+
+  the_numbers
+
+
+
+
+
 end
 
-def player_stats(player_name)
-  find_the_player(player_name).reject { |key, value| key == :player_name }
+def player_stats(name_given)
+
+  the_stats = {}
+
+    game_hash.each do |home_or_away, info_group|
+
+  info_group.each do |label, specifics|
+
+        if label == :players
+
+              specifics.each do |player_blob|
+
+                player_blob.each do |inner_label, inner_value|
+
+                if inner_value == name_given
+
+                  the_stats = player_blob
+
+
+                  end
+
+
+            end
+
+
+          end
+
+
+        end
+
+      end
+
+
+    end
+
+
+the_stats.dup.tap { |h| h.delete(:player_name) }
+
 end
 
 
 
 def player_biggest_shoe_size
-players.sort_by {|player| player.fetch(:shoe) }.last
+
+
+  players.sort_by {|player| player.fetch(:shoe) }.last
 end
 
 
 def big_shoe_rebounds
-player = player_biggest_shoe_size
-player.fetch(:rebounds)
+
+  player = player_biggest_shoe_size
+  player.fetch(:rebounds)
+
+
 end
-
-
-def good_practices
-  game_hash.each do |location, team_data|
-    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-    binding.pry
-      team_data.each do |attribute, data|
-        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-        binding.pry
-
-        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-        data.each do |data_item|
-            binding.pry
-      end
-    end
-  end
-end
-
-#good_practices
