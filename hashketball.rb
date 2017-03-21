@@ -177,3 +177,47 @@ def big_shoe_rebounds
   end[0]
   look_up_player_stats(biggest_player, :rebounds)
 end
+
+def player_with_highest_stat(stat)
+  stat_hash = {}
+  game_hash.each do |team, team_keys|
+    team_keys[:players].each do |player, stats|
+      stat_hash[player] = stats[stat]
+    end
+  end
+  stat_hash.max_by do |player, stat|
+    stat
+  end[0]
+end
+
+def most_points_scored
+  player_with_highest_stat(:points)
+end
+
+def winning_team
+  points_hash = {}
+  game_hash.each do |team, team_keys|
+    team_points = 0
+    team_keys[:players].each do |player, stats|
+      team_points += stats[:points]
+    end
+    points_hash[team_keys[:team_name]] = team_points
+  end
+  points_hash.max_by do |team, points|
+    points
+  end[0]
+end
+
+def player_with_longest_name
+  game_hash.collect do |team, team_keys|
+    team_keys[:players].keys.collect do |player_name|
+      player_name
+    end
+  end.flatten.max_by do |player_name|
+    player_name.length
+  end
+end
+
+def long_name_steals_a_ton?
+  player_with_longest_name == player_with_highest_stat(:steals) ? true : false
+end
