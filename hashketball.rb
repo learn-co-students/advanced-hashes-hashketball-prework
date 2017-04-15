@@ -168,3 +168,109 @@ def big_shoe_rebounds
 end
 rebound_total
 end
+
+def most_points_scored
+  most_points = 0
+  top_scorer = ""
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats|
+          stats.each do |stat, value|
+            if stat == :points && value > most_points
+              most_points = value
+            end
+          end
+        end
+      end
+    end
+  end
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats|
+          if stats[:points] == most_points
+            top_scorer = player
+          end
+        end
+      end
+    end
+  end
+  top_scorer
+end
+
+def winning_team
+  team1_points = 0
+  team2_points = 0
+  team1 = game_hash[:home][:team_name]
+  team2 = game_hash[:away][:team_name]
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team1
+      team_data.each do |attribute, data|
+        if attribute == :players
+          data.each do |player, stats|
+            team1_points = team1_points + stats[:points]
+          end
+        end
+      end
+    elsif team_data[:team_name] == team2
+      team_data.each do |attribute, data|
+        if attribute == :players
+          data.each do |player, stats|
+            team2_points = team2_points + stats[:points]
+          end
+        end
+      end
+    end
+  end
+  if team1_points > team2_points
+    team1
+  elsif team2_points > team1_points
+    team2
+  else
+    "tie"
+  end
+end
+
+def player_with_longest_name
+  long_name = 0
+  long_name_player = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats|
+          if player.length > long_name
+            long_name = player.length
+          end
+          if long_name == player.length
+            long_name_player = player
+          end
+        end
+      end
+    end
+  end
+  long_name_player
+end
+
+def long_name_steals_a_ton?
+  player_with_longest_name
+  high_steals = 0
+  high_steals_player = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats|
+          stats.each do |stat, value|
+            if stat == :steals && value > high_steals
+              high_steals = value
+            end
+          end
+          if stats[:steals] == high_steals
+            high_steals_player = player
+        end
+      end
+    end
+  end
+end
+  player_with_longest_name == high_steals_player
+end
