@@ -36,7 +36,7 @@ def game_hash
           :blocks =>1,
           :slam_dunks =>15
         },{
-        player_name:"Mason Pumlee",
+        player_name:"Mason Plumlee",
           :number =>1,
           :shoe =>19,
           :points =>26,
@@ -59,8 +59,8 @@ def game_hash
       ]
     },
       :away =>{
-        :team_name => "",
-        :colors => [],
+        :team_name => "Charlotte Hornets",
+        :colors => ["Turquoise", "Purple"],
         :players => [
           {
             player_name: "Jeff Adrien",
@@ -73,7 +73,7 @@ def game_hash
             :blocks =>7,
             :slam_dunks =>2
           },{
-            player_name: "Bismak Biyambo",
+            player_name: "Bismak Biyombo",
             :number =>0,
             :shoe =>16,
             :points =>12,
@@ -117,7 +117,7 @@ def game_hash
       }
   }
 end
-
+=begin
 def good_practices
   game_hash.each do |location, team_data|
     binding.pry
@@ -127,5 +127,46 @@ def good_practices
         binding.pry
       end
     end
-  end 
+  end
 end
+=end
+
+def num_points_scored(player_name)
+  game_hash.each do |side,side_info_hash|
+     side_info_hash[:players].each do |players_hash|
+       players_hash.each do |parameter,stat|
+         if stat==player_name
+           return players_hash[:points]
+         end
+       end
+     end
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |side,side_info_hash|
+    side_info_hash[:players].each do |player_hash|
+      player_hash.each do |parameter,stat|
+        if player_name==stat
+          return player_hash[:shoe]
+        end
+      end
+     end
+  end
+end
+
+def team_colors(team_name)
+ return game_hash.each do |side,side_hash|
+   if side_hash[:team_name] == team_name
+     return side_hash[:colors]
+    end
+   end
+end
+
+def team_names
+  name_array=[]
+  game_hash.each do |side,side_info|
+     name_array << side_info[:team_name]
+  end
+  return name_array
+end 
