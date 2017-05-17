@@ -169,4 +169,39 @@ def team_names
      name_array << side_info[:team_name]
   end
   return name_array
+end
+
+def player_numbers(team_name)
+  number_array =[]
+  game_hash.each do |side, side_info|
+    if side_info[:team_name] ==team_name
+       side_info[:players].each do |player_hash|
+       number_array << player_hash[:number]
+     end
+    end
+  end
+  return number_array
+end
+
+def player_stats(player_name)
+  game_hash.each do |side, side_info|
+    side_info[:players].each do |player_hash|
+    if player_hash[:player_name]==player_name
+      player_hash.delete(:player_name)
+    return player_hash
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size_array=[]
+  game_hash.each do |side, side_data|
+    side_data[:players].each do |players_hash|
+     shoe_size_array << players_hash[:shoe]
+     if players_hash[:shoe]==shoe_size_array.sort!.last
+       return players_hash[:rebounds]
+     end
+    end
+  end
 end 
