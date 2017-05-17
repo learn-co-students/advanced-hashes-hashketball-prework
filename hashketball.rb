@@ -195,24 +195,61 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
-  shoe_size_array=[]
+  shoe_size_hash ={}
   game_hash.each do |side, side_data|
     side_data[:players].each do |players_hash|
-     shoe_size_array << players_hash[:shoe]
-     if players_hash[:shoe]==shoe_size_array.sort!.last
-       return players_hash[:rebounds]
-     end
+     shoe_key = players_hash[:shoe]
+     rebounds = players_hash[:rebounds]
+     shoe_size_hash[shoe_key] = rebounds
     end
+  end
+  return shoe_size_hash.max[1]
+end
+#try this again by creating a new hash with player name => points scored values
+def most_points_scored
+  points_hash={}
+  game_hash.each do |side, side_data|
+    side_data[:players].each do |players_hash|
+     name = players_hash[:player_name]
+      number_of_points = players_hash[:points]
+      points_hash[name] = number_of_points
+    end
+  end
+  return points_hash.key(points_hash.values.max)
+end
+
+def winning_team
+  points_array_home=[]
+  points_array_away=[]
+
+  game_hash[:home][:players].each do |player_hash|
+    points_array_home << player_hash[:points]
+  end
+    game_hash[:away][:players].each do |player_hash|
+    points_array_away << player_hash[:points]
+  end
+  sum_home =points_array_home.inject{|sum,x| sum+x}
+  sum_away =points_array_away.inject{|sum,x| sum+x}
+
+  if sum_home>sum_away
+    return game_hash[:home][:team_name]
+  elsif sum_away>sum_home
+    return [:away][:team_name]
+  else
+    return "Draw"
   end
 end
 
-def most_points_scored
-  points_array=[]
-  game_hash.each do |side, side_data|
-    side_data[:players].each do |players_hash|
-      points_array << players_hash[:points]
-      if players_hash[:points]==points_array.sort!.last
-        return players_hash[:player_name]
-      end
+def player_with_longest_name
+  name_length_hash ={}
+  game_hash.each do |side, side_info|
+    side_info[:players].each do |player_hash|
+      #sets variables
+      name = player_hash[:player_name]
+      length = player_hash[:player_name].length
+      #creates new hash baed on variables
+      name_length_hash[name] = length
     end
-  end 
+  end
+  return name_length_hash.key(name_length_hash.values.max)
+end
