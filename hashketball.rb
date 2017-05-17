@@ -253,3 +253,19 @@ def player_with_longest_name
   end
   return name_length_hash.key(name_length_hash.values.max)
 end
+
+def long_name_steals_a_ton?
+  steal_hash ={}
+  game_hash.each do |side, side_info|
+    side_info[:players].each do |player_hash|
+    name = player_hash[:player_name]
+    steals =  player_hash[:steals]
+    steal_hash[name] = steals
+    end
+  end
+  if player_with_longest_name == steal_hash.key(steal_hash.values.max)
+    return true
+  else
+    return false
+  end
+end 
