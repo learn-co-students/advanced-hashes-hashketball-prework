@@ -216,24 +216,66 @@ def big_shoe_rebounds
 end
 
 def most_points_scored
-	
-
+		winner = ''
+		count = 0
 			game_hash.map do |x, v| 
-
-			 return v[:players].sort_by {|key, val| val[:points] }.last[0]
-
-	end 
-
+				if v[:players].sort_by {|key, val| val[:points] }.last[1][:points] > count 
+			  	winner = v[:players].sort_by {|key, val| val[:points] }.last[0]
+			  	count = v[:players].sort_by {|key, val| val[:points] }.last[1][:points]
+			  end
+			end
+		winner
 end
 
 def winning_team
+		winner = ''
+		count = 0
+			game_hash.map do |x, v| 
+				inner_count = 0
+
+				v[:players].each do |key, val|
+					inner_count += val[:points]
+				end
+				if inner_count > count
+					winner = v[:team_name]
+					count = inner_count
+				end
+			end
+			winner
+		
 	
 end
 
 def player_with_longest_name
+
+	winner = ''
+		count = 0
+			game_hash.map do |x, v| 
+				if v[:players].sort_by {|key, val| key.length}.last[0].length > count 
+			  	winner = v[:players].sort_by {|key, val| key.length}.last[0]
+			  	count = v[:players].sort_by {|key, val| key.length}.last[0].length
+			  	# binding.pry
+
+			  end
+			end
+		winner
 	
 end
 
+def long_name_steals_a_ton?
+
+winner = ''
+		count = 0
+			game_hash.map do |x, v| 
+				if v[:players].sort_by {|key, val| val[:steals] }.last[1][:steals] > count 
+			  	winner = v[:players].sort_by {|key, val| val[:steals] }.last[0]
+			  	count = v[:players].sort_by {|key, val| val[:steals] }.last[1][:steals]
+			  end
+			end
+		winner == player_with_longest_name
+
+	
+end
 
 
 
