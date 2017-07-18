@@ -115,12 +115,15 @@ def game_hash
   }
 end
 
-def num_points_scored(player_name)
-  game_hash.each do |team, team_data|
-    if team_data[:players].key?(player_name)
-      return team_data[:players][player_name][:points]
-    end
+def get_all_players
+  teams = game_hash.values.collect do |team|
+    team[:players]
   end
+  teams[0].merge(teams[1])
+end
+
+def num_points_scored(player_name)
+  get_all_players[player_name][:points]
 end
 
 def shoe_size(player_name)
@@ -163,12 +166,69 @@ def player_stats(player_name)
   end
 end
 
+#
+# def big_shoe_rebounds
+#   players = []
+#   game_hash.collect do |team, team_data|
+#     players += team_data[:players].sort_by do | players, value|
+#       value[:shoe] && value[:rebounds]
+#     end
+#   end
+#   players.last.last[:rebounds]
+# end
+
+
 def big_shoe_rebounds
-  players = []
-  game_hash.collect do |team, team_data|
-    players += team_data[:players].sort_by do | players, value|
-      value[:shoe] && value[:rebounds]
-    end
+  shoe_sizes = {}
+  rebounds = {}
+
+  get_all_players.each do |player_name, attributes|
+    shoe_sizes[player_name] = attributes[:shoe]
+    rebounds[player_name] = attributes[:rebounds]
   end
-  players.last.last[:rebounds]
+
+  last_shoes_sizes = shoe_sizes.sort_by do |player_name, shoe_size|
+    shoe_size
+  end.last
+
+  all_big_shoes_players = shoe_sizes.find_all do |size|
+    size == last_shoes_sizes
+  end.to_h
+
+  rebounds.values_at(*all_big_shoes_players.keys).last
+end
+
+def most_points_scored
+  player = get_all_players.sort_by do |player_name, attributes|
+    attributes[:points]
+  end.last
+
+  player.first
+end
+
+def sum_points(players)
+  players.values.map {|value| value[:points]}.reduce(:+)
+end
+
+def winning_team
+  home_points = sum_points(game_hash[:home][:players])
+  away_points = sum_points(game_hash[:away][:players])
+
+  if home_points > away_points
+    puts "Home team is the winner."
+  elsif home_points == away_points
+    puts "It's a tie!"
+  else
+    puts "Away team is the winner."
+  end
+end
+
+def player_with_longest_name
+  names = get_all_players.keys
+
+  names.sort_by! do |name|
+    name.length
+  end
+
+  names.last
 end
