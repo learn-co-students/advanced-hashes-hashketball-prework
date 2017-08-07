@@ -1,4 +1,5 @@
-# Write your code here!
+require "pry"
+
 def game_hash
   {
     home: {
@@ -116,81 +117,70 @@ def game_hash
   }
 end
 
-def num_points_scored(player)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player_name, player_stats|
-      if player_name == player
-        return player_stats[:points]
-      end
+# helper functions
+def get_players
+  game_hash.values.map do |team_data|
+    team_data[:players].map do |player_name, player_stats|
+      player_stats[:name] = player_name
+      player_stats
     end
-  end
+  end.flatten
 end
 
-def shoe_size(player)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player_name, player_stats|
-      if player_name == player
-        return player_stats[:shoe]
-      end
-    end
-  end
+def find_player(players, player_name)
+  players.find { |player| player[:name] == player_name}
 end
 
-def team_colors(team)
-  game_hash.each do |location, team_data|
-    if team_data[:team_name] == team
-      return team_data[:colors]
-    end
-  end
+def get_teams
+  game_hash.values
+end
+
+# problem questions
+def find_team(teams, team_name)
+  teams.find { |team| team[:team_name] == team_name }
+end
+
+def num_points_scored(player_name)
+  find_player(get_players, player_name)[:points]
+end
+
+def shoe_size(player_name)
+  find_player(get_players, player_name)[:shoe]
+end
+
+def team_colors(team_name)
+  find_team(get_teams, team_name)[:colors]
 end
 
 def team_names
-  names = []
-
-  game_hash.each do |location, team_data|
-    names << team_data[:team_name]
-  end
-
-  names
+  get_teams.map { |team| team[:team_name] }
 end
 
-def player_numbers(team)
-  numbers = []
-
-  game_hash.each do |location, team_data|
-    if team_data[:team_name] == team
-      team_data[:players].each do |player_name, player_stats|
-        numbers << player_stats[:number]
-      end
-    end
+def player_numbers(team_name)
+  find_team(get_teams, team_name)[:players].map do |player_name, player_stats|
+    player_stats[:number]
   end
-
-  numbers
 end
 
-def player_stats(player)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player_name, player_stats|
-      if player_name == player
-        return player_stats
-      end
-    end
-  end
+def player_stats(player_name)
+  stats = find_player(get_players, player_name)
+  stats.delete(:name)
+  stats
 end
 
 def big_shoe_rebounds
-  player_with_biggest_shoe = nil
+  # player_with_biggest_shoe = nil
   biggest_shoe = nil
   biggest_shoe_rebounds = nil
 
   game_hash.each do |location, team_data|
     team_data[:players].each do |player_name, player_stats|
-      if player_with_biggest_shoe == nil
-        player_with_biggest_shoe = player_name
+      if biggest_shoe == nil
+        # player_with_biggest_shoe = player_name
         biggest_shoe = player_stats[:shoe]
         biggest_shoe_rebounds = player_stats[:rebounds]
       elsif biggest_shoe < player_stats[:shoe]
-        player_with_biggest_shoe = player_name
+        # player_with_biggest_shoe = player_name
         biggest_shoe = player_stats[:shoe]
         biggest_shoe_rebounds = player_stats[:rebounds]
       end
@@ -270,3 +260,6 @@ def long_name_steals_a_ton?
 
   player_with_most_steals == player_with_longest_name
 end
+
+# binding.pry
+# ""
