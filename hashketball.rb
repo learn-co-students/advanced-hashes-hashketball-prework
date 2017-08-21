@@ -116,66 +116,70 @@ def game_hash
   }
 end
 
-def num_points_scored(name)
+def num_points_scored(player_name)
   game_hash.each do |key, value|
-    value[:players].each do |p_name, p_stats|
-      if p_name == name
-        return p_stats[:points]
+    value[:players].each do |name, stats|
+      if name == player_name
+        return stats[:points]
       end
     end
   end
 end
 
-def shoe_size(name)
+def shoe_size(player_name)
   game_hash.each do |key, value|
-    value[:players].each do |p_name, p_stats|
-      if p_name == name
-        return p_stats[:shoe]
+    value[:players].each do |name, stats|
+      if name == player_name
+        return stats[:shoe]
       end
     end
   end
 end
 
-def team_colors(team_name)
-  the_colors = []
+def team_colors(name_of_team)
   game_hash.each do |key, value|
-    if value[:team_name] == team_name
-      the_colors = value[:colors]
+    if name_of_team == value[:team_name]
+      return value[:colors]
     end
   end
-  the_colors
 end
 
 def team_names
-  team_names_array = []
-  game_hash.each do |key, value|
-    if value[:team_name]
-      team_names_array << value[:team_name]
-    end
+  team_name_array = []
+  game_hash.each do |k, v|
+    team_name_array << v[:team_name]
   end
-  team_names_array
+  team_name_array
 end
 
-
-
-
-def player_numbers(team_name)
-  result = game_hash.select { |key, value| value[:team_name] == team_name }
-  result.values[0][:players].map { |_, attribute| attribute[:number] }
+def player_numbers(name_of_team)
+  game_hash.each do |k, v|
+    if v[:team_name] == name_of_team
+      return v[:players].map do |name, stat|
+       stat[:number]
+      end
+    end
+  end
 end
 
 def player_stats(name)
-    game_hash.each_with_object([]) do |(key, value), result|
-      unless game_hash[key][:players][name].nil?
-        result << game_hash[key][:players][name]
+  game_hash.each do |key, value|
+    if value[:players].include?(name)
+      return value[:players][name]
     end
-  end.first
+  end
 end
 
 def big_shoe_rebounds
-  result = game_hash.each_with_object([]) do |(key, value), r|
-    r << value[:players].map do |_, attribute|
-      [attribute[:shoe], attribute[:rebounds]]
-    end.max
-  end.max.last
+  player_shoe = nil
+  player_rebounds = nil
+  game_hash.each do |key, value|
+    value[:players].each do |k, v|
+      if player_shoe.nil? || v[:shoe] > player_shoe
+        player_shoe = v[:shoe]
+        player_rebounds = v[:rebounds]
+      end
+    end
+  end
+  player_rebounds
 end
