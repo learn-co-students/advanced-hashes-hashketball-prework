@@ -7,18 +7,18 @@ describe 'hashketball' do
     let(:team_level_keys) { [:team_name, :colors, :players] }
 
     it 'returns a hash' do
-      expect(game_hash).to be_a(Hash)
+      expect($game_hash).to be_a(Hash)
     end
 
     it 'returns the correct top-level keys' do
       top_level_keys.each do |key|
-        expect(game_hash.keys).to include(key)
+        expect($game_hash.keys).to include(key)
       end
     end
 
     it 'returns the correct team-level keys' do
       team_level_keys.each do |key|
-        expect(game_hash.values.first.keys).to include(key)
+        expect($game_hash.values.first.keys).to include(key)
       end
     end
   end
@@ -239,7 +239,7 @@ describe 'hashketball' do
   describe '#big_shoe_rebounds' do
 
     it 'returns the number of rebounds of the player with the biggest shoe size' do
-      expect(big_shoe_rebounds).to eq(12)
+      expect(big_shoe_rebounds).to eq(19)
     end
 
   end
