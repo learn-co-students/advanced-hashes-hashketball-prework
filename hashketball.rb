@@ -113,19 +113,19 @@ $game_hash = {
   }
 }
 
-# returns hash of stats for given player name
+
 def get_player_stats(name)
-  # This hash holds all players from both teams, key => player_name, value => stats
+
   all_player_hash = $game_hash[:home][:players].merge($game_hash[:away][:players])
 
-  # iterate over every player to find one with the given name, then return points scored
+
   all_player_hash.each_pair { |player, stats|
     if (name == player)
       return stats
     end
   }
 
-  # name given was not a player in our game
+
   raise Exception.new("player does not exist")
 end
 
@@ -167,15 +167,30 @@ def player_stats(name)
 end
 
 def big_shoe_rebounds
-  # all players in one hash
+
   all_player_hash = $game_hash[:home][:players].merge($game_hash[:away][:players])
-  most_rebounds = 0
+
+  biggest_foot_stats = {:shoe => 0}
   all_player_hash.each_pair { |player, stats|
-    if (stats[:rebounds] > most_rebounds)
-      most_rebounds = stats[:rebounds]
+    if (stats[:shoe] > biggest_foot_stats[:shoe])
+      biggest_foot_stats = stats
     end
   }
-  return most_rebounds
+  return biggest_foot_stats[:rebounds]
+end
+
+def most_points_scored
+
+  all_player_hash = $game_hash[:home][:players].merge($game_hash[:away][:players])
+  most_points = 0
+  greatest_scorer = nil
+  all_player_hash.each_pair { |player, stats|
+    if (stats[:points] > most_points)
+      most_points = stats[:points]
+      greatest_scorer = player
+    end
+  }
+  return greatest_scorer
 end
 
 def team_names
