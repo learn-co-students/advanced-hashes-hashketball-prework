@@ -7,18 +7,18 @@ describe 'hashketball' do
     let(:team_level_keys) { [:team_name, :colors, :players] }
 
     it 'returns a hash' do
-      expect(game_hash).to be_a(Hash)
+      expect($game_hash).to be_a(Hash)
     end
 
     it 'returns the correct top-level keys' do
       top_level_keys.each do |key|
-        expect(game_hash.keys).to include(key)
+        expect($game_hash.keys).to include(key)
       end
     end
 
     it 'returns the correct team-level keys' do
       team_level_keys.each do |key|
-        expect(game_hash.values.first.keys).to include(key)
+        expect($game_hash.values.first.keys).to include(key)
       end
     end
   end
@@ -248,42 +248,44 @@ end
 
 # If you'd like to work on the bonus, uncomment these tests.
 
-# describe 'bonus' do
+describe 'bonus' do
 
-#   describe '#most_points_scored' do
+  describe '#most_points_scored' do
 
-#     it 'returns Ben Gordon' do
-#       expect(most_points_scored).to eq("Ben Gordon")
-#     end
+    it 'returns Ben Gordon' do
+      expect(most_points_scored).to eq("Ben Gordon")
+    end
 
-#   end
+  end
+end
+
 
 #   describe '#winning_team' do
-
+#
 #     it 'returns the Brooklyn Nets' do
 #       expect(winning_team).to eq("Brooklyn Nets")
 #     end
-
+#
 #   end
-
+#
 #   describe '#player_with_longest_name' do
-
+#
 #     it 'returns Brendan Haywood' do
 #       expect(player_with_longest_name).to eq("Brendan Haywood")
 #     end
-
+#
 #   end
-
+#
 # end
-
+#
 # describe 'super bonus' do
-
+#
 #   describe '#long_name_steals_a_ton?' do
-
+#
 #     it 'returns true' do
 #       expect(long_name_steals_a_ton?).to eq(true)
 #     end
-
+#
 #   end
-
+#
 # end
