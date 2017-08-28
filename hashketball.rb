@@ -119,65 +119,45 @@ def game_hash
   }
 end
 
-def num_points_scored(name)
-  points_scored = 0
-    game_hash[:home][:players].each do |player, player_stat|
-      if player == name
-        points_scored = player_stat[:points]
-      end
-    end
-    game_hash[:away][:players].each do |player, player_stat|
-      if player == name
-        points_scored = player_stat[:points]
-      end
-    end
-  return points_scored
+def num_points_scored(player_name)
+    players = get_player_hashes
+    players.find do |key, value| #iterates though all players
+        key == player_name #returns array of two items ["player name", {info hash}]
+    end.last[:points] #returns points_scored
+end
+
+def get_player_hashes
+    x = game_hash.values.map do |team_info|
+        team_info[:players]
+    end #returns array of two hashes
+    x.first.merge(x.last) #returns hash of all players
 end
 
 def shoe_size(name)
-  shoe_size = 0
-  game_hash[:home][:players].each do |player, player_stat|
-    if player == name
-      shoe_size = player_stat[:shoe].to_i
-    end
-  end
-  game_hash[:away][:players].each do |player, player_stat|
-    if player == name
-      shoe_size = player_stat[:shoe].to_i
-    end
-  end
-  return shoe_size
+  players = get_player_hashes
+  players.find do |key, value|
+    key == name
+  end.last[:shoe]
 end
 
 def team_colors(name)
-  colors = []
   game_hash.each do |location, team|
     if (team[:team_name] == name)
-      colors = team[:colors]
+      return team[:colors]
     end
   end
-  return colors
 end
 
 def team_names
-  teams = [game_hash[:home][:team_name],game_hash[:away][:team_name]]
-  return teams
+  return [game_hash[:home][:team_name],game_hash[:away][:team_name]]
 end
 
 def player_numbers(name)
-  jerseys = []
-  if (name == game_hash[:home][:team_name])
-    game_hash[:home][:players].each do |player, player_stat|
-      jerseys.push(player_stat[:number].to_i)
-    end
-  elsif(name == game_hash[:away][:team_name])
-    game_hash[:away][:players].each do |player, player_stat|
-      jerseys.push(player_stat[:number].to_i)
-    end
-  else
-    puts "Wrong team name!"
-  end
-  return jerseys.sort
+    game_hash.values.find do |team_info|
+        team_info[:team_name] == name
+    end[:players].map do |name, info|
+        info[:number]
+    end.sort
 end
 
 def player_stats(name)
