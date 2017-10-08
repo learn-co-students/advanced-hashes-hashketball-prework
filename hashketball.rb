@@ -185,3 +185,77 @@ def big_shoe_rebounds
 
   player_stats(player_name_a)[:rebounds]
 end
+
+def most_points_scored
+  players = game_hash.values.collect{|value| value[:players]}.flatten!
+
+  player_name_a = ""
+  points_a = 0
+
+  players.each do |player|
+    if player[:points] > points_a
+      player_name_a = player[:player_name]
+      points_a = player[:points]
+    end
+  end
+
+  player_name_a
+
+end
+
+#puts most_points_scored
+
+def player_points(what_team)
+  points = []
+  game_hash.values.each{|team| team[:players].each{|player| points << player[:points]} if team[:team_name] == what_team}
+  points
+
+  points_sum = 0
+  points.each{|point| points_sum += point}
+  points_sum
+end
+
+#puts player_points("Brooklyn Nets")
+
+def winning_team
+  teams = []
+  game_hash.values.each{|value| teams << value[:team_name]}
+
+  teams_scores= {}
+  teams.each do |team|
+    teams_scores[team] = player_points(team)
+  end
+
+  score = teams_scores.values[0]
+  winner = teams_scores.keys[0]
+  teams_scores.each do |key,val|
+    winner = key if val > score
+  end
+  winner
+end
+
+#puts winning_team
+
+def player_with_longest_name
+  player_names = []
+  game_hash.values.each{|values| values[:players].each{|value| player_names << value[:player_name]}}
+
+  longest = player_names[0]
+  player_names.each{|player| longest = player if player.length > longest.length}
+  longest
+end
+
+#puts player_with_longest_name
+
+def long_name_steals_a_ton
+  longest_name = player_with_longest_name
+  longest_name_steals = player_stats(longest_name)[:steals]
+  players = game_hash.values.collect{|value| value[:players]}.flatten!
+
+  steals_a_ton = true
+  players.each{|player| steals_a_ton = false if player[:steals] > longest_name_steals}
+  steals_a_ton
+
+end
+
+puts long_name_steals_a_ton
