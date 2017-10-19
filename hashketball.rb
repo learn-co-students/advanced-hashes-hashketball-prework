@@ -132,3 +132,75 @@ def big_shoe_rebounds
   end
   rebounds
 end
+
+
+######################## BONUS QUESTIONS ###########################
+
+def most_points_scored
+  score_hash = {}
+  game_hash.each do |home_away, team_hash|
+    team_hash.each do |team_stat, stat_value|
+      if team_stat == :players
+        stat_value.each do |player_name, player_stats|
+          score_hash[player_name] = player_stats[:points]
+        end
+      end
+    end
+  end
+  winner = score_hash.max_by {|name, score| score}
+  winner[0]
+end
+
+def winning_team
+  home_score = 0
+  away_score = 0
+  game_hash[:home][:players].each do |name, player_stats|
+    home_score += player_stats[:points]
+  end
+  game_hash[:away][:players].each do |name, player_stats|
+    away_score += player_stats[:points]
+  end
+  if home_score > away_score
+    game_hash[:home][:team_name]
+  elsif home_score < away_score
+    game_hash[:away][:team_name]
+  end
+end
+
+def player_with_longest_name
+  home_names = game_hash[:home][:players].keys
+  away_names = game_hash[:away][:players].keys
+  all_names = home_names.concat(away_names)
+  longest_name = ""
+  for counter in 0...all_names.length
+    if all_names[counter].length > longest_name.length
+      longest_name = all_names[counter]
+    end
+  end
+  longest_name
+end
+
+############################ SUPER BONUS ###########################
+
+def long_name_steals_a_ton?
+  all_player_steals = []
+  longest_name_steals = 0
+  game_hash.each do |home_away, team_hash|
+    team_hash.each do |team_stat, stat_value|
+      if team_stat == :players
+        stat_value.each do |player_name, player_stats|
+          all_player_steals << player_stats[:steals]
+          if player_name == player_with_longest_name
+            longest_name_steals = player_stats[:steals]
+          end
+        end
+      end
+    end
+  end
+  steals_sorted = all_player_steals.sort.reverse
+  if longest_name_steals == steals_sorted[0]
+    true
+  else
+    false
+  end
+end
