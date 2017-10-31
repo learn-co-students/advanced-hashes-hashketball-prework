@@ -279,4 +279,49 @@ def most_points_scored
   player_with_most_points
 end
 
-puts most_points_scored
+# puts most_points_scored
+
+def winning_team
+  home_team_name = nil
+  home_team = 0
+
+  away_team_name = nil
+  away_team = 0
+
+  game_hash.each do |location, team_data|
+    if location == :home
+      team_data.each do |attribute, value|
+        if attribute == :players
+          value.each do |player, stats|
+            stats.each do |stat, val|
+              if stat == :points
+                home_team_name = game_hash[location][:team_name][0]
+                home_team += val
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  game_hash.each do |location, team_data|
+    if location == :away
+      team_data.each do |attribute, value|
+        if attribute == :players
+          value.each do |player, stats|
+            stats.each do |stat, val|
+              if stat == :points
+                away_team_name = game_hash[location][:team_name][0]
+                away_team += val
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  home_team > away_team ? home_team_name : away_team_name
+end
+puts winning_team
