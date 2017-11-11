@@ -59,10 +59,10 @@ def num_points_scored(name)
   points = 0
 
   game_hash.each do |location, team_data|
-    team_data.each do |team_attribute, team_value|
+    team_data.each do |team_attribute, players|
       if team_attribute == :players
-        team_value.each do |player, stats|
-          if player == name
+        players.each do |player_name, stats|
+          if player_name == name
             stats.each do |stat_type, stat_value|
               if stat_type == :points
                 points = stat_value
@@ -72,5 +72,157 @@ def num_points_scored(name)
         end
       end
     end
-    points
   end
+  points
+end
+
+def shoe_size(name)
+  size = 0
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          if player_name == name
+            stats.each do |stat_type, stat_value|
+              if stat_type == :shoe
+                size = stat_value
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  size
+end
+
+def team_colors(name)
+  all_colors = Array.new(2){Array.new(2)}
+  final_colors = []
+  team = ""
+  count = 0
+
+  game_hash.each do |location, team_data|
+    team_data.each do |key, value|
+      if key == :colors
+        all_colors[count][0] = value
+      end
+      if value == name
+        all_colors[count][1] = true
+      end
+    end
+    count += 1
+  end
+
+  all_colors.each do |teams|
+    if teams[1] == true
+      final_colors = teams[0]
+    end
+  end
+
+  final_colors
+end
+
+def team_names
+  names = []
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, attribute_value|
+      if team_attribute == :team_name
+        names << attribute_value
+      end
+    end
+  end
+
+  names
+end
+
+def player_numbers(name)
+  team_numbers1 = []
+  team_numbers2 = []
+  count = 0
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, attribute_value|
+      if team_attribute == :team_name
+        count == 0 ? team_numbers1 << attribute_value : team_numbers2 << attribute_value
+      end
+      if team_attribute == :players
+        attribute_value.each do |player_name, stats|
+          stats.each do |stat_type, stat_value|
+            if stat_type == :number
+              count == 0 ? team_numbers1 << stat_value : team_numbers2 << stat_value
+            end
+          end
+        end
+      end
+    end
+    count += 1
+  end
+
+  if team_numbers1.include?(name)
+    team_numbers1.delete_if {|x| x.class == String }
+  else
+    team_numbers2.delete_if {|x| x.class == String }
+  end
+
+end
+
+def player_stats(name)
+  stat_hash = {}
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          if player_name == name
+            stat_hash = stats
+          end
+        end
+      end
+    end
+  end
+  stat_hash
+end
+
+def big_shoe_rebounds
+  #find largest shoe_size
+  largest = ""
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          if largest.empty?
+            largest << player_name
+          elsif shoe_size(player_name) > shoe_size(largest[0])
+            largest = player_name
+          end
+        end
+      end
+    end
+  end
+
+puts largest
+  rebounds = 0
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          if player_name == largest
+            stats.each do |stat_type, stat_value|
+              if stat_type == :rebounds
+                rebounds = stat_value
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  rebounds
+
+end
