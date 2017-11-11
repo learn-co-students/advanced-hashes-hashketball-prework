@@ -195,8 +195,8 @@ def big_shoe_rebounds
       if team_attribute == :players
         players.each do |player_name, stats|
           if largest.empty?
-            largest << player_name
-          elsif shoe_size(player_name) > shoe_size(largest[0])
+            largest = player_name
+          elsif shoe_size(player_name) > shoe_size(largest)
             largest = player_name
           end
         end
@@ -204,7 +204,6 @@ def big_shoe_rebounds
     end
   end
 
-puts largest
   rebounds = 0
 
   game_hash.each do |location, team_data|
@@ -224,5 +223,121 @@ puts largest
   end
 
   rebounds
+
+end
+
+def most_points_scored
+  points = 0
+  player = ""
+  most_points = ""
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          player = player_name
+          stats.each do |stat_type, stat_value|
+            if stat_type == :points
+              if points == 0
+                points = stat_value
+                most_points = player
+              elsif stat_value > points
+                points = stat_value
+                most_points = player
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  most_points
+end
+
+def winning_team
+  points = 0
+  points_team1 = 0
+  team = ""
+  most_points = ""
+  winner = ""
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, attribute_value|
+      if team_attribute == :team_name
+        team = attribute_value
+      end
+      if team_attribute == :players
+        attribute_value.each do |player_name, stats|
+          stats.each do |stat_type, stat_value|
+            if stat_type == :points
+              points += stat_value
+            end
+          end
+        end
+      end
+
+      if most_points.empty? && points != 0
+        most_points = team
+        points_team1 = points
+        points = 0
+      elsif points_team1 > points
+        winner = most_points
+      else
+        winner = team
+      end
+    end
+  end
+  winner
+end
+
+def player_with_longest_name
+  #find longest name
+  longest = ""
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          if longest.empty?
+            longest << player_name
+          elsif player_name.size > longest.size
+            longest = player_name
+          end
+        end
+      end
+    end
+  end
+  longest
+end
+#returns true if the player with the longest name had the most steals
+def long_name_steals_a_ton?
+
+  #find the most steals
+  steals = 0
+  player = ""
+  highest_steals = ""
+
+  game_hash.each do |location, team_data|
+    team_data.each do |team_attribute, players|
+      if team_attribute == :players
+        players.each do |player_name, stats|
+          player = player_name
+          stats.each do |stat_type, stat_value|
+            if stat_type == :steals
+              if steals == 0
+                steals = stat_value
+                highest_steals = player
+              elsif stat_value > steals
+                steals = stat_value
+                highest_steals = player
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  highest_steals == player_with_longest_name
 
 end
