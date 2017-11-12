@@ -79,7 +79,33 @@ def team_colors(team)
 end
 
 def team_names
+  team_array = []
   game_hash.each_value do |team|
+    team_array.push(team[:team_name])
+  end
+  return team_array
+end
 
+def player_numbers(team)
+  team_numbers = []
+  game_hash.each_value do |side|
+    if side[:team_name] == team
+      side[:players].each_value do |player_data|
+        team_numbers.push(player_data[:number])
+      end
+    end
+  end
+  return team_numbers
+end
+
+def player_stats(player)
+  game_hash.each_value do |team|
+    team[:players].each do |name, player_data|
+      if name == player
+        name[player_data].each do |stat|
+          
+        end
+      end
+    end
   end
 end
