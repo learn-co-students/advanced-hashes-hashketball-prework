@@ -136,8 +136,8 @@ end
 
 def team_colors(name_team)
   game_hash.each do |team, info|
-    if game_hash[team][:team_name] ==name_team
-      return game_hash[team][:colors]
+    if info[:team_name] ==name_team #game_hash[team]
+      return info[:colors] #game_hash[team]
     end
   end
 end
@@ -182,5 +182,57 @@ def big_shoe_rebounds
       end
     end
   end
-  return rebound 
+  return rebound
+end
+
+def most_points_scored
+  max = nil
+  best_player = nil
+  game_hash.each do |team, info|
+    info[:players].each do |name,stats|
+      if max == nil || stats[:points] > max
+        max = stats[:points]
+        best_player = name
+      end
+    end
+  end
+  best_player
+end
+
+def winning_team
+  away = get_team_score(:away)
+  home = get_team_score(:home)
+
+  if away > home
+    return game_hash[:away][:team_name]
+  else
+    return game_hash[:home][:team_name]
+  end
+
+end
+
+def get_team_score (team_side)
+  total_points = 0
+
+  game_hash[team_side][:players].each do |name, stat|
+    total_points += stat[:points]
+  end
+  total_points
+end
+
+def player_with_longest_name
+  game_hash.map do |side, info|
+    info[:players].keys.max do |a,b|
+      a.length <=> b.length
+    end
+  end.max
+end
+
+def long_name_steals_a_ton?
+name = player_with_longest_name
+game_hash.each do |side, info|
+  if info[:players][name] != nil
+    return info[:players][name][:steals] > 20
+    end
+  end
 end
