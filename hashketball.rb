@@ -16,8 +16,8 @@ def game_hash
             :rebounds=>12,
             :assists=>12,
             :steals=>3,
-            :blocks=>7,
-            :slam_dunks=>2
+            :blocks=>1,
+            :slam_dunks=>1
           },
           "Reggie Evans"=>
           {
@@ -189,4 +189,18 @@ def player_numbers(team)
     end
   end
   numbers_array
+end
+
+def player_stats(name)
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if data.is_a? Hash
+        data.each do |player,stats|
+          if player == name
+            return game_hash[location][attribute][player]
+          end
+        end
+      end
+    end
+  end
 end
