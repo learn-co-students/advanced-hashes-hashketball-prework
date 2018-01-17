@@ -115,10 +115,55 @@ def most_points_scored
   most_points_name = ""
   game_hash.each{|team, team_info|
     team_info[:players].each{|player,info|
-      if most_points = info[:points]
+      if info[:points] > most_points
+        most_points = info[:points]
         most_points_name = player
       end
     }
   }
   most_points_name
+end
+
+def winning_team
+  most_points = 0
+  most_points_team = ""
+  game_hash.each{|team, team_info|
+    point_count = 0
+    team_info[:players].each{|player,info|
+      point_count +=info[:points]
+    }
+    if point_count > most_points
+      most_points = point_count
+      most_points_team = team_info[:team_name]
+    end
+  }
+  most_points_team
+end
+
+def player_with_longest_name
+  most_letters = 0
+  most_letters_name= ""
+  game_hash.each{|team, team_info|
+    team_info[:players].each{|player,info|
+      if player.length >most_letters
+        most_letters = player.length
+        most_letters_name = player
+      end
+    }
+  }
+  most_letters_name
+end
+
+def long_name_steals_a_ton?
+  most_steals = 0
+  most_steals_name= ""
+  game_hash.each{|team, team_info|
+    team_info[:players].each{|player,info|
+      if info[:steals] >most_steals
+        most_steals = info[:steals]
+        most_steals_name = player
+      end
+    }
+  }
+  most_steals_name == player_with_longest_name
 end
