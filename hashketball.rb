@@ -108,6 +108,17 @@ def big_shoe_rebounds
       end
     }
   }
+end
 
-   #returns the number of rebounds of the player with the biggest shoe size (FAILED - 7)
+def most_points_scored
+  most_points = 0
+  most_points_name = ""
+  game_hash.each{|team, team_info|
+    team_info[:players].each{|player,info|
+      if most_points = info[:points]
+        most_points_name = player
+      end
+    }
+  }
+  most_points_name
 end
