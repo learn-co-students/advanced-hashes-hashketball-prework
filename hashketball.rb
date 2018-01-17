@@ -11,7 +11,7 @@ def game_hash
         "Brook Lopez" => {
           number: 11, shoe: 17, points: 17, rebounds: 19, assists: 10, steals: 3, blocks: 1, slam_dunks: 15} ,
         "Mason Plumlee" => {
-          number: 1, shoe: 19, points: 26, rebounds: 12, assists: 6, steals: 3, blocks: 8, slam_dunks: 8} ,
+          number: 1, shoe: 19, points: 26, rebounds: 12, assists: 6, steals: 3, blocks: 8, slam_dunks: 5} ,
         "Jason Terry" => {
           number: 31, shoe: 15, points: 19, rebounds: 2, assists: 2, steals: 4, blocks: 11, slam_dunks: 1}
       }
@@ -23,11 +23,11 @@ def game_hash
         "Bismak Biyombo" => {
           number: 0, shoe: 16, points: 12, rebounds: 4, assists: 7, steals: 7, blocks: 15, slam_dunks: 10} ,
         "DeSagna Diop" => {
-          number: 2, shoe: 14, points: 24, rebounds: 12, assists: 12, steals: 1, blocks: 1, slam_dunks: 5} ,
+          number: 2, shoe: 14, points: 24, rebounds: 12, assists: 12, steals: 4, blocks: 5, slam_dunks: 5} ,
         "Ben Gordon" => {
-          number: 8, shoe: 15, points: 33, rebounds: 3, assists: 2, steals: 22, blocks: 5, slam_dunks: 0} ,
+          number: 8, shoe: 15, points: 33, rebounds: 3, assists: 2, steals: 1, blocks: 1, slam_dunks: 0} ,
         "Brendan Haywood" => {
-          number: 33, shoe: 15, points: 6, rebounds: 12, assists: 12, steals: 4, blocks: 11, slam_dunks: 12}
+          number: 33, shoe: 15, points: 6, rebounds: 12, assists: 12, steals: 22, blocks: 5, slam_dunks: 12}
       }
     }
   }
@@ -80,14 +80,34 @@ def player_numbers(team_name)
     end
   }
   array
-   #returns the player jersey numbers (FAILED - 5)
-   #returns an array of the jersey number
 end
 
-def player_stats
-   #returns all stats for a given player (FAILED - 6)
+def player_stats(player_name)
+  game_hash.each{|team, team_info|
+    team_info[:players].each{|player,info|
+      if player == player_name
+        return info
+      end
+    }
+  }
 end
 
 def big_shoe_rebounds
+  big_shoe = 0
+  big_shoe_name = ""
+  game_hash.each{|team, team_info|
+    team_info[:players].each{|player,info|
+      if info[:shoe] > big_shoe
+        big_shoe = info[:shoe]
+        big_shoe_name = player
+      end
+    }
+    team_info[:players].each{|player,info|
+      if player == big_shoe_name
+        return info[:rebounds]
+      end
+    }
+  }
+
    #returns the number of rebounds of the player with the biggest shoe size (FAILED - 7)
 end
