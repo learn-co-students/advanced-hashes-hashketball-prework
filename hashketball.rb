@@ -176,4 +176,66 @@ rebounds = 0
   return rebounds 
 end 
   
+def most_points_scored 
+points = 0 
+highest_scorer = ""
+  game_hash.each do |location, team_data| 
+    team_data[:players].each do |player|
+      if player[:points] > points
+        points = player[:points]
+        highest_scorer = player[:player_name]
+      end
+    end
+  end
+  return highest_scorer
+end
 
+def winning_team
+home = 0 
+away = 0
+  game_hash.each do |location, team_data|
+    if location == :home
+      team_data[:players].each do |player|
+        home = home + player[:points]
+      end
+    else location == :away 
+      team_data[:players].each do |player|
+        away = away + player[:points]
+      end
+    end
+  end 
+  if home > away 
+    return game_hash[:home][:team_name]
+  elsif away > home  
+    return game_hash[:away][:team_name]
+  else 
+    return "It's a tie!"
+  end
+end
+
+def player_with_longest_name
+  longest_name_length = 0 
+  longest_name = "" 
+  game_hash.each do |location, team_data|
+    team_data[:players]. each do |player|
+      if player[:player_name].length > longest_name_length
+        longest_name = player[:player_name] 
+      end
+    end
+  end
+  return longest_name
+end
+
+def long_name_steals_a_ton?
+steals = 0 
+player_with_most_steals = ""
+  game_hash.each do |location, team_data| 
+    team_data[:players].each do |player|
+      if player[:steals] > steals
+        steals = player[:steals]
+        player_with_most_steals = player[:player_name]
+      end
+    end
+  end
+  player_with_longest_name == player_with_most_steals 
+end
