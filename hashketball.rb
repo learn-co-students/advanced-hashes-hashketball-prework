@@ -1,6 +1,3 @@
-# Write your code here!
-require "pry"
-
 def game_hash
   {
     home: {
@@ -120,135 +117,60 @@ def game_hash
   }
 end
 
+def shoe_size(name)
+  player = find_the_player(name)
+  player.fetch(:shoe)
+end
 
 def num_points_scored(name)
-  game_hash.each do |team, info|
-    if info[:players].keys.include?(name)
-      return info[:players][name][:points]
-    end
-  end
-  nil
+  player = find_the_player(name)
+  player.fetch(:points)
 end
 
-def shoe_size(name)
-  game_hash.each do |team, info|
-    if info[:players].keys.include?(name)
-      return info[:players][name][:shoe]
-    end
-  end
-  nil
+def team_colors(team_name)
+  team = find_the_team(team_name)
+  team.fetch(:colors)
 end
 
-def team_colors(team)
-  game_hash.each do |k, v|
-    if v[:team_name] == team
-      return v[:colors]
-    end
-  end
-  nil
+def teams
+  game_hash.values
 end
 
-def team_names
-  game_hash.map do |team, info|
-    info[:team_name]
-  end
-end
-
-def player_numbers(team)
-  game_hash.each do |k, v|
-    if v[:team_name] == team
-      nums = []
-      v[:players].each do |player, info|
-        nums << info[:number]
-      end
-      return nums
-    end
-  end
-  nil
-end
-
-def player_stats(name)
-  game_hash.each do |team, info|
-    if info[:players].keys.include?(name)
-      return info[:players][name]
-    end
-  end
-  nil
+def find_the_team(team_name)
+  teams.find {|team| team.fetch(:team_name) == team_name}
 end
 
 def big_shoe_rebounds
-  big_shoe_size = nil
-  rebounds = nil
-
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |name, player_info|
-      if big_shoe_size == nil || player_info[:shoe] > big_shoe_size
-        big_shoe_size = player_info[:shoe]
-        rebounds = player_info[:rebounds]
-      end
-    end
-  end
-
-  rebounds
+  player = player_biggest_shoe_size
+  player.fetch(:rebounds)
 end
 
-def most_points_scored
-  points_high = nil
-  player = nil
-
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |name, player_info|
-      if points_high == nil || player_info[:points] > points_high
-        points_high = player_info[:points]
-        player = name
-      end
-    end
-  end
-
-  player
+def player_biggest_shoe_size
+  players.sort_by {|player| player.fetch(:shoe) }.last
 end
 
-def winning_team
-  teams_and_scores = {}
-  game_hash.each do |team, team_info|
-    total = 0
-    team_info[:players].each do |player, player_info|
-      total += player_info[:points]
-    end
-    teams_and_scores[team_info[:team_name]] = total
-  end
-  teams_and_scores.key(teams_and_scores.values.max)
+def players
+  home_players = game_hash.fetch(:home).fetch(:players)
+  away_players = game_hash.fetch(:away).fetch(:players)
+  home_players + away_players
 end
 
-def player_with_longest_name
-  longest = nil
-
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |name, player_info|
-      if longest == nil || name.length > longest.length
-        longest = name
-      end
-    end
+def team_names
+  teams.map do |team|
+    team[:team_name]
   end
-  longest
 end
 
-def long_name_steals_a_ton?
-  longest_name = nil
-  most_steals = nil
-  stealer = nil
-
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |name, player_info|
-      if longest_name == nil || name.length > longest_name.length
-        longest_name = name
-      end
-      if most_steals == nil || player_info[:steals] > most_steals
-        most_steals = player_info[:steals]
-        stealer = name
-      end
-    end
+def player_numbers(team_name)
+  find_the_team(team_name)[:players].map do |player|
+    player[:number]
   end
+end
 
-  longest_name == stealer
+def player_stats(player_name)
+  find_the_player(player_name).reject { |key, value| key == :player_name }
+end
+
+def find_the_player(name)
+  players.find {|player| player.fetch(:player_name) == name}
 end
