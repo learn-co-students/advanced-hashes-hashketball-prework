@@ -129,3 +129,126 @@ def num_points_scored(name)
   end
   nil
 end
+
+def shoe_size(name)
+  game_hash.each do |team, info|
+    if info[:players].keys.include?(name)
+      return info[:players][name][:shoe]
+    end
+  end
+  nil
+end
+
+def team_colors(team)
+  game_hash.each do |k, v|
+    if v[:team_name] == team
+      return v[:colors]
+    end
+  end
+  nil
+end
+
+def team_names
+  game_hash.map do |team, info|
+    info[:team_name]
+  end
+end
+
+def player_numbers(team)
+  game_hash.each do |k, v|
+    if v[:team_name] == team
+      nums = []
+      v[:players].each do |player, info|
+        nums << info[:number]
+      end
+      return nums
+    end
+  end
+  nil
+end
+
+def player_stats(name)
+  game_hash.each do |team, info|
+    if info[:players].keys.include?(name)
+      return info[:players][name]
+    end
+  end
+  nil
+end
+
+def big_shoe_rebounds
+  big_shoe_size = nil
+  rebounds = nil
+
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |name, player_info|
+      if big_shoe_size == nil || player_info[:shoe] > big_shoe_size
+        big_shoe_size = player_info[:shoe]
+        rebounds = player_info[:rebounds]
+      end
+    end
+  end
+
+  rebounds
+end
+
+def most_points_scored
+  points_high = nil
+  player = nil
+
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |name, player_info|
+      if points_high == nil || player_info[:points] > points_high
+        points_high = player_info[:points]
+        player = name
+      end
+    end
+  end
+
+  player
+end
+
+def winning_team
+  teams_and_scores = {}
+  game_hash.each do |team, team_info|
+    total = 0
+    team_info[:players].each do |player, player_info|
+      total += player_info[:points]
+    end
+    teams_and_scores[team_info[:team_name]] = total
+  end
+  teams_and_scores.key(teams_and_scores.values.max)
+end
+
+def player_with_longest_name
+  longest = nil
+
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |name, player_info|
+      if longest == nil || name.length > longest.length
+        longest = name
+      end
+    end
+  end
+  longest
+end
+
+def long_name_steals_a_ton?
+  longest_name = nil
+  most_steals = nil
+  stealer = nil
+
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |name, player_info|
+      if longest_name == nil || name.length > longest_name.length
+        longest_name = name
+      end
+      if most_steals == nil || player_info[:steals] > most_steals
+        most_steals = player_info[:steals]
+        stealer = name
+      end
+    end
+  end
+
+  longest_name == stealer
+end
