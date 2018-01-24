@@ -248,7 +248,7 @@ end
 
 # If you'd like to work on the bonus, uncomment these tests.
 
-# describe 'bonus' do
+describe 'bonus' do
 
 #   describe '#most_points_scored' do
 
@@ -266,15 +266,15 @@ end
 
 #   end
 
-#   describe '#player_with_longest_name' do
+   describe '#player_with_longest_name' do
 
-#     it 'returns Brendan Haywood' do
-#       expect(player_with_longest_name).to eq("Brendan Haywood")
-#     end
+     it 'returns Brendan Haywood' do
+       expect(player_with_longest_name).to eq("Brendan Haywood")
+     end
 
-#   end
+   end
 
-# end
+ end
 
 # describe 'super bonus' do
 
