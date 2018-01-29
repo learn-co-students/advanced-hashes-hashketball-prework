@@ -34,32 +34,39 @@ def game_hash
 end
 
 
+
 def num_points_scored(player_name)
-  game_hash.each{|team, team_info|
-    team_info[:players].each{|player,info|
-      if player == player_name
-        return info[:points]
-      end
-    }
-  }
+  # binding.pry
+  player_stats(player_name)[:points]
 end
+#
+#
+# def num_points_scored(player_name)
+#   game_hash.each{|team, team_info|
+#     team_info[:players].each {|player,info|
+#       if player == player_name
+#         return info[:points]
+#       end
+#     }
+#   }
+# end
+#
+# def shoe_size(player_name)
+#   game_hash.each{|team, team_info|
+#     team_info[:players].each{|player,info|
+#       if player == player_name
+#         return info[:shoe]
+#       end
+#     }
+#   }
+# end
 
 def shoe_size(player_name)
-  game_hash.each{|team, team_info|
-    team_info[:players].each{|player,info|
-      if player == player_name
-        return info[:shoe]
-      end
-    }
-  }
+  player_stats(player_name)[:shoe]
 end
 
 def team_colors (team_name)
-  game_hash.each{|team, team_info|
-    if team_info[:team_name] == team_name
-      return team_info[:colors]
-    end
-  }
+  find_team(team_name)[:colors]
 end
 
 def team_names
@@ -71,15 +78,9 @@ def team_names
 end
 
 def player_numbers(team_name)
-  array = []
-  game_hash.each{|team, team_info|
-    if team_info[:team_name] == team_name
-      team_info[:players].values.each{|x|
-        array << x[:number]
-      }
-    end
+  find_team(team_name)[:players].values.map {|player|
+    player[:number]
   }
-  array
 end
 
 def player_stats(player_name)
@@ -89,6 +90,14 @@ def player_stats(player_name)
         return info
       end
     }
+  }
+end
+
+def find_team(team_name)
+  game_hash.each{|team, team_info|
+    if team_info[:team_name] == team_name
+      return team_info
+    end
   }
 end
 
@@ -104,7 +113,7 @@ def big_shoe_rebounds
     }
     team_info[:players].each{|player,info|
       if player == big_shoe_name
-        return info[:rebounds]
+        return info[:rebounds] #move to line 111?
       end
     }
   }
