@@ -1,4 +1,3 @@
-require 'pry'
 
 def game_hash
   hash = {
@@ -140,41 +139,11 @@ end
 
 def num_points_scored(name)
   players = get_players
-  find_player(players, name)[:points]
-
-  # home_players = game_hash[:home][:players]
-  # away_players = game_hash[:away][:players]
-  #
-  # home_players.each do |player, stats|
-  #   if player == name
-  #     return home_players["#{name}"][:points]
-  #   end
-  # end
-  #
-  # away_players.each do |player, stats|
-  #   if player == name
-  #     return away_players["#{name}"][:points]
-  #   end
-  # end
 end
 
 def shoe_size(name)
   players = get_players
   find_player(players, name)[:shoe]
-  # home_players = game_hash[:home][:players]
-  # away_players = game_hash[:away][:players]
-  #
-  # home_players.each do |player, stats|
-  #   if player == name
-  #     return home_players["#{name}"][:shoe]
-  #   end
-  # end
-  #
-  # away_players.each do |player, stats|
-  #   if player == name
-  #     return away_players["#{name}"][:shoe]
-  #   end
-  # end
 end
 
 def team_colors(team)
@@ -183,23 +152,12 @@ def team_colors(team)
       return data[:colors]
     end
   end
-  # if game_hash[:home][:team_name] == team
-  #   return game_hash[:home][:colors]
-  # elsif game_hash[:away][:team_name] == team
-  #   return game_hash[:away][:colors]
-  # end
 end
 
 def team_names
   game_hash.values.map do |data|
     data[:team_name]
   end.flatten
-  # teams = []
-  #
-  # teams << game_hash[:home][:team_name]
-  # teams << game_hash[:away][:team_name]
-  #
-  # teams
 end
 
 def player_numbers(team)
@@ -210,20 +168,6 @@ def player_numbers(team)
   one_team[:players].map do |player|
     player[:number]
   end.flatten
-  # numbers = []
-  #
-  # if game_hash[:home][:team_name] == team
-  #   game_hash[:home][:players].each do |player, stats|
-  #     numbers << stats[:number]
-  #   end
-  # end
-  #
-  # if game_hash[:away][:team_name] == team
-  #   game_hash[:away][:players].each do |player, stats|
-  #     numbers << stats[:number]
-  #   end
-  # end
-  # numbers
 end
 
 def player_stats(name)
@@ -232,61 +176,24 @@ def player_stats(name)
   found_player.select do |k, v|
     k != :player_name
   end
-  # home_players = game_hash[:home][:players]
-  # away_players = game_hash[:away][:players]
-  # home_players.each do |player, stats|
-  #   if player == name
-  #     return home_players["#{name}"]
-  #   end
-  # end
-  #
-  # away_players.each do |player, stats|
-  #   if player == name
-  #     return away_players["#{name}"]
-  #   end
-  # end
 end
 
-def find_biggest_shoe
+def big_shoe_player
   big_shoe = 0
+  player = nil
   players = get_players
 
   players.each do |name|
     if name[:shoe] > big_shoe
       big_shoe = name[:shoe]
+      player = name
     end
   end
-  big_shoe
+  big_shoe_player
 end
 
 def big_shoe_rebounds
-  find_biggest_shoe[:rebounds]
-  # shoe_sizes = []
-  # largest_shoe = 0
-  # largest_shoe_player = nil
-  #
-  # home_players = game_hash[:home][:players]
-  # away_players = game_hash[:away][:players]
-  #
-  # home_players.each do |player, stats|
-  #   shoe_sizes << stats[:shoe]
-  # end
-  # away_players.each do |players, stats|
-  #   shoe_sizes << stats[:shoe]
-  # end
-  #
-  # largest_shoe = shoe_sizes.sort.reverse[0]
-  #
-  # home_players.each do |player, stats|
-  #   if stats[:shoe] == largest_shoe
-  #     return stats[:rebounds]
-  #   end
-  # end
-  # away_players.each do |player, stats|
-  #   if stats[:shoe] == largest_shoe
-  #     return stats[:rebounds]
-  #   end
-  # end
+  big_shoe_player[:rebounds]
 end
 
 def most_points_scored
@@ -303,13 +210,3 @@ def most_points_scored
   end
   player_name
 end
-
-=begin
-def most_points_scored
-
-  most_points = num_points_scored(name)
-  player_name = name
-
-
-end
-=end
