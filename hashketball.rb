@@ -217,19 +217,22 @@ end
 # end
 
 
-# def player_numbers(team)
-#   location = nil
-#   numbers = []
-#         if team == "Brooklyn Nets"
-#             location = :home
-#         elsif team == "Charlotte Hornets"
-#             location = :away
-#         end
-#       game_hash[location][team][:players].each_value do |stat|
-#       numbers << stat[:number]
-#   end
-#     numbers
-# end
+def player_numbers(team)
+  location = nil
+  numbers = []
+        if team == "Brooklyn Nets"
+            location = :home
+        elsif team == "Charlotte Hornets"
+            location = :away
+        end
+      game_hash[location][:players].each_value do |stat|
+      numbers << stat[:number]
+  end
+    numbers
+end
+
+
+
 # def player_numbers(team_name)
 #   game_hash.each do |team, game_data|
 #     if game_data[:team_name] == team_name
