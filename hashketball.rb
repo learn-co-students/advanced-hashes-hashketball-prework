@@ -132,9 +132,7 @@ end
 
 def team_names
   array = []
-  game_hash.each do |teams, stats|
-  array << stats[:team_name]
-  end
+  game_hash.each do |teams, stats| array << stats[:team_name] end
   array
 end
 
