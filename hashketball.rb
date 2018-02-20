@@ -139,20 +139,18 @@ end
 
 def team_colors(team_name_string)
   return_value = "No such team!"
-  game_hash.each {|game_hash_key_symbol, game_hash_value_hash|
-    if game_hash_value_hash[:team_name] == team_name_string
-      return_value = game_hash_value_hash[:colors]
+  game_hash.each {|key, value|
+    if value[:team_name] == team_name_string
+      return_value = value[:colors]
     end
   }
   return_value
 end
 
 def team_names()
-  return_value = []
-  game_hash.each {|game_hash_key_symbol, game_hash_value_hash|
-    return_value.push(game_hash_value_hash[:team_name])
+  game_hash.collect {|game_hash_key_symbol, game_hash_value_hash|
+    game_hash_value_hash[:team_name]
   }
-  return_value
 end
 
 def player_numbers(team_name_string)
