@@ -25,60 +25,125 @@ def game_hash
 }
 end
 
-def num_points_scored(player_name)
-  game_hash.each do |team, values|
-    values.each do |data, values|
-      if values.class == Hash
-        values.each do |player, scores|
-          if player == player_name
-            return scores[:points]
-          end
-        end
-      end
+# def num_points_scored(player_name)
+#   game_hash.each do |team, values|
+#     values.each do |data, values|
+#       if values.class == Hash
+#         values.each do |player, scores|
+#           if player == player_name
+#             return scores[:points]
+#           end
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# def shoe_size(player_name)
+#   game_hash.each do |team, values|
+#     values.each do |data, values|
+#       if values.class == Hash
+#         values.each do |player, scores|
+#           if player == player_name
+#             return scores[:shoe]
+#           end
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# def player_stats(player_name)
+#   game_hash.each do |team, values|
+#     values.each do |data, values|
+#       if values.class == Hash
+#         values.each do |player, scores|
+#           if player == player_name
+#             return scores
+#           end
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# def big_shoe_rebounds
+#   largest_shoe = 0
+#   largest_rebound = String.new
+#   game_hash.each do |team, values|
+#     values.each do |data, values|
+#       if values.class == Hash
+#         values.each do |player, scores|
+#           if scores[:shoe] > largest_shoe
+#             largest_shoe = scores[:shoe]
+#             largest_rebound = scores[:rebounds]
+#           end
+#         end
+#       end
+#     end
+#   end
+#   largest_rebound
+# end
+#
+# def team_names
+#   game_hash.collect do |team, values|
+#      values[:team_name]
+#   end
+# end
+#
+# def team_colors(team_arg)
+#   game_hash.each do |team, values|
+#     if values[:team_name] == team_arg
+#       return values[:colors]
+#     end
+#   end
+# end
+#
+# def player_numbers(team_arg)
+#   output = []
+#   game_hash.each do |team, values|
+#     if values[:team_name] == team_arg
+#       values.each do |data, values|
+#         if values.class == Hash
+#           output = values.collect do |player, scores|
+#             scores[:number]
+#           end
+#         end
+#       end
+#     end
+#   end
+#   output
+# end
+
+# --Better solution--
+
+# player helper method
+def player_stats(player)
+  game_hash.each do |key, data|
+    if game_hash[key][:players].has_key?(player)
+      return game_hash[key][:players][player]
     end
   end
 end
 
-def shoe_size(player_name)
-  game_hash.each do |team, values|
-    values.each do |data, values|
-      if values.class == Hash
-        values.each do |player, scores|
-          if player == player_name
-            return scores[:shoe]
-          end
-        end
-      end
-    end
-  end
+def num_points_scored(player)
+  player_stats(player)[:points]
 end
 
-def player_stats(player_name)
-  game_hash.each do |team, values|
-    values.each do |data, values|
-      if values.class == Hash
-        values.each do |player, scores|
-          if player == player_name
-            return scores
-          end
-        end
-      end
-    end
-  end
+
+def shoe_size(player)
+  player_stats(player)[:shoe]
 end
+
 
 def big_shoe_rebounds
   largest_shoe = 0
   largest_rebound = String.new
   game_hash.each do |team, values|
-    values.each do |data, values|
-      if values.class == Hash
-        values.each do |player, scores|
-          if scores[:shoe] > largest_shoe
-            largest_shoe = scores[:shoe]
-            largest_rebound = scores[:rebounds]
-          end
-        end
+    game_hash[team][:players].each do |player, scores|
+      if scores[:shoe] > largest_shoe
+        largest_shoe = scores[:shoe]
+        largest_rebound = scores[:rebounds]
       end
     end
   end
@@ -91,26 +156,21 @@ def team_names
   end
 end
 
-def team_colors(team_arg)
+# team helper method
+def find_team(team_arg)
   game_hash.each do |team, values|
-    if values[:team_name] == team_arg
-      return values[:colors]
+    if game_hash[team][:team_name] == team_arg
+      return game_hash[team]
     end
   end
 end
 
+def team_colors(team_arg)
+  find_team(team_arg)[:colors]
+end
+
 def player_numbers(team_arg)
-  output = []
-  game_hash.each do |team, values|
-    if values[:team_name] == team_arg
-      values.each do |data, values|
-        if values.class == Hash
-          output = values.collect do |player, scores|
-            scores[:number]
-          end
-        end
-      end
-    end
+  find_team(team_arg)[:players].collect do |player, values|
+    values[:number]
   end
-  output
 end
