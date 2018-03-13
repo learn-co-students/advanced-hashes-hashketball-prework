@@ -138,7 +138,7 @@ end
 
 def big_shoe_rebounds
   largest_shoe = 0
-  largest_rebound = String.new
+  largest_rebound = 0
   game_hash.each do |team, values|
     game_hash[team][:players].each do |player, scores|
       if scores[:shoe] > largest_shoe
