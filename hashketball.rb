@@ -132,8 +132,57 @@ def big_shoe_rebounds
       end #if
     end #team_data
   end #game_hash
-
   rebounds
+end
 
+def most_points_scored ()
+  m_point = 0
+  player = ""
+
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |p_name, stats|
+      if(stats[:points]> m_point)
+        m_point = stats[:points]
+        player = p_name
+      end #if
+    end #team_data
+  end # game_hash
+  player
+
+end
+
+# #winning_team
+#   returns the Brooklyn Nets (FAILED - 2)
+def winning_team
+  team_p = []
+  team_n = []
+
+  game_hash.each do | location, team_data|
+    temp = 0
+    team_data[:players].each do |p_name, stats|
+      temp += stats[:points]
+    end
+    team_n << team_data[:team_name]
+    team_p << temp
+  end
+
+  team_p[0] > team_p[1] ? team_n[0] : team_n[1]
+
+end
+
+# #player_with_longest_name
+#   returns Brendan Haywood (FAILED - 3)
+def player_with_longest_name
+  longest_name = 0
+  the_player = ""
+
+  game_hash.each do |location, team_data|
+      team_data[:players].each do |name,stats|
+        if (name.size > the_player.size)
+          the_player = name
+        end #if
+      end #team_data
+  end #game_hash
+  the_player
 
 end
