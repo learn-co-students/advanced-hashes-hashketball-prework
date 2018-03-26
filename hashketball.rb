@@ -1,10 +1,11 @@
 require 'pry'
+
 def game_hash
   {
-    home => {
-      team_name => "Brooklyn Nets",
-      colors => [Black, White],
-      players => {
+    :home => {
+      :team_name => "Brooklyn Nets",
+      :colors => ["Black", "White"],
+      :players => {
         "Alan Anderson" => {
           number: 0,
           shoe: 16,
@@ -58,10 +59,10 @@ def game_hash
       }
 },
 
-    away => {
-      team_name => "Charlotte Hornets",
-      colors => [Turquoise, Purple],
-      players => {
+    :away => {
+      :team_name => "Charlotte Hornets",
+      :colors => ["Turquoise", "Purple"],
+      :players => {
         "Jeff Adrien" => {
           number: 4,
           shoe: 18,
@@ -117,27 +118,67 @@ def game_hash
   }
 end
 
-# def good_practices
-#   game_hash.each do |location, team_data|
-#     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-#     binding.pry
-#       team_data.each do |attribute, data|
-#         #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-#         binding.pry
-#
-#         #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-#         data.each do |data_item|
-#             binding.pry
-#       end
-#     end
-#   end
-# end
-#
-# good_practices
-
-def home_team_name
-  game_hash[:home][:team_name]
+def num_points_scored(player_name)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players.merge(away_players)
+  player = all_players[player_name]
+  player[:points]
 end
 
-game_hash
-puts home_team_name 
+def find_player(player_name)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players.merge(away_players)
+  player = all_players[player_name]
+end
+
+def shoe_size(player_name)
+  player = find_player(player_name)
+  player[:shoe]
+end
+
+def team_colors(team_name)
+  if team_name == "Brooklyn Nets"
+    game_hash[:home][:colors]
+  else
+    game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  team_name_array = []
+  home_team_name = game_hash[:home][:team_name]
+  away_team_name = game_hash[:away][:team_name]
+  team_name_array<<home_team_name<<away_team_name
+  team_name_array
+end
+
+def player_numbers(team_name)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  home_players_array = home_players.keys
+  away_players_array = away_players.keys
+  home_numbers_array = []
+  away_numbers_array = []
+
+if team_name == "Brooklyn Nets"
+  home_players_array.each do |player|
+    home_numbers_array<<game_hash[:home][:players][player][:number]
+  end
+  home_numbers_array
+else
+  away_players_array.each do |player|
+    away_numbers_array<<game_hash[:away][:players][player][:number]
+  end
+  away_numbers_array
+end
+end
+
+def player_stats(player_name)
+  find_player(player_name)
+end
+
+def big_shoe_rebounds
+  game_hash[:home][:players]["Mason Plumlee"][:rebounds]
+end
