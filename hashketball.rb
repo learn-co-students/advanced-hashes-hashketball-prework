@@ -140,3 +140,4 @@ def home_team_name
 end
 
 game_hash
+puts home_team_name 
