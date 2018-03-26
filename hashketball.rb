@@ -118,12 +118,40 @@ def game_hash()
   }
 end 
 
-def num_points_scored(player)
-  if game_hash[:home][:players].keys.include?(player)
-    return game_hash[:home][:players][player][:points]
-  else 
-    return game_hash[:away][:players][player][:points]
+# after realizing they never said you can't make extra 
+# helper methods 
+
+def players 
+  home = game_hash[:home][:players]
+  away = game_hash[:away][:players]
+  return home.merge(away)
+end
+
+def find_player(player) 
+  players.find do |name,stats|
+    name == player
+  end[1] #just the player hash, not their name key
+end
+
+def find_team(team)
+  game_hash.find do |location,details|
+    game_hash[location][:team_name] == team
   end
+end
+
+
+# original code
+
+
+
+
+def num_points_scored(player)
+  return players(player)[:points]
+  # if game_hash[:home][:players].keys.include?(player)
+  #   return game_hash[:home][:players][player][:points]
+  # else 
+  #   return game_hash[:away][:players][player][:points]
+  # end
 end
 
 def shoe_size(player)
@@ -133,14 +161,6 @@ def shoe_size(player)
     end
   end
 end
-  
-# def shoe_size(player) 
-#   if game_hash[:home][:players].keys.include?(player)
-#     return game_hash[:home][:players][player][:shoe]
-#   else 
-#     return game_hash[:away][:players][player][:shoe]
-#   end
-# end
 
 def team_colors(team)
   if game_hash[:home][:team_name] == team
@@ -163,18 +183,6 @@ def player_numbers(team)
     end
   end.flatten.compact
 end  
-
-# def player_numbers(team)
-#   if game_hash[:home][:team_name] == team
-#     return game_hash[:home][:players].map do |player,stats|
-#         game_hash[:home][:players][player][:number]
-#       end
-#   else 
-#     return game_hash[:away][:players].map do |player,stats|
-#         game_hash[:away][:players][player][:number]
-#       end
-#   end
-# end
 
 def player_stats(player)
   game_hash.each do |location,value|
@@ -203,6 +211,37 @@ def big_shoe_rebounds()
   end
 end
 
-# shoe_size("Jeff Adrien")
-# 10.times {puts Benchmark.measure{player_numbers("Brooklyn Nets")}}
-# 10.times {puts Benchmark.measure{player_stats("Jeff Adrien")}}
+# bonus methods that were attempted after I realized the right
+# way to go about this lab with helper methods 
+
+
+
+def most_points_scored()
+  players.sort_by {|name,stats|stats[:points]}[-1][0] 
+end 
+
+def winning_team
+  home_p = away_p = 0
+  game_hash.each do |location,stuff|
+    game_hash[location][:players].each do |player,stat|
+      location == :home ? home_p += stat[:points] : away_p += stat[:points]
+    end
+  end
+  return game_hash[home_p > away_p ? :home : :away][:team_name]
+end
+
+def player_with_longest_name
+  players.sort_by do |name,stats|
+    name.length
+  end[-1][0]
+end
+
+def long_name_steals_a_ton?
+  long_guy = player_with_longest_name
+  players.any? do |name,stats|
+    players[long_guy][:steals] < stats[:steals]
+  end
+end  
+binding.pry
+# 10.times {puts Benchmark.measure { winning_team }}
+winning_team
