@@ -183,11 +183,11 @@ end
 def big_shoe_rebounds
   game_hash.each do |team, info| # Top layer hash
     info[:players].each do |attribute_hash| # Array, each elem is a hash with each player info
-      #binding.pry
+
       #attribute_hash.sort_by {|player| player.fetch(:shoe) }.last
       #students.max_by{|k| k[:test_score] }
-      attribute_hash.max_by {|s| s[:shoe]}[:player_name]
-
+      attribute_hash.max_by {|s| s[:shoe]}#[:player_name]
+      binding.pry
     end
   end
 end
