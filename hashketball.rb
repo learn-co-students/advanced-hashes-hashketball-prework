@@ -181,9 +181,9 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
-  game_hash.each do |team, info|
-    info[:players].each do |attribute_hash|
-      #binding.pry
+  game_hash.each do |team, info| # Top layer hash
+    info[:players].each do |attribute_hash| # Array with each player info
+      binding.pry
     end
   end
 end
