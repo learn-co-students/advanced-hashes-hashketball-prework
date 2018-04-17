@@ -182,6 +182,7 @@ end
 
 def big_shoe_rebounds
   game_hash.each do |team, info| # Top layer hash
+    #Who has the biggest shoe size?
     big_shoe_player = info[:players].sort_by {|a| a.fetch(:shoe) }.last[:player_name] # Array, each elem is a hash with each player info
     info[:players].each do |attribute_hash|
       if attribute_hash[:player_name] == big_shoe_player
