@@ -250,12 +250,12 @@ end
 
 # describe 'bonus' do
 
-#   describe '#most_points_scored' do
+#   describe '#player_by_number' do
 
 #     it 'returns Ben Gordon' do
-#       expect(most_points_scored).to eq("Ben Gordon")
+#       expect(player_by_number(8)).to eq("Ben Gordon")
 #     end
-
+#     end
 #   end
 
 #   describe '#winning_team' do
