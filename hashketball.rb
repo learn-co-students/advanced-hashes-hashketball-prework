@@ -139,6 +139,15 @@ def shoe_size(name)
   end
 end
 
+def player_by_number(num)
+ player_array = game_hash.collect do |location, team_data|
+    team_data[:players]
+     end.flatten
+  player_array.find do |player|
+    player[:number] == num
+  end[:player_name]
+end
+
 def team_colors(team_name)
   game_hash.each do |location, team_data|
     if team_data[:team_name] == team_name
