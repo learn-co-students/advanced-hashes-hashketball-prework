@@ -120,6 +120,7 @@ def game_hash
 }
 end
 
+
 def all_players
   home_team = game_hash[:home][:players]
   away_team = game_hash[:away][:players]
@@ -127,17 +128,33 @@ def all_players
   both_teams = home_team + away_team
 
   both_teams
+  # binding.pry
 end
+
 
 def num_points_scored(name)
   find_player = all_players.find {|player| player.fetch(:player_name) == name}
   find_player.fetch(:points)
 end
 
+
+# || Done with Matt ||
+
+# def player_by_number(num)
+#   find_player = all_players.find {|player| player.fetch(:number) == num}
+#   find_player.fetch(:player_name)
+# end
+
+
+# iterate through all players[:number] to find if that matches "num", then return
+# the name associated with that
+
+
 def shoe_size(name)
   find_player = all_players.find {|player| player.fetch(:player_name) == name}
   find_player.fetch(:shoe)
 end
+
 
 def team_colors(team_name)
   if team_name == "Brooklyn Nets"
@@ -149,10 +166,12 @@ def team_colors(team_name)
   end
 end
 
+
 def team_names
   teams = [game_hash[:home][:team_name], game_hash[:away][:team_name]]
   teams
 end
+
 
 def player_numbers(team_name)
   team_numbers = []
@@ -174,26 +193,46 @@ end
 
 def player_stats(name)
   player_stats = find_player = all_players.find {|player| player.fetch(:player_name) == name}
+  # binding.pry
   player_stats.delete(:player_name)
 
   return player_stats
 end
 
+
 def big_shoe_rebounds
-  big_shoes_guy = 0
-  rebounds = 0
-    game_hash.each do | team, team_details_hash|
-      team_details_hash[:players].each do | stats |
-        if stats[:shoe] > big_shoes_guy
+  biggest_shoes_player = 0
+  num_of_rebounds = 0
+    game_hash.each do | team, team_stats|
+      team_stats[:players].each do | stats |
+        if stats[:shoe] > biggest_shoes_player
           # binding.pry
-          big_shoes_guy = stats[:shoe] # if conditional true, replaces big_shoes_guy, else it stays the same
-          rebounds = stats[:rebounds]
+          biggest_shoes_player = stats[:shoe] # if conditional true, replaces big_shoes_guy, else it stays the same
+          num_of_rebounds = stats[:rebounds]
           # binding.pry
         end
       end
     end
-  rebounds
+  num_of_rebounds
 end
+
+
+# Bonus Questions:
+#
+# Define methods to return the answer to the following questions:
+#
+# Which player has the most points? Call the method most_points_scored.
+#
+# Which team has the most points? Call the method winning_team.
+#
+# Which player has the longest name? Call the method player_with_longest_name.
+#
+# Super Bonus:
+#
+# Write a method that returns true if the player with the longest name had the
+# most steals. Call the method long_name_steals_a_ton?.
+
+
 
 
 # def good_practices
