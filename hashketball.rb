@@ -204,6 +204,8 @@ def big_shoe_rebounds
   rebound_stat[0]
 end
 
+#B-b-b-b-BAANG!! OVER TIME (thanks mike breen)
+#bonus round
 def most_points_scored
   points_scored = []
   box_score = []
@@ -216,8 +218,7 @@ def most_points_scored
   game_hash.each do |court, attributes|
     attributes[:players].each do |players, stats|
       if potg == stats[:points]
-        binding.pry
-        box_score.push(attributes[:players])
+        box_score.push(players)
       end
     end
   end
