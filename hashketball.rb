@@ -1,4 +1,5 @@
 # Write your code here!
+
 def game_hash
   game_hash = {
     :home => {
@@ -153,10 +154,10 @@ def shoe_size(player)
   end
 end
 
-def team_colors(name_of_team)
+def team_colors(team_name)
   game_hash.each do |location, team_data|
     team_data.each do |attributes, data|
-      if data == name_of_team
+      if data == team_name
         return team_data[:colors]
       end
     end
@@ -195,44 +196,60 @@ end
 
 def player_stats(name_of_player)
   game_hash.each do |location, team_data|
-    team_data.each do |attributes, data|
-      if attributes == :players
-        data.each do |player, stats|
-          if player == name_of_player
-            return stats
-          end
-        end
+    team_data[:players].each do |player, stats|
+      if name_of_player == player
+        return stats
       end
     end
   end
 end
 
+# def big_shoe_rebounds
+#   player_shoe_size = []
+#   game_hash.each do |location, team_data|
+#     team_data.each do |attributes, data|
+#       if attributes == :players
+#         data.each do |player, player_data|
+#           player_shoe_size << [player, player_data[:shoe]]
+#         end
+#       end
+#     end
+#   end
+#
+#   player_with_biggest_shoe = player_shoe_size.sort_by { |player| player[1] }.last[0]
+#
+#   game_hash.each do |location, team_data|
+#     team_data.each do |attributes, data|
+#       if attributes == :players
+#         data.each do |player, player_data|
+#           if player == player_with_biggest_shoe
+#             player_data.each do |stat, data|
+#               if stat == :rebounds
+#                 return data
+#               end
+#             end
+#           end
+#         end
+#       end
+#     end
+#   end
+# end
+
 def big_shoe_rebounds
-  player_shoe_size = []
+  shoe_sizes_arr = []
+
   game_hash.each do |location, team_data|
-    team_data.each do |attributes, data|
-      if attributes == :players
-        data.each do |player, player_data|
-          player_shoe_size << [player, player_data[:shoe]]
-        end
-      end
+    team_data[:players].each do |player, player_data|
+      shoe_sizes_arr << [player, player_data[:shoe]]
     end
   end
 
-  player_with_biggest_shoe = player_shoe_size.sort_by { |player| player[1] }.last[0]
+  player_with_largest_shoe = shoe_sizes_arr.sort_by! { |player| player[1] }.last[0]
 
   game_hash.each do |location, team_data|
-    team_data.each do |attributes, data|
-      if attributes == :players
-        data.each do |player, player_data|
-          if player == player_with_biggest_shoe
-            player_data.each do |stat, data|
-              if stat == :rebounds
-                return data
-              end
-            end
-          end
-        end
+    team_data[:players].each do |player, player_data|
+      if player == player_with_largest_shoe
+        return player_data[:rebounds]
       end
     end
   end
