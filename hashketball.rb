@@ -177,3 +177,20 @@ def big_shoe_rebounds
   end
   rebounds_biggest_show_size
 end
+
+def most_points_scored
+  highest_score = 0
+  highest_score_player = 0
+
+  game_hash.each do |team, team_data|
+
+    team_data[:players].each do |player_name, player_data|
+
+      if highest_score == 0 || player_data[:points].to_i > highest_score
+        highest_score = player_data[:points].to_i
+        highest_score_player = player_name.to_s
+      end
+    end
+  end
+  highest_score_player
+end
