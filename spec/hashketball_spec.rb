@@ -236,7 +236,7 @@ describe 'hashketball' do
 
   end
 
-  describe '#big_shoe_rebounds' do
+describe '#big_shoe_rebounds' do
 
     it 'returns the number of rebounds of the player with the biggest shoe size' do
       expect(big_shoe_rebounds).to eq(12)
@@ -248,15 +248,15 @@ end
 
 # If you'd like to work on the bonus, uncomment these tests.
 
-# describe 'bonus' do
+ describe 'bonus' do
 
-#   describe '#most_points_scored' do
+   describe '#most_points_scored' do
 
-#     it 'returns Ben Gordon' do
-#       expect(most_points_scored).to eq("Ben Gordon")
-#     end
-
-#   end
+     it 'returns Ben Gordon' do
+       expect(most_points_scored).to eq("Ben Gordon")
+     end
+   end
+end
 
 #   describe '#winning_team' do
 
