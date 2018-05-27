@@ -140,6 +140,24 @@ end
 
 #good_practices
 
+def players
+	home_players = game_hash.fetch(:home).fetch(:players)
+	away_players = game_hash.fetch(:away).fetch(:players)
+	home_players + away_players
+end
+
+def find_the_player(name)
+	players.find {|player| player.fetch(:player_name) == name}
+end
+
+def teams
+	game_hash.values
+end
+
+def find_the_team(team_name)
+	teams.find {|team| team.fetch(:team_name) == team_name}
+end
+
 def num_points_scored(name)
 	player = find_the_player(name)
 	player.fetch(:points)
@@ -174,36 +192,6 @@ end
 def big_shoe_rebounds
 	player = player_biggest_shoe_size
 	player.fetch(:rebounds)
-end
-
-def most_points_scored
-end
-
-def winning_team
-end
-
-def player_with_longest_game
-end
-
-def long_name_steals_a_ton?
-end
-
-def players
-	home_players = game_hash.fetch(:home).fetch(:players)
-	away_players = game_hash.fetch(:away).fetch(:players)
-	home_players + away_players
-end
-
-def find_the_player(name)
-	players.find {|player| player.fetch(:player_name) == name}
-end
-
-def teams
-	game_hash.values
-end
-
-def find_the_team(team_name)
-	teams.find {|team| team.fetch(:team_name) == team_name}
 end
 
 def player_biggest_shoe_size
