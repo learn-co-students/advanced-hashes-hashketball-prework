@@ -189,13 +189,12 @@ def player_stats(name)
 	find_the_player(name).reject {|key, value| key == :player_name}
 end
 
-def big_shoe_rebounds
-	player = player_biggest_shoe_size
-	player.fetch(:rebounds)
-end
-
 def player_biggest_shoe_size
 	players.sort_by {|player| player.fetch(:shoe)}.last
 end
 
+def big_shoe_rebounds
+	player = player_biggest_shoe_size
+	player.fetch(:rebounds)
+end
 
