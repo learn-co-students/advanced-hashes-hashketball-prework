@@ -141,15 +141,38 @@ def shoe_size (player_name)
   size[0]
 end
 
+#
+#def team_colors(team)
+#  colors = []
+#  game_hash.each do |court, attributes|
+#    if team == attributes[:team_name]
+#      colors.push(attributes[:colors])
+#    end
+#  end
+#  binding.pry
+#  colors.flatten
+#end
+
 def team_colors(team)
   colors = []
   game_hash.each do |court, attributes|
     if team == attributes[:team_name]
-      colors.push(attributes[:colors])
+      attributes[:colors].each do |color|
+        colors.push(color)
+      end
     end
   end
-  colors.flatten
+  #binding.pry
+  colors
 end
+
+#above I can push the entire array into the empty array and flatten it (which is the original commented out version)
+#or I can iterate through the attributes[:color] array and push each individual element into my empty array
+#the result is the same either way
+
+
+
+
 
 def team_names
   teams = []
