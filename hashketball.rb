@@ -247,3 +247,30 @@ def most_points_scored
   end
   box_score[0]
 end
+
+def home_points #auxiliary to winning_team method below
+  points = 0
+  game_hash[:home][:players].each do |player, stats|
+    points += stats[:points]
+  end
+  points
+end
+
+def away_points #auxiliary to winning team method below
+  points = 0
+  game_hash[:away][:players].each do |player, stats|
+    points += stats[:points]
+  end
+  points
+end
+
+def winning_team
+  home_score = home_points
+  away_score = away_points
+  #binding.pry
+  if away_score > home_score
+    game_hash[:away][:team_name]
+  else
+    game_hash[:home][:team_name]
+  end
+end
