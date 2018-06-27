@@ -195,5 +195,13 @@ end
 names
 end
 
-
+def player_stats(string)
+name=[]
+  game_hash.each do |team,team_name| 
+  if game_hash[team][:players].include?(string)
+    puts game_hash[team][:players][string].each{|x| name.push(x)}
+    end
+  end
+  name
+end
 
