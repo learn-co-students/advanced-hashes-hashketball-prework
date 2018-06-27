@@ -201,7 +201,9 @@ game_hash.each do |team,team_name|
     return game_hash[team][:players][string]
     end
   end
-enddef big_shoe_rebounds
+end
+
+def big_shoe_rebounds
 player = ""
 shoe_size = 0
 game_hash.each do |team,team_name| 
