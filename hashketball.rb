@@ -175,6 +175,16 @@ def team_names
   return names
 end
 
+def players_numbers
+  names = []
+  game_hash.each do |team, team_hash|
+    names.push(team_hash[:team_name])
+  end
+  return names
+end
+
+
+
 
 
 
