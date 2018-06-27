@@ -167,9 +167,9 @@ def team_colors(team_name)
 return colors
 end
 
-def team_names(hash)
+def team_names
   names = []
-  hash.each do |team, team_hash|
+  game_hash.each do |team, team_hash|
     names.push(team_hash[:team_name])
   end
   return names
