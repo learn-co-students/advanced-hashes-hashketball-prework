@@ -172,7 +172,7 @@ def team_names(game_hash)
   game_hash.each do |team, team_hash|
     names.push(team_hash[:team_name])
   end
-  puts names
+  return names
 end
 
 
