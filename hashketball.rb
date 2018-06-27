@@ -188,10 +188,10 @@ def players_numbers(string)
   game_hash.each do |team,team_name| 
   if team_name[:team_name] == string
     team_name[:players].each do |x,y| 
-    names.push(y[:number])
-    end
+      names.push(y[:number])
     end
   end
+end
 names
 end
 
