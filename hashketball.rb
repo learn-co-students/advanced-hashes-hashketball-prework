@@ -183,7 +183,15 @@ def players_numbers(team_name)
   return names
 end
 
-
+def players_numbers(string)
+  names = []  
+  game_hash.each do |team,team_name| 
+  if team_name[:team_name] == string
+    team_name[:players].each{|x,y| names.push(x)}
+    end
+  end
+names
+end
 
 
 
