@@ -164,7 +164,7 @@ def team_colors(team_name)
       end
     end
   end
-return colors.join(" and ")
+return colors.join
 end
 
 
