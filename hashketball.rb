@@ -201,5 +201,17 @@ game_hash.each do |team,team_name|
     return game_hash[team][:players][string]
     end
   end
+enddef big_shoe_rebounds
+player = ""
+shoe_size = 0
+game_hash.each do |team,team_name| 
+  team_name[:players].each do |side, stats|
+    if stats[:shoe] > shoe_size
+    shoe_size =stats[:shoe]
+    player = stats[:rebounds]
+    end
+  end
+  end
+  puts player
 end
 
