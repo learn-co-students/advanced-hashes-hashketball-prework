@@ -168,19 +168,20 @@ def player_numbers(team_name)
   end
 end
 
+
+def player_stats(player_name)
+  stats = players.find {|player| player.fetch(:player_name) == player_name}
+  stats.delete_if {|info, string| info == :player_name}
+
+end
+
+
 def get_all_players
   team_players_array = game_hash.values.map do |team_data|
     team_data[:players]
   end
 
   team_players_array.flatten
-end
-
-def player_stats(player_name)
-  players = get_all_players
-  players.find do |player_data|
-    player_data[:player_name] == player_name
-  end
 end
 
 def big_shoe_rebounds
