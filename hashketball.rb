@@ -1,5 +1,6 @@
 require "pry"
 
+#The hash to be used.
 def game_hash
   game_hash = {
     home: {
@@ -118,6 +119,7 @@ def game_hash
   }
 end
 
+# Returns the number of points scored for a particular player based on his/her name.
 def num_points_scored(player_name)
   result = nil
   game_hash.each do |team, about|
@@ -130,6 +132,7 @@ def num_points_scored(player_name)
   result
 end
 
+#Returns show size of a particular player based on his/her name.
 def shoe_size(player_name)
   result = nil
   game_hash.each do |team, about|
@@ -142,6 +145,7 @@ def shoe_size(player_name)
   result
 end
 
+#Returns team colors based on team name.
 def team_colors(team_name)
   result = nil
   game_hash.each do |team, about|
@@ -152,6 +156,7 @@ def team_colors(team_name)
   result
 end
 
+#Returns team names.
 def team_names
   result = []
   game_hash.each do |team, about|
@@ -160,6 +165,7 @@ def team_names
   result
 end
 
+#Returns the number of all players in a given team based on team name.
 def player_numbers(team_name)
   result = []
   game_hash.each do |team, about|
@@ -172,6 +178,7 @@ def player_numbers(team_name)
   result
 end
 
+#Returns a hash of the players stats based on the players name.
 def player_stats(player_name)
   result = {}
   game_hash.each do |team, about|
@@ -184,6 +191,7 @@ def player_stats(player_name)
   result
 end
 
+#Returns the rebounds of the player with the biggest shoe size.
 def big_shoe_rebounds
   big_shoe = 0
   result = 0
@@ -202,6 +210,7 @@ def big_shoe_rebounds
   result
 end
 
+#Returns the name of the player with the largest score.
 def most_points_scored
   points = 0
   result = ""
@@ -216,6 +225,7 @@ def most_points_scored
   result
 end
 
+#Returns the name of the team with the highest score.
 def winning_team
   home_points = 0
   away_points = 0
@@ -234,6 +244,7 @@ def winning_team
   home_points > away_points ? result = game_hash[:home][:team_name] : result = game_hash[:away][:team_name]
 end
 
+#Returns the name of the player with the longest name.
 def player_with_longest_name
   name_size = 0
   result = ""
@@ -247,6 +258,7 @@ def player_with_longest_name
   result
 end
 
+#compares the player with the longest name with the player with the most steals and returns a boolean based on the result.
 def long_name_steals_a_ton?
   steals = 0
   most_steals = ""
