@@ -178,13 +178,13 @@ end
 def player_stats(player_name)
   players = get_all_players
   players.find do |player_data|
-    player_data[:player_name] == player_name
+    player_data[:player_name] == player_name 
   end
 end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
