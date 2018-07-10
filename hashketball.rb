@@ -170,7 +170,7 @@ end
 
 def player_numbers(team_name)
   team = get_team(team_name)
-  team[:players].map do |player_data|
+  team[:players].collect do |player_data|
     player_data[:number]
   end
 end
