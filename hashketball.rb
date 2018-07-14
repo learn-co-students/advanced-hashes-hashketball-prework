@@ -189,7 +189,6 @@ def big_shoe_rebounds
     if(!result)
       result = player_data
     end
-
     result
   end
 
@@ -197,4 +196,3 @@ def big_shoe_rebounds
 end
 
 puts team_names
-puts most_points_scored
