@@ -144,7 +144,7 @@ def get_data_from_player(player_name, data)
 end
 
 def num_points_scored(player_name)
-  get_data_from_player(player_name, :points)
+get_data_from_player(player_name, :points)
 end
 
 def shoe_size(player_name)
