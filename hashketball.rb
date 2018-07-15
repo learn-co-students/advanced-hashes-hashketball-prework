@@ -123,22 +123,35 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
+#def good_practices
+#  game_hash.each do |location, team_data|
+#    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
+#    binding.pry
+#      team_data.each do |attribute, data|
+#        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
+#        binding.pry
+#
+#        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
+#        data.each do |data_item|
+#            binding.pry
+#      end
+#    end
+#  end
+#end
+
 def get_all_players
-  team_players_array = game_hash.values.map do |team_data|
+  players_array = game_hash.values.map do |team_data|
     team_data[:players]
   end
-
-  team_players_array.flatten
+  players_array.flatten
 end
 
 def get_data_from_player(player_name, data)
   all_players = get_all_players
-
   all_players.reduce(nil) do |result, player_data|
     if(player_data[:player_name] == player_name)
       result = player_data[data]
     end
-
     result
   end
 end
@@ -184,16 +197,11 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
     end
-
     result
   end
-
   biggest_shoe[:rebounds]
 end
-
-puts team_names
