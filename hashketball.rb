@@ -123,6 +123,8 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
+puts home_team_name
+
 def get_all_players
   team_players_array = game_hash.values.map do |team_data|
     team_data[:players]
@@ -197,3 +199,6 @@ def big_shoe_rebounds
 end
 
 puts team_names
+
+def good_practices
+end
