@@ -123,27 +123,6 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
-# def get_all_players
-#   team_players_array = game_hash.values.map do |team_data|
-#     team_data[:players]
-#
-#   end
-#   team_players_array.flatten
-#   # binding.pry
-# end
-
-def get_data_from_player(player_name, data)
-  all_players = get_all_players
-
-  all_players.reduce(nil) do |result, player_data|
-    if(player_data[:player_name] == player_name)
-      result = player_data[data]
-    end
-
-    result
-  end
-end
-
 def players
   home = game_hash[:home][:players]
   away = game_hash[:away][:players]
@@ -157,7 +136,6 @@ def find_player(player_name)
 end
 
 def num_points_scored(player_name)
-  # get_data_from_player(player_name, :points)
   player = find_player(player_name)
   player[:points]
 end
@@ -209,4 +187,67 @@ def big_shoe_rebounds
 
   player[:rebounds]
   # binding.pry
+end
+
+#bonus:
+def most_points_scored
+  all_players = players
+  all_players.sort_by do |player|
+    player[:points]
+  end.last[:player_name]
+end
+
+# def team_points
+#   game_hash.each do |home_away, team_data|
+#       team_points = 0
+#     team_data[:players].each do |player|
+#       team_points += player[:points]
+#     end
+#   end
+#   puts total_points
+# end
+
+def winning_team
+  total_points = 0
+  winner = ""
+  game_hash.each do |home_away, team_data|
+    team_points = 0
+    team_name = game_hash[home_away][:team_name]
+    # puts home_away
+    team_data[:players].each do |player|
+      points = player[:points]
+      team_points += points
+    end
+    if team_points > total_points
+      winner, total_points = team_name, team_points
+    end
+    # puts home = game_hash[:home][:players][:points]
+    # away = game_hash[:away][:players][:points]
+  end
+  winner
+end
+
+def player_with_longest_name
+  longest = ""
+  longest_length = 0
+  game_hash.each do |home_away, team_data|
+    team_data[:players].each do |player|
+      name_length = player[:player_name].length
+
+      if name_length > longest_length
+        longest, longest_length = player[:player_name], name_length
+      end
+    end
+  end
+  return longest
+  binding.pry
+end
+#super bonus:
+def long_name_steals_a_ton?
+  #
+  # game_hash.each do |home_away, team_data|
+  #   team_data[:players].each do |player|
+  #     puts player[:steals]
+  #   end
+  # end
 end
