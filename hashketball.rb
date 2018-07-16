@@ -123,13 +123,14 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
-def get_all_players
-  team_players_array = game_hash.values.map do |team_data|
-    team_data[:players]
-  end
-
-  team_players_array.flatten
-end
+# def get_all_players
+#   team_players_array = game_hash.values.map do |team_data|
+#     team_data[:players]
+#
+#   end
+#   team_players_array.flatten
+#   # binding.pry
+# end
 
 def get_data_from_player(player_name, data)
   all_players = get_all_players
@@ -143,12 +144,27 @@ def get_data_from_player(player_name, data)
   end
 end
 
+def players
+  home = game_hash[:home][:players]
+  away = game_hash[:away][:players]
+  home + away
+end
+
+def find_player(player_name)
+  players.find do |player|
+    player[:player_name] == player_name
+  end
+end
+
 def num_points_scored(player_name)
-  get_data_from_player(player_name, :points)
+  # get_data_from_player(player_name, :points)
+  player = find_player(player_name)
+  player[:points]
 end
 
 def shoe_size(player_name)
-  get_data_from_player(player_name, :shoe)
+  player = find_player(player_name)
+  player[:shoe]
 end
 
 def get_team(team_name)
@@ -173,27 +189,24 @@ def player_numbers(team_name)
   team[:players].map do |player_data|
     player_data[:number]
   end
+  # team[:players][:number]
+  # binding.pry
 end
 
 def player_stats(player_name)
-  players = get_all_players
-  players.find do |player_data|
-    player_data[:player_name] == player_name 
-  end
+  player = find_player(player_name)
+  player[:player_name] = player_name
+end
+
+def player_biggest_shoe_size
+  players.sort_by do |player|
+    player[:shoe]
+  end.last
 end
 
 def big_shoe_rebounds
-  players = get_all_players
+  player = player_biggest_shoe_size
 
-  biggest_shoe = players.reduce do |result, player_data|
-    if(!result)
-      result = player_data
-    end
-
-    result
-  end
-
-  biggest_shoe[:rebounds]
+  player[:rebounds]
+  # binding.pry
 end
-
-puts team_names
