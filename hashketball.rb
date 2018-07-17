@@ -183,17 +183,7 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
-  players = get_all_players
-  shoe_sizes = players.collect do |player|
-    player[:shoe]
-  end
-
-  players.each do |player|
-    if player[:shoe] == shoe_sizes.max
-      return player[:rebounds]
-    end
-  end
-
+    get_all_players.sort_by {|player| player[:shoe]}.last[:rebounds]
 end
 
 puts team_names
