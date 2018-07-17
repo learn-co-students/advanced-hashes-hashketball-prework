@@ -134,13 +134,13 @@ end
 def get_data_from_player(player_name, data)
   all_players = get_all_players
 
-  all_players.reduce(nil) do |result, player_data|
+  result = all_players.collect do |player_data|
     if(player_data[:player_name] == player_name)
-      result = player_data[data]
+      player_data[data]
     end
-
-    result
   end
+  result = result.delete_if {|unit| unit == nil}
+  result[0]
 end
 
 def num_points_scored(player_name)
@@ -184,16 +184,38 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
-  biggest_shoe = players.reduce do |result, player_data|
-    if(!result)
-      result = player_data
-    end
-
-    result
+  shoe_sizes = players.collect do |player|
+    player[:shoe]
   end
 
-  biggest_shoe[:rebounds]
+  players.each do |player|
+    if player[:shoe] == shoe_sizes.max
+      return player[:rebounds]
+    end
+  end
+
 end
 
 puts team_names
+
+def most_points_scored
+  get_all_players.sort_by {|player| player[:points]}.last[:player_name]
+end
+
+def winning_team 
+  home_points = game_hash[:home][:players].reduce(0) do |points, player|
+    points += player[:points]
+  end
+  away_points = game_hash[:away][:players].reduce(0) do |points, player|
+    points += player[:points]
+  end
+  (home_points > away_points) ? game_hash[:home][:team_name] : game_hash[:away][:team_name]
+end
+
+def player_with_longest_name
+  longest_name = get_all_players.sort_by {|player| player[:player_name].length}.last[:player_name]
+end
+
+def long_name_steals_a_ton?
+  get_all_players.sort_by {|player| player[:steals]}.last[:player_name] == player_with_longest_name
+end
