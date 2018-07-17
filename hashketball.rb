@@ -152,12 +152,79 @@ def shoe_size(player_name)
 end
 
 def team_colors(team_name)
-  game_hash.map do |location, team_data|
-    team_data.map do |attribute, data|
-      if attribute == :colors
+  result = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if game_hash[location].values[0] == team_name && attribute == :colors
+        result = data
+      end
+    end
+  end
+  result
+end
+
+def team_names
+  team_names = []
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :team_name
+        team_names << data
+      end
+    end
+  end
+  team_names
+end
+
+def player_numbers(team_name)
+  player_numbers = []
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if game_hash[location].values[0] == team_name && attribute == :players
+        data.each do |player, stats|
+          stats.each do |k, v|
+            if k == :number
+              player_numbers << v
+            end
+          end
+        end
+      end
+    end
+  end
+  player_numbers
+end
+
+def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          if player == player_name 
+            return stats
+          end
+        end
+      end
     end
   end
 end
+
+def big_shoe_rebounds
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          stats.each do |k, v|
+            if k == :shoe.values.max
+              binding.pry
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+
+
 
 
 
