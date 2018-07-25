@@ -135,7 +135,7 @@ def get_data_from_player(player_name, data)
   all_players = get_all_players
 
   all_players.reduce(nil) do |result, player_data|
-    if(player_data[:player_name] == player_name)
+    if (player_data[:player_name] == player_name)
       result = player_data[data]
     end
 
@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
@@ -194,6 +194,19 @@ def big_shoe_rebounds
   end
 
   biggest_shoe[:rebounds]
+end
+
+def most_points_scored
+  players = get_all_players
+  topScorer = " "
+  max = 0
+  players.each do |name|
+    if name[:points] > max
+      topScorer = name[:player_name]
+      max = name[:points]
+    end
+  end
+  topScorer
 end
 
 puts team_names
