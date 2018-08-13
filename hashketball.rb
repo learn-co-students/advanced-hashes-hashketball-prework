@@ -163,7 +163,7 @@ def team_colors(team_name)
 end
 
 def team_names
-  game_hash.map do |location, team_data|
+  game_hash.map do |something, team_data|
     team_data[:team_name]
   end
 end
@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
