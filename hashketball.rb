@@ -123,7 +123,7 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
-def get_all_players
+def get_all_playerslea
   team_players_array = game_hash.values.map do |team_data|
     team_data[:players]
   end
