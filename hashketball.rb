@@ -46,8 +46,8 @@ def game_hash
                              slam_dunks: 1}
                     }
           }
-    away: {team_name: "",
-           colors: ["", ""],
+    away: {team_name: "Charlotte Hornets",
+           colors: ["Turquoise", "Purple"],
            players: {"Jeff Adrien" => { number: 4,
                              shoe: 18, 
                              points: 10, 
