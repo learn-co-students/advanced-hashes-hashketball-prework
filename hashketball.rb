@@ -76,5 +76,6 @@ end
 
 
 def long_name_steals_a_ton?
-  
+# So create an array_of_steal _values 
+# player_stats(pass player_with_longest_name)[steals] == array_of_steal_values.sort[-1]
 end 
