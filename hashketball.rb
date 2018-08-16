@@ -102,8 +102,8 @@ def num_points_scored(player_name)
       if attribute == :players 
         attribute.each do |data, name_of_player| # for :players, data is the roster_hash
           name_of_player.each do |player_performance, stat|
-            if name_of_player == player_name 
-              num_points = game_hash[location][team_data][attribute][data][player_name][player_performance][:points]
+            if name_of_player == player_name && stat == :points 
+              num_points = game_hash[location][team_data][attribute][data][player_name][player_performance][stat]
             else nil 
             end
           end
