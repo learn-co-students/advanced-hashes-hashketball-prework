@@ -106,7 +106,7 @@ def num_points_scored(player_name)
   # When I place binding.pry here, player_performance_hash[:points] returns 22sh[:points].  And num_points returns nil. 
         end
 # But when I place binding.pry here, I'm told that player_performance_hash[:points] is an undeclared method or variable.
-             
+            
       end 
     end
      
