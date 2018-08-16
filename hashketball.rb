@@ -108,6 +108,7 @@ def num_points_scored(player_name)
         data.each do |data_item|
           if data_item == player_name 
             num_points = game_hash[location][team_data][attribute][data][data_item][:points]
+            
           end 
           num_points
         end     
