@@ -109,7 +109,7 @@ def num_points_scored(player_name)
           if data == :players 
             :players.each do |roster_hash, player_name|
               
-              game_hash[location][team_data][attribute][data][data_item][roster_hash][:points]
+              num_points = game_hash[location][team_data][attribute][data][data_item][roster_hash][:points]
               
             end 
            num_points 
