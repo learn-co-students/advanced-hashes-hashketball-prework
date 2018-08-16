@@ -96,19 +96,23 @@ end
 
 def good_practices
   game_hash.each do |location, team_data|
-    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-    # OG: location => :home
-    # OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
-    binding.pry
+    
+#are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
+# OG: location => :home
+# OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
+  
+binding.pry
       team_data.each do |attribute, data|
-        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-        # OG attribute => :team_name
-        # OG team_data returns same as above.
-        binding.pry
+#are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
+# OG attribute => :team_name
+# OG team_data returns same as above.
+
+binding.pry
  
-        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
+#what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
+#data => "Brooklyn Nets"
         data.each do |data_item|
-            binding.pry
+binding.pry
       end
     end
   end
