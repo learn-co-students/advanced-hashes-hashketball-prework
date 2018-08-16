@@ -138,8 +138,8 @@ def num_points(player_name)
        data.each do |data_item|
          if data_item == player_name
            game_hash[location][team_data][attribute][data][data_item][:points]
-
-     end
+         end 
+      end
     end
   end
 end
