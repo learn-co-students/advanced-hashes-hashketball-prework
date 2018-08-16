@@ -100,7 +100,7 @@ def num_points_scored(player_name)
 #binding.pry     
     team_data.each do |attribute, data|
 #binding.pry
-      if attribute == :players 
+      if attribute != :team_name && attribute != :colors  
 #binding.pry
         attribute.each do |data, data_item| # for :players, data is the roster_hash
 #binding.pry
