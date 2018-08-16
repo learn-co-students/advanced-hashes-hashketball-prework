@@ -64,7 +64,7 @@ def game_hash
                              steals: 7, 
                              blocks: 15,
                              slam_dunks: 10},       
-                     "Bismak Biyombo" => { number: 2,
+                     "DeSagna Diop" => { number: 2,
                              shoe: 14, 
                              points: 24, 
                              rebounds: 12, 
