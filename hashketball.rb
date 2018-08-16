@@ -111,7 +111,7 @@ end
 # binding.pry
  
 #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-# OG When I exit the first two bindings, I've exited completely.  Why isn't a third exit required? Oh. I just remembered.  If there's not enough code within the binding, it can't be accessed. (My choice of words may be quite wrong.) 
+# OG When I exit the first two bindings, I've exited completely.  Why isn't a third exit required? Oh. I just remembered.  If there's not enough code within the binding, it can't be accessed. (My choice of words here might not be very precise.) 
 #        data.each do |data_item|
 #binding.pry
 #     end
@@ -121,3 +121,6 @@ end
 # good_practices
 
 
+def num_points(player_name)
+  
+end
