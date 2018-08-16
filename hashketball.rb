@@ -112,3 +112,9 @@ end
 good_practices
 
 
+def num_points_scored(player_name)
+  hash_of_players_and_points = {}
+  game_hash.each do |team_role_hash, team_data_hash|
+    team_data_hash.each do |team_data_type, player_pair|
+      player_pair
+end
