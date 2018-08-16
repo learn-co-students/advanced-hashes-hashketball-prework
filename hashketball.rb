@@ -95,6 +95,7 @@ end
 
 
 def num_points_scored(player_name)
+  num_points = 0 
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
       if attribute == :players 
@@ -102,13 +103,13 @@ def num_points_scored(player_name)
           if data_item == player_name
             num_points = player_performance_hash[:points]
           end
- # When I place binding.pry here, player_performance_hash[:points] returns 22sh[:points].  And num_points returns nil. 
+  # When I place binding.pry here, player_performance_hash[:points] returns 22sh[:points].  And num_points returns nil. 
         end
 # But when I place binding.pry here, I'm told that player_performance_hash[:points] is an undeclared method or variable.
-        num points      
+             
       end 
     end
-    num_points 
+     
   end
   num_points 
 end
