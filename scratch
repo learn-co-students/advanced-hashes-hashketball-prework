@@ -1,96 +1,111 @@
+require "pry"
+
+def game_hash
+  {
+    home: {team_name: "Brooklyn Nets",
+           colors: ["Black", "White"],
+           players: {"Alan Anderson" => { number: 0,
+                             shoe: 16, 
+                             points: 22, 
+                             rebounds: 12, 
+                             assists: 12, 
+                             steals: 3, 
+                             blocks: 1,
+                             slam_dunks: 1},
+                     "Reggie Evans" => { number: 30,
+                             shoe: 14, 
+                             points: 12, 
+                             rebounds: 12, 
+                             assists: 12, 
+                             steals: 12, 
+                             blocks: 12,
+                             slam_dunks: 7},       
+                     "Brook Lopez" => { number: 11,
+                             shoe: 17, 
+                             points: 17, 
+                             rebounds: 19, 
+                             assists: 10, 
+                             steals: 3, 
+                             blocks: 1,
+                             slam_dunks: 15},
+                     "Mason Plumlee" => { number: 1,
+                             shoe: 19, 
+                             points: 26, 
+                             rebounds: 12, 
+                             assists: 6, 
+                             steals: 3, 
+                             blocks: 8,
+                             slam_dunks: 5},
+                     "Jason Terry" => { number: 31,
+                             shoe: 15, 
+                             points: 19, 
+                             rebounds: 2, 
+                             assists: 2, 
+                             steals: 4, 
+                             blocks: 11,
+                             slam_dunks: 1}
+                    }
+          },
+    away: {team_name: "Charlotte Hornets",
+           colors: ["Turquoise", "Purple"],
+           players: {"Jeff Adrien" => { number: 4,
+                             shoe: 18, 
+                             points: 10, 
+                             rebounds: 1, 
+                             assists: 1, 
+                             steals: 2, 
+                             blocks: 7,
+                             slam_dunks: 2},
+                     "Bismak Biyombo" => { number: 0,
+                             shoe: 16, 
+                             points: 12, 
+                             rebounds: 4, 
+                             assists: 7, 
+                             steals: 7, 
+                             blocks: 15,
+                             slam_dunks: 10},       
+                     "DeSagna Diop" => { number: 2,
+                             shoe: 14, 
+                             points: 24, 
+                             rebounds: 12, 
+                             assists: 12, 
+                             steals: 4, 
+                             blocks: 5,
+                             slam_dunks: 5},
+                     "Ben Gordon" => { number: 8,
+                             shoe: 15, 
+                             points: 33, 
+                             rebounds: 3, 
+                             assists: 2, 
+                             steals: 1, 
+                             blocks: 1,
+                             slam_dunks: 0},
+                     "Brendan Haywood" => { number: 33,
+                             shoe: 15, 
+                             points: 6, 
+                             rebounds: 12, 
+                             assists: 12, 
+                             steals: 22, 
+                             blocks: 5,
+                             slam_dunks: 12}
+                    }
+          }
+  }
+end 
+
+
 def num_points_scored(player_name)
-  hash_of_players_and_points = {}
+  num_points = 0 
   game_hash.each do |location, team_data|
-    
     team_data.each do |attribute, data|
-      
-      data.each do |data_item
-      
-      , ind_stats_hash|
-        ind_stats_hash.each do |ind_stats_hash, stat_number_pair|
-          stat_number_pair.each do |stat_category, number|
-            
-            player_name_points = game_hash[team_role_hash][team_data_hash][team_data_type][player_pair][player_name][ind_stats_hash][stat_number_pair][:points]
+      if attribute == :players 
+        data.each do |data_item, player_performance_hash| # for :players, data is the roster_hash
+          if data_item == player_name
+            num_points = player_performance_hash[:points]
           end
-          player_name_points
         end
-        player_name_points
-      end
-      player_name_points
+      end 
     end
-    player_name_points
-  end 
-end
-
-def num_points(player_name)
-  
-end
-
-
-def shoe_size(player_name)
-  
-end 
-
-
-def team_colors(team_name)
-  
-end 
-
-
-def team_names
-  
-end
-
-
-def player_numbers(team_name)
-  
-end 
-
-
-def player_stats(player_name)
-  
-end 
-
-
-def big_shoe rebounds
-  
-end  
-
-
-def most_points_scored 
-  
-end 
-
-
-def winning_team
-  
-end 
-
-
-def player_with_longest_name
-  
-end 
-
-
-def long_name_steals_a_ton?
-# So create an array_of_steal _values 
-# player_stats(pass player_with_longest_name)[steals] == array_of_steal_values.sort[-1]
-end 
-
-
-       data.each do |data_item, player_stats|
-         if data_item == player_name
-           num_points_scored = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
-         else nil 
-         end 
-         num_points_scored
-      end
-      num_points_scored
-    end
-    num_points_scored
   end
-  num_points_scored
+  num_points 
 end
-
-
-player_performance_hash.each do |stat, number|
