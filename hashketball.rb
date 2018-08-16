@@ -110,7 +110,9 @@ def num_points_scored(player_name)
             :players.each do |roster_hash, player_name|
               
               game_hash[location][team_data][attribute][data][data_item][roster_hash][:points]
-           
+              
+            end 
+           num_points 
           end 
           num_points
         
