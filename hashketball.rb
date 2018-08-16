@@ -110,12 +110,14 @@ def num_points_scored(player_name)
                 player_name.each do |player_performance, stat|
                   if stat = :points 
               num_points = game_hash[location][team_data][attribute][data][player_name][player_performance][stat]
+            else nil 
              end
               
            end
            num_points
          end 
             num_points
+          else nil 
           end 
           
        
