@@ -100,7 +100,7 @@ def num_points_scored(player_name)
 #binding.pry     
     team_data.each do |attribute, data|
 #binding.pry
-      if attribute != :team_name && attribute != :colors  
+      if attribute == :players 
 #binding.pry
         attribute.each do |data, data_item| # for :players, data is the roster_hash
 #binding.pry
@@ -123,7 +123,6 @@ def num_points_scored(player_name)
   end
   num_points
 end
-
 
 # OG location => :home
 # OG team_data returns the :home_hash
