@@ -140,3 +140,8 @@ def team_colors(name_of_team)
   colors_of_team
 # binding.pry colors_of_team incorrectly returns ["Turquoise", "Purple"], the only other array of colors in the whole hash.
 end 
+
+# def team_names
+#  game_hash.each do |location, team_data|
+   
+# end 
