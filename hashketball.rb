@@ -94,24 +94,22 @@ def game_hash
 end 
 
 
-
-
-
-def good_practices
+def num_points_scored(player_name)
+  
   game_hash.each do |location, team_data|
     
     binding.pry
       team_data.each do |attribute, data|
         
         binding.pry
-        data.each do |data_item|
+        data.each do |data_item, player_stats|
           
             binding.pry
-         data.each do |data_item, player_stats|
-         if data_item == player_name
-           num_points_scored = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
-         else nil 
-         end    
+#         data.each do |data_item, player_stats|
+#        if data_item == player_name
+#         num_points_scored = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
+#         else nil 
+#         end    
       end
     end
   end
