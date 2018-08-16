@@ -133,9 +133,10 @@ def team_colors(name_of_team)
     team_data.each do |attribute, data|
       if attribute == :team_name && data = name_of_team
         colors_of_team = team_data[:colors]
-# binding.pry          
+# binding.pry colors_of_team properly returns ["Black, "White]  
       end 
     end
   end
   colors_of_team
+# binding.pry colors_of_team incorrectly returns ["Turquoise", "Purple"], the only other array of colors in the whole hash.
 end 
