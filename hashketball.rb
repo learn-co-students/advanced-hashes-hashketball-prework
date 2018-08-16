@@ -103,19 +103,9 @@ def num_points_scored(player_name)
           if data_item == player_name
             num_points = player_performance_hash[:points]
           end
-  # When I place binding.pry here, player_performance_hash[:points] returns 22sh[:points].  And num_points returns nil. 
         end
-# But when I place binding.pry here, I'm told that player_performance_hash[:points] is an undeclared method or variable.
-            
       end 
     end
-     
   end
   num_points 
 end
- 
-
-# OG location => :home
-# OG team_data returns the :home_hash
-# OG attribute => :team_name
-# OG data=> "Brooklyn Nets"
