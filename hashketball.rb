@@ -150,3 +150,32 @@ def team_names
   end 
   array_of_team_names
 end 
+
+
+def player_numbers(name_of_team)
+  array_of_team_jersey_numbers = []
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if data == name_of_team  
+# binding.pry 
+        team_data.each do |attribute, data|
+          if attribute == :players
+        data.each do |data_item, player_performance_hash|
+ #         binding.pry 
+          player_performance_hash.each do |stat, integer|
+  #          binding.pry 
+            if stat == :number 
+  #            binding.pry 
+            array_of_team_jersey_numbers << integer
+   #         binding.pry 
+          end
+        end
+      end 
+        end 
+        end 
+      end 
+    end 
+  end
+  array_of_team_jersey_numbers
+#  binding.pry 
+end 
