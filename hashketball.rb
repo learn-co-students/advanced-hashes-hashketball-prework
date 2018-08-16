@@ -119,6 +119,6 @@ end
 
 
 # OG location => :home
+# OG team_data returns the :home_hash
 # OG attribute => :team_name
-# OG team_data returns same as above.
 # OG data=> "Brooklyn Nets"
