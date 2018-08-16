@@ -134,12 +134,17 @@ def num_points(player_name)
 # OG data=> "Brooklyn Nets"
 
  
-
-       data.each do |data_item|
+       data.each do |data_item, player_stats|
          if data_item == player_name
-           game_hash[location][team_data][attribute][data][data_item][:points]
+           num_points = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
+ 
+         else nil  
          end 
+         num_points
       end
+      num_points
     end
+    num_points
   end
+  num_points
 end
