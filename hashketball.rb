@@ -97,13 +97,19 @@ end
 def num_points_scored(player_name)
   
   game_hash.each do |location, team_data|
+#binding.pry     
     team_data.each do |attribute, data|
-
+#binding.pry
       if attribute == :players 
-        attribute.each do |data, name_of_player| # for :players, data is the roster_hash
-          name_of_player.each do |player_performance, stat|
-            if name_of_player == player_name && stat == :points 
-              num_points = game_hash[location][team_data][attribute][data][player_name][player_performance][stat]
+#binding.pry
+        attribute.each do |data, data_item| # for :players, data is the roster_hash
+#binding.pry
+          data_item.each do |player_performance, stat|
+#binding.pry
+            if data_item == player_name 
+#binding.pry
+              num_points = game_hash[location][team_data][attribute][data][data_item][player_performance][:points]
+#binding.pry
             else nil 
             end
           end
