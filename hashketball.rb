@@ -143,12 +143,12 @@ def get_data_from_player(player_name, data)
   end
 end
 
-def num_points_scored(player_name)
-  get_data_from_player(player_name, :points)
+def num_points_scored(player)
+  get_data_from_player(player, :points)
 end
 
-def shoe_size(player_name)
-  get_data_from_player(player_name, :shoe)
+def shoe_size(player)
+  get_data_from_player(player, :shoe)
 end
 
 def get_team(team_name)
@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
