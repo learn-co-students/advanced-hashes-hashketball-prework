@@ -105,8 +105,8 @@ end
 #      team_data.each do |attribute, data|
 #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
 # OG location => :home
-# OG attribute => :team_name
 # OG team_data returns same as above.
+# OG attribute => :team_name
 # OG data=> "Brooklyn Nets"
 # binding.pry
  
@@ -122,5 +122,24 @@ end
 
 
 def num_points(player_name)
+  game_hash.each do |location, team_data|
+  # OG: location => :home
+  # OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
   
+      team_data.each do |attribute, data|
+
+# OG location => :home
+# OG attribute => :team_name
+# OG team_data returns same as above.
+# OG data=> "Brooklyn Nets"
+
+ 
+
+       data.each do |data_item|
+         if data_item == player_name
+           game_hash[location][team_data][attribute][data][data_item][:points]
+
+     end
+    end
+  end
 end
