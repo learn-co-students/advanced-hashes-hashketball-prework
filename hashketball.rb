@@ -104,14 +104,14 @@ def good_practices
 binding.pry
       team_data.each do |attribute, data|
 #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-# OG location +> :home
+# OG location => :home
 # OG attribute => :team_name
 # OG team_data returns same as above.
-# OG "Brooklyn Nets"
+# OG data=> "Brooklyn Nets"
 binding.pry
  
 #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-
+# OG When I exit the first two bindings, I've exited completely.  Why isn't a third exit required? Oh. I just remembered.  If there's not enough code within the binding, it can't be accessed. (My choice of words may be quite wrong.) 
         data.each do |data_item|
 binding.pry
       end
