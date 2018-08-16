@@ -95,36 +95,22 @@ end
 
 
 def num_points_scored(player_name)
-  
   game_hash.each do |location, team_data|
-    
     team_data.each do |attribute, data|
-
       if attribute == :players 
-
         data.each do |data_item, player_performance_hash| # for :players, data is the roster_hash
           if data_item == player_name
-
-            player_performance_hash.each do |stat, number|
-
-            
-
-               num_points = game_hash[location][team_data][attribute][data][data_item][player_performance][:points]
-
-            
-            end
-            num_points 
+            num_points = player_performance_hash[:points]
           end
-              
-        end 
-        num_points          
-       
-      end
+        end
+        num points      
+      end 
     end
-    num_points  
+    num_points 
   end
   num_points 
 end
+ 
 
 # OG location => :home
 # OG team_data returns the :home_hash

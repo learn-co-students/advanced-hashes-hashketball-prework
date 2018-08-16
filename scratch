@@ -91,3 +91,6 @@ end
   end
   num_points_scored
 end
+
+
+player_performance_hash.each do |stat, number|
