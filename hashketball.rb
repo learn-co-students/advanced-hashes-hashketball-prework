@@ -137,7 +137,6 @@ def num_points(player_name)
        data.each do |data_item, player_stats|
          if data_item == player_name
            num_points = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
-          
          end 
          num_points
       end
