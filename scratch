@@ -172,4 +172,21 @@ def player_numbers(name_of_team)
     end 
   end
   array_of_team_jersey_numbers
-end 
+end
+
+
+def player_stats(player_name)
+  stats_of_player = nil   
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players 
+        data.each do |data_item, player_performance_hash|
+          if data_item == player_name
+            stats_of_player = player_performance_hash
+          end
+        end 
+      end 
+    end
+  end 
+  stats_of_player
+end
