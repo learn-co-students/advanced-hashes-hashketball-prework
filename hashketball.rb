@@ -112,7 +112,7 @@ end
 
 
 def shoe_size(player_name)
-  shoe_size = 0 
+  shoe_size = nil  
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
       if attribute == :players 
@@ -125,4 +125,17 @@ def shoe_size(player_name)
     end
   end
   shoe_size
+end 
+
+def team_colors(name_of_team)
+  colors_of_team = nil 
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :team_name && data = name_of_team
+        colors_of_team = team_data[:colors]
+# binding.pry          
+      end 
+    end
+  end
+  colors_of_team
 end 
