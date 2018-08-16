@@ -94,56 +94,31 @@ def game_hash
 end 
 
 
-#def good_practices
-#  game_hash.each do |location, team_data|
-    
-#are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-# OG: location => :home
-# OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
-  
-# binding.pry
-#      team_data.each do |attribute, data|
-#are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-# OG location => :home
-# OG team_data returns same as above.
-# OG attribute => :team_name
-# OG data=> "Brooklyn Nets"
-# binding.pry
- 
-#what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-# OG When I exit the first two bindings, I've exited completely.  Why isn't a third exit required? Oh. I just remembered.  If there's not enough code within the binding, it can't be accessed. (My choice of words here might not be very precise.) 
-#        data.each do |data_item|
-#binding.pry
-#     end
-#    end
-#  end
-#end
-# good_practices
 
 
-def num_points(player_name)
+
+def good_practices
   game_hash.each do |location, team_data|
-  # OG: location => :home
-  # OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
-  
+    
+    binding.pry
       team_data.each do |attribute, data|
-
-# OG location => :home
-# OG attribute => :team_name
-# OG team_data returns same as above.
-# OG data=> "Brooklyn Nets"
-
- 
-       data.each do |data_item, player_stats|
+        
+        binding.pry
+        data.each do |data_item|
+          
+            binding.pry
+         data.each do |data_item, player_stats|
          if data_item == player_name
            num_points_scored = game_hash[location][team_data][attribute][data][data_item][player_stats][:points]
          else nil 
-         end 
-         num_points_scored
+         end    
       end
-      num_points_scored
     end
-    num_points_scored
   end
-  num_points_scored
 end
+
+
+# OG location => :home
+# OG attribute => :team_name
+# OG team_data returns same as above.
+# OG data=> "Brooklyn Nets"
