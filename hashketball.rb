@@ -108,14 +108,14 @@ def num_points_scored(player_name)
         
           if attribute == :players 
               :players.each do |data, player_name|
-              num_points = game_hash[location][team_data][:players][data][player_name][:points]
+              num_points = game_hash[location][team_data][attribute][data][player_name][:points]
               
             
           end 
           num_points
         
       end     
-      num_points
+      
     end
     num_points
   end
