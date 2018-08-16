@@ -1,3 +1,27 @@
+def num_points_scored(player_name)
+  hash_of_players_and_points = {}
+  game_hash.each do |location, team_data|
+    
+    team_data.each do |attribute, data|
+      
+      data.each do |data_item
+      
+      , ind_stats_hash|
+        ind_stats_hash.each do |ind_stats_hash, stat_number_pair|
+          stat_number_pair.each do |stat_category, number|
+            
+            player_name_points = game_hash[team_role_hash][team_data_hash][team_data_type][player_pair][player_name][ind_stats_hash][stat_number_pair][:points]
+          end
+          player_name_points
+        end
+        player_name_points
+      end
+      player_name_points
+    end
+    player_name_points
+  end 
+end
+
 def num_points(player_name)
   
 end

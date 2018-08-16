@@ -97,9 +97,13 @@ end
 def good_practices
   game_hash.each do |location, team_data|
     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
+    # OG: location => :home
+    # OG team_data => {:team_name+>"Brooklyn Nets", :colors+>[Black, White], :players=> {"Alan Anderson" => {...all the way through the stats_hash for "Jason Terry"}}}
     binding.pry
       team_data.each do |attribute, data|
         #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
+        # OG attribute => :team_name
+        # OG team_data returns same as above.
         binding.pry
  
         #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
@@ -112,9 +116,3 @@ end
 good_practices
 
 
-def num_points_scored(player_name)
-  hash_of_players_and_points = {}
-  game_hash.each do |team_role_hash, team_data_hash|
-    team_data_hash.each do |team_data_type, player_pair|
-      player_pair
-end
