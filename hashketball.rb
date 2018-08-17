@@ -210,5 +210,5 @@ def big_shoe_rebounds
       end
     end
   end 
-  player_performance_hash[:shoe]
+  biggest_shoe_rebounds
 end 
