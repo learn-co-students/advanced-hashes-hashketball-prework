@@ -201,17 +201,20 @@ def big_shoe_rebounds
         data.each do |name_of_player, player_performance_hash|
           if player_performance_hash[:shoe] > biggest_shoe
              biggest_shoe = player_performance_hash[:shoe]
-# biggest_shoe = 16
+
           end
-# biggest_shoe = 16        
+      
           if player_performance_hash[:shoe] == biggest_shoe
-# name_of_player == "Brook Lopez". player_performance_hash == Brook Lopez's hash.  biggest_shoe == 17, which is Brook Lopez' shoe size.
+
              biggest_shoe_rebounds == player_performance_hash[:rebounds]
-binding.pry  # name_of_player == "Alan Anderson". player_performance_hash == Alan Anderson's hash.  biggest_shoe == 16, Alan Anderson's shoe.  player_performance_hash[:shoe] == 16.
+# player_performance_hash[:rebounds] => 12 . 
+# But biggest_shoe_rebounds => nil .             
+binding.pry 
           end
         end
       end
     end
   end 
-  biggest_shoe_rebounds
+# biggest_shoe_rebounds = nil 
+#binding.pry 
 end 
