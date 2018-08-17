@@ -98,13 +98,11 @@ def num_points_scored(player_name)
   num_points = 0 
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
-      if attribute == :players 
-        data.each do |data_item, player_performance_hash|
+        team_data[:players].each do |data_item, player_performance_hash|
           if data_item == player_name
             num_points = player_performance_hash[:points]
           end
         end
-      end 
     end
   end
   num_points 
@@ -115,14 +113,12 @@ def shoe_size(player_name)
   shoe_size = nil  
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
-      if attribute == :players 
-        data.each do |data_item, player_performance_hash|
+      team_data[:players].each do |data_item, player_performance_hash|
           if data_item == player_name
             shoe_size = player_performance_hash[:shoe]
           end
         end
       end 
-    end
   end
   shoe_size
 end 
@@ -131,8 +127,8 @@ def team_colors(name_of_team)
   colors_of_team = nil 
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
-      if attribute == :team_name && data == name_of_team
-        colors_of_team = team_data[:colors]
+      if data == name_of_team 
+         colors_of_team = team_data[:colors]
       end 
     end
   end
@@ -157,16 +153,12 @@ def player_numbers(name_of_team)
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
       if data == name_of_team  
-        team_data.each do |attribute, data|
-          if attribute == :players
-        data.each do |data_item, player_performance_hash|
+        team_data[:players].each do |data_item, player_performance_hash|
           player_performance_hash.each do |stat, integer|
             if stat == :number 
             array_of_team_jersey_numbers << integer
-          end
-        end
-      end 
-        end 
+            end 
+          end 
         end 
       end 
     end 
@@ -178,18 +170,14 @@ end
 def player_stats(player_name)
   stats_of_player = nil   
   game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
-      if attribute == :players 
-        data.each do |data_item, player_performance_hash|
-          if data_item == player_name
-            stats_of_player = player_performance_hash
-          end
+    team_data[:players].each do |data_item, player_performance_hash|
+        if data_item == player_name 
+        stats_of_player = player_performance_hash
         end 
-      end 
     end
   end 
   stats_of_player
-end 
+end
 
 
 def big_shoe_rebounds
@@ -208,9 +196,9 @@ def big_shoe_rebounds
     end
   end 
 biggest_shoe_rebounds 
-end 
+end  
 
-
+# Dave Dening
 def big_shoe_rebounds
   biggest_shoe_player = nil  
   game_hash.each do |location, team_data|
