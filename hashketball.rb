@@ -129,6 +129,7 @@ def get_all_players
   end
 
   team_players_array.flatten
+  
 end
 
 def get_data_from_player(player_name, data)
