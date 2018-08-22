@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
@@ -197,3 +197,4 @@ def big_shoe_rebounds
 end
 
 puts team_names
+ 
