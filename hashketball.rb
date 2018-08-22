@@ -197,3 +197,40 @@ def big_shoe_rebounds
 end
 
 puts team_names
+
+def most_points_scored
+  array = all_players
+  highest_score = nil
+  current_player = ""
+  array.each do |key, value|
+    if key = :points
+      if highest_score == nil || highest_score < value
+        highest_score = value
+        current_player = key
+      end
+    end
+  end
+  current_player
+end
+
+def winning_team
+  team_one_score = 0
+  team_two_score = 0
+  game_hash.each do |team, information|
+    if team == :home
+      team[:players].each do |player|
+        team_one_score += player[:points]
+      end
+    else
+      team[:players].each do |player|
+        team_two_score += player[:points]
+      end
+    end
+  end
+
+  if team_one_score > team_two_score
+    return team_one_score
+  else
+    return team_two_score
+  end
+end
