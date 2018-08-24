@@ -157,7 +157,7 @@ end
 #above:
 
 def shoe_size(player_name)
-  player = find_the_player(player_name)
+  player = find_the_player(name)
   player.fetch(:shoe)
 end
 
@@ -199,7 +199,7 @@ end
 
 def team_names
   teams = game_hash.values
-  teams.map do |team|
+  team.map do |team|
     team[:team_name]
   end
 end
@@ -212,10 +212,10 @@ def player_numbers(team_name)
   #Step 1:
   teams = game_hash.values
   #Step 2:
-  right_team = teams.find {|team| team.fetch(:team_name) == team_name}
+  rigth_team = teams.find {|team| team.fetch(:team_name) == team_name}
   #Step 3: iterate over player hashes and access jersey number
   right_team[:players].map do |player|
-    player[:number]
+    players[:number]
   end
 end
 
@@ -239,7 +239,10 @@ end
 
 #Step one: find player with largest shoe shoe_size
 
-def big_shoe_rebounds
+def largest_shoe_size
+  home_players = game_hash.fetch(:home).fetch(:players)
+  away_players = game_hash.fetch(:away).fetch(:players)
+  players = home_players + away_players
 
   #Step 1: Find player with biggest shoe size
   player = players.sort_by {|player| player.fetch(:shoe) }.last
@@ -268,7 +271,7 @@ def most_points_scored
     #Now using the 'players method for simplicity'
 
     player = players.sort_by {|player| player.fetch(:points) }.last
-
+    binding.pry
     player[:player_name]
 
 end
@@ -280,12 +283,12 @@ def winning_team
   home_team = []
   away_team = []
 
-  game_hash.fetch(:home).fetch(:players).map do |player|
-    home_team << player[:points]
+  game_hash.fetch(:home).fetch(:players).map |player|
+    home_team << player[points]
   end
 
-  game_hash.fetch(:away).fetch(:players).map do |player|
-    away_team << player[:points]
+  game_hash.fetch(:away).fetch(:players).map |player|
+    away_team << player[points]
   end
 
 
@@ -297,21 +300,5 @@ def winning_team
   else
     game_hash.fetch(:away).fetch(:team_name)
   end
-
-end
-
-#Which player has the longest name? Call the method player_with_longest_name.
-def player_with_longest_name
-  player = players.sort_by {|player| player.fetch(:player_name).length }.last
-  player[:player_name]
-end
-
-#Write a method that returns true if the player with the longest name had the
-#most steals. Call the method long_name_steals_a_ton?.
-
-def long_name_steals_a_ton?
-
-  player = players.sort_by {|player| player.fetch(:steals) }.last
-  player_with_longest_name == player[:player_name] ? true : false
 
 end
