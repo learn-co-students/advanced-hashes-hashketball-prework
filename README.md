@@ -173,3 +173,38 @@ Define methods to return the answer to the following questions:
 * [Codecademy](http://www.codecademy.com/dashboard) - [A Night at the Movies](http://external.codecademy.com/courses/ruby-beginner-en-0i8v1/0/1)
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/advanced-hashes-hashketball'>Hashketball</a> on Learn.co and start learning to code for free.</p>
+
+
+def practice
+  game_hash.each do |place, data|
+    data.each do |attributes, select_data|
+    if attributes == :players
+        select_data.each do |info|
+          info.each do |key, val|
+            if val == "Alan Anderson" && key == :points
+               puts :points
+            end
+          end
+        end
+      end
+    end 
+  end
+end
+
+
+def practice(name)
+  game_hash.each do |place, data|
+    data.each do |attributes, select_data|
+    if attributes == :players
+        select_data.each do |info|
+          if info[:player_name] == name
+          puts info[:points]
+          end
+          end
+        end
+      end
+    end 
+  end
+info.each do |key, val|
+              puts val
+            end
