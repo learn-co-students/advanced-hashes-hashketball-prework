@@ -112,13 +112,11 @@ end
 def shoe_size(player_name)
   shoe_size = nil  
   game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
       team_data[:players].each do |data_item, player_performance_hash|
           if data_item == player_name
             shoe_size = player_performance_hash[:shoe]
           end
         end
-      end 
   end
   shoe_size
 end 
