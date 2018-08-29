@@ -139,6 +139,7 @@ end
 # good_practices
 
 
+
 def team_names
   name = []
   game_hash.each do |team, team_data|
@@ -223,4 +224,77 @@ def big_shoe_rebounds
   rebounds
 end
 
-big_shoe_rebounds
+def player_attributes(attribute)
+  attributes = []
+  game_hash.each do |team, team_data|
+    team_data.each do |key, values|
+      if key == :players
+        values.each do |key|
+          attributes << key[attribute]
+        end
+      end
+    end
+  end
+  attributes
+end
+
+def player_hash
+  game_hash.map do |team, team_data|
+    team_data.map do |key, values|
+      if key == :players
+        values.map do |key|
+          key
+        end
+      end
+    end
+  end
+end
+
+def most_points_scored
+  points = 0
+  player = nil
+  game_hash.each do |team, team_data|
+    team_data.each do |key, values|
+      if key == :players
+        values.each do |key|
+          if points < key[:points].to_i
+            points = key[:points].to_i
+            player = key[:player_name].to_s
+          end
+        end
+      end
+    end
+  end
+  player
+end
+
+def winning_team
+  brooklyn_nets_points = 0
+  charlotte_hornets_points = 0
+  game_hash.each do |team, team_data|
+    if team_data[:team_name] == 'Charlotte Hornets'
+      team_data.each do |key, values|
+        if key == :players
+          values.each do |key|
+            charlotte_hornets_points += key[:points].to_i
+          end
+        end
+      end
+      elsif team_data[:team_name] == 'Brooklyn Nets'
+        team_data.each do |key, values|
+          if key == :players
+            values.each do |key|
+            brooklyn_nets_points += key[:points].to_i
+          end
+        end
+      end
+    end
+  end
+  if brooklyn_nets_points > charlotte_hornets_points
+    'Brooklyn Nets'
+  else
+    'Charlotte Hornets'
+  end
+end
+
+winning_team
