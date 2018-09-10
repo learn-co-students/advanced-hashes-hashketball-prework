@@ -133,12 +133,12 @@ end
 
 def get_data_from_player(player_name, data)
   all_players = get_all_players
-
+p "check this", all_players
   all_players.reduce(nil) do |result, player_data|
     if(player_data[:player_name] == player_name)
       result = player_data[data]
     end
-
+puts "check this2", result
     result
   end
 end
@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
