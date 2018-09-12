@@ -196,4 +196,10 @@ def big_shoe_rebounds
   biggest_shoe[:rebounds]
 end
 
+def most_points_scored
+  players=get_all_players
+  players.max_by{|p| p[:points]}[:player_name]
+end
+
+
 puts team_names
