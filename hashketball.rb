@@ -196,4 +196,4 @@ def big_shoe_rebounds
   biggest_shoe[:rebounds]
 end
 
-puts am_names
+puts team_names
