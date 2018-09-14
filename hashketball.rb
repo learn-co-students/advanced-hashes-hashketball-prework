@@ -123,7 +123,7 @@ def home_team_name
   game_hash[:home][:team_name]
 end
 
-def get_all_players
+def all_players
   team_players_array = game_hash.values.map do |team_data|
     team_data[:players]
   end
@@ -132,8 +132,6 @@ def get_all_players
 end
 
 def get_data_from_player(player_name, data)
-  all_players = get_all_players
-
   all_players.reduce(nil) do |result, player_data|
     if(player_data[:player_name] == player_name)
       result = player_data[data]
@@ -183,7 +181,7 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
-  players = get_all_players
+  players = all_players
   
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
