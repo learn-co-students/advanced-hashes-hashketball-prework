@@ -144,11 +144,19 @@ def get_data_from_player(player_name, data)
 end
 
 def num_points_scored(player_name)
-  get_data_from_player(player_name, :points)
+  game_hash.values.each do |team|
+    team[:players].each do |player|
+      return player[:points] if player.has_value?(player_name)
+    end
+  end
 end
 
 def shoe_size(player_name)
-  get_data_from_player(player_name, :shoe)
+  game_hash.values.each do |team|
+    team[:players].each do |player|
+      return player[:shoe] if player.has_value?(player_name)
+    end
+  end
 end
 
 def get_team(team_name)
@@ -158,42 +166,48 @@ def get_team(team_name)
 end
 
 def team_colors(team_name)
-  team = get_team(team_name)
-  team[:colors]
-end
-
-def team_names
-  game_hash.map do |location, team_data|
-    team_data[:team_name]
+  game_hash.values.each do |team|
+    return team[:colors] if team.has_value?(team_name)
   end
 end
 
-def player_numbers(team_name)
-  team = get_team(team_name)
-  team[:players].map do |player_data|
-    player_data[:number]
+def team_names
+  game_hash.values.collect do |value| value[:team_name]
+  end
+end
+
+def player_numbers(team)
+  game_hash.values.each do |team_info|
+    if team_info.has_value?(team)
+      return team_info[:players].map {|player| player[:number]}
+    end
   end
 end
 
 def player_stats(player_name)
-  players = get_all_players
-  players.find do |player_data|
-    player_data[:player_name] == player_name
+  game_hash.values.each do |team_info|
+    team_info[:players].each do |player|
+      if player.has_value?(player_name)
+        player.delete(:player)
+        return player
+      end
+    end
   end
 end
 
 def big_shoe_rebounds
-  players = get_all_players
-  
-  biggest_shoe = players.reduce do |result, player_data|
-    if(!result)
-      result = player_data
+biggest = 0
+rebounds = 0
+
+game_hash.each do |team, keys|
+  keys[:players].each do |player|
+    size = player[:shoe]
+    if size > biggest
+      biggest = size
+      rebounds = player[:rebounds]
     end
-
-    result
   end
-
-  biggest_shoe[:rebounds]
 end
+rebounds
 
-puts team_names
+end
