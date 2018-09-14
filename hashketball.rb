@@ -188,6 +188,7 @@ def big_shoe_rebounds
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
+      
     end
 
     result
