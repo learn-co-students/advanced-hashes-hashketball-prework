@@ -119,15 +119,14 @@ def game_hash
   }
 end
 
-def home_team_name
-  game_hash[:home][:team_name]
-end
+# def home_team_name
+#   game_hash[:home][:team_name]
+# end
 
 def all_players
   team_players_array = game_hash.values.map do |team_data|
     team_data[:players]
   end
-
   team_players_array.flatten
 end
 
@@ -173,25 +172,46 @@ def player_numbers(team_name)
   end
 end
 
+def players
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  total_players = home_players + away_players
+  total_players
+end
+
 def player_stats(player_name)
-  players = get_all_players
-  players.find do |player_data|
-    player_data[:player_name] == player_name
-  end
+ stats= players.find {|player| player.fetch(:player_name) == player_name}
+  stats.delete_if {|info, string| info == :player_name}
 end
 
 def big_shoe_rebounds
   players = all_players
-  
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
     end
-
     result
   end
-
   biggest_shoe[:rebounds]
 end
 
-puts team_names
+
+def most_points_scored
+    players = all_players
+most_points = players.max_by { |points|
+points.fetch(:points) }
+most_points.fetch(:player_name)
+end
+
+def winning_team
+  home = game_hash[:home][:team_name]
+  away = game_hash[:away][:team_name]
+  brooklyn_nets_points = home.sum { |player| player[:points] }  
+  charlotte_hornets_points = away.sum { |player| player[:points]}
+  if brooklyn_nets_points > charlotte_hornets_points
+  return "Brooklyn Nets"
+  end
+  "Brooklyn Nets"
+end 
+
+
