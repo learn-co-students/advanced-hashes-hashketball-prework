@@ -90,7 +90,7 @@ describe 'hashketball' do
   end
 
   # describe '#player_stats' do
-
+  #
   #   let(:jeff_stats) {
   #     {
   #       :number => 4,
@@ -103,7 +103,7 @@ describe 'hashketball' do
   #       :slam_dunks => 2
   #     }
   #   }
-
+  #
   #   let(:bismak_stats) {
   #     {
   #       :number => 0,
@@ -116,7 +116,7 @@ describe 'hashketball' do
   #       :slam_dunks => 10
   #     }
   #   }
-
+  #
   #   let(:desagna_stats) {
   #     {
   #       :number => 2,
@@ -129,7 +129,7 @@ describe 'hashketball' do
   #       :slam_dunks => 5
   #     }
   #   }
-
+  #
   #   let(:ben_stats) {
   #     {
   #       :number => 8,
@@ -142,7 +142,7 @@ describe 'hashketball' do
   #       :slam_dunks => 0
   #      }
   #   }
-
+  #
   #   let(:brendan_stats) {
   #     {
   #       :number => 33,
@@ -155,7 +155,7 @@ describe 'hashketball' do
   #       :slam_dunks => 12
   #     }
   #   }
-
+  #
   #   let(:alan_stats) {
   #     {
   #       :number => 0,
@@ -168,7 +168,7 @@ describe 'hashketball' do
   #       :slam_dunks => 1
   #     }
   #   }
-
+  #
   #   let(:reggie_stats) {
   #     {
   #       :number => 30,
@@ -181,7 +181,7 @@ describe 'hashketball' do
   #       :slam_dunks => 7
   #     }
   #   }
-
+  #
   #   let(:brook_stats) {
   #     {
   #       :number => 11,
@@ -194,7 +194,7 @@ describe 'hashketball' do
   #       :slam_dunks => 15
   #     }
   #   }
-
+  #
   #   let(:mason_stats) {
   #     {
   #       :number => 1,
@@ -207,7 +207,7 @@ describe 'hashketball' do
   #       :slam_dunks => 5
   #     }
   #   }
-
+  #
   #   let(:jason_stats) {
   #     {
   #       :number => 31,
@@ -219,8 +219,8 @@ describe 'hashketball' do
   #       :blocks => 11,
   #       :slam_dunks => 1
   #     }
-    # }
-
+  #   }
+  #
   #   it 'returns all stats for a given player' do
   #     expect(player_stats("Jeff Adrien")).to eq(jeff_stats)
   #     expect(player_stats("Bismak Biyombo")).to eq(bismak_stats)
@@ -233,7 +233,7 @@ describe 'hashketball' do
   #     expect(player_stats("Mason Plumlee")).to eq(mason_stats)
   #     expect(player_stats("Jason Terry")).to eq(jason_stats)
   #   end
-
+  #
   # end
 
   describe '#big_shoe_rebounds' do

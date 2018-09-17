@@ -1,5 +1,3 @@
-require 'pry'
-
 def game_hash
   {
     home: {
@@ -119,15 +117,28 @@ def game_hash
   }
 end
 
+def players
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  total_players = home_players + away_players
+end
+
+def team_stats
+  home_team = game_hash.values_at(:home)
+  away_team = game_hash.values_at(:away)
+  total_team_stats = home_team + away_team
+  total_team_stats
+end
+
 def num_points_scored(player_name)
-   game_hash.values.each do |team|  
+   game_hash.values.each do |team|
     team[:players].each do |player|
       return player[:points] if player.has_value?(player_name)
     end
   end
  end
 
-def shoe_size(player_name)
+ def shoe_size(player_name)
   game_hash.values.each do |team|
     team[:players].each do |player|
       return player[:shoe] if player.has_value?(player_name)
@@ -154,29 +165,36 @@ def player_numbers(team)
   end
 end
 
-def player_stats(player_name)
-   game_hash.values.each do |team_info|
-    team_info[:players].each do |player|
-      if player.has_value?(player_name)
-         player.delete(:player_name) 
-         return player
-      end
-    end
-  end
- end
- 
- def big_shoe_rebounds
-  biggest = 0
-  rebounds = 0
-  game_hash.each do |team, keys|
-    keys[:players].each do |player|
-      size = player[:shoe]
-      if size > biggest
-      biggest = size
-      rebounds = player[:rebounds]
-      end
-    end
-  end
-  rebounds
+def stats(player_name)
+  player_stats = players.find {|player| player.fetch(:player_name) == player_name}
+  player_stats
 end
- 
+
+def big_shoe_rebounds
+  biggest_shoe_player = players.max_by {|player| player[:shoe]}
+  biggest_shoe_player.fetch(:rebounds)
+end
+
+def most_points_scored
+  most_points = players.max_by {|player| player[:points]}
+  most_points[:player_name]
+end
+
+def winning_team
+ winner = team_stats.max_by {|team| team[:points]}
+ winner[:team_name]
+end
+
+
+def player_with_longest_name
+  longest = players.max_by {|player| player[:player_name].length}
+  longest[:player_name]
+end
+
+
+def long_name_steals_a_ton?
+  steals = players.max_by {|player| player[:steals]}
+  if steals[:player_name] = player_with_longest_name
+    return true
+  end
+end
