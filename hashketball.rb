@@ -1,5 +1,3 @@
-require 'pry'
-
 def game_hash
   {
     home: {
@@ -119,81 +117,84 @@ def game_hash
   }
 end
 
-def home_team_name
-  game_hash[:home][:team_name]
+def players
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  total_players = home_players + away_players
 end
 
-def get_all_players
-  team_players_array = game_hash.values.map do |team_data|
-    team_data[:players]
-  end
-
-  team_players_array.flatten
-end
-
-def get_data_from_player(player_name, data)
-  all_players = get_all_players
-
-  all_players.reduce(nil) do |result, player_data|
-    if(player_data[:player_name] == player_name)
-      result = player_data[data]
-    end
-
-    result
-  end
+def team_stats
+  home_team = game_hash.values_at(:home)
+  away_team = game_hash.values_at(:away)
+  total_team_stats = home_team + away_team
+  total_team_stats
 end
 
 def num_points_scored(player_name)
-  get_data_from_player(player_name, :points)
-end
+   game_hash.values.each do |team|
+    team[:players].each do |player|
+      return player[:points] if player.has_value?(player_name)
+    end
+  end
+ end
 
-def shoe_size(player_name)
-  get_data_from_player(player_name, :shoe)
-end
-
-def get_team(team_name)
-  game_hash.values.find do |team_data|
-    team_data[:team_name] == team_name
+ def shoe_size(player_name)
+  game_hash.values.each do |team|
+    team[:players].each do |player|
+      return player[:shoe] if player.has_value?(player_name)
+    end
   end
 end
 
 def team_colors(team_name)
-  team = get_team(team_name)
-  team[:colors]
+  game_hash.values.each do |team|
+    return team[:colors] if team.has_value?(team_name)
+    end
 end
 
 def team_names
-  game_hash.map do |location, team_data|
-    team_data[:team_name]
+  game_hash.values.collect do |value| value[:team_name]
   end
 end
 
-def player_numbers(team_name)
-  team = get_team(team_name)
-  team[:players].map do |player_data|
-    player_data[:number]
+def player_numbers(team)
+   game_hash.values.each do |team_info|
+    if team_info.has_value?(team)
+      return team_info[:players].map { |player| player[:number]}
+    end
   end
 end
 
-def player_stats(player_name)
-  players = get_all_players
-  players.find do |player_data|
-    player_data[:player_name] == player_name
-  end
+def stats(player_name)
+  player_stats = players.find {|player| player.fetch(:player_name) == player_name}
+  player_stats
 end
 
 def big_shoe_rebounds
-  players = get_all_players
-  
-  biggest_shoe = players.reduce do |result, player_data|
-    if(!result)
-      result = player_data
-    end
-
-    result
-  end
-
-  biggest_shoe[:rebounds]
+  biggest_shoe_player = players.max_by {|player| player[:shoe]}
+  biggest_shoe_player.fetch(:rebounds)
 end
 
-puts team_names
+def most_points_scored
+  most_points = players.max_by {|player| player[:points]}
+  most_points[:player_name]
+end
+
+def winning_team
+ winner = team_stats.max_by {|team| team[:points]}
+ winner[:team_name]
+end
+
+
+def player_with_longest_name
+  longest = players.max_by {|player| player[:player_name].length}
+  longest[:player_name]
+end
+
+
+def long_name_steals_a_ton?
+  steals = players.max_by {|player| player[:steals]}
+  if steals[:player_name] = player_with_longest_name
+    return true
+  end
+end
