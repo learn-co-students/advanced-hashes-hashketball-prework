@@ -89,7 +89,7 @@ describe 'hashketball' do
 
   end
 
-  # describe '#player_stats' do
+   describe '#player_stats' do
 
   #   let(:jeff_stats) {
   #     {
