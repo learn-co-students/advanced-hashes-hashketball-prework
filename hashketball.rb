@@ -6,6 +6,7 @@ def game_hash
       team_name: "Brooklyn Nets",
       colors: ["Black", "White"],
       players: [
+        
         {
           player_name: "Alan Anderson",
           number: 0,
@@ -186,7 +187,7 @@ def big_shoe_rebounds
   players = get_all_players
   
   biggest_shoe = players.reduce do |result, player_data|
-    if(!result)
+    unless result
       result = player_data
     end
 
