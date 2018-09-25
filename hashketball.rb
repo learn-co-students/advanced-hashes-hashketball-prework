@@ -171,6 +171,7 @@ end
 def player_numbers(team_name)
   team = get_team(team_name)
   team[:players].map do |player_data|
+    binding.pry
     player_data[:number]
   end
 end
@@ -184,8 +185,9 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
+    binding.pry
     if(!result)
       result = player_data
     end
