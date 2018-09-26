@@ -1,5 +1,3 @@
-require 'pry'
-
 def game_hash
   {
     home: {
@@ -163,14 +161,14 @@ def team_colors(team_name)
 end
 
 def team_names
-  game_hash.map do |location, team_data|
+  game_hash.collect do |location, team_data|
     team_data[:team_name]
   end
 end
 
 def player_numbers(team_name)
   team = get_team(team_name)
-  team[:players].map do |player_data|
+  team[:players].collect do |player_data|
     player_data[:number]
   end
 end
