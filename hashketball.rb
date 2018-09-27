@@ -184,7 +184,7 @@ end
 
 def big_shoe_rebounds
   players = get_all_players
-  
+
   biggest_shoe = players.reduce do |result, player_data|
     if(!result)
       result = player_data
@@ -197,3 +197,78 @@ def big_shoe_rebounds
 end
 
 puts team_names
+
+def most_points_scored
+  player_scores = {}
+  get_all_players.each { |player|
+    player_scores[player[:player_name]] = player[:points]
+  }
+  players_sorted = player_scores.sort_by { |player_name, points| points }
+  player_with_most_points = players_sorted[-1]
+  puts "#{player_with_most_points[0]} is the player with most points at #{player_with_most_points[1]} points!"
+end
+
+most_points_scored
+
+def winning_team
+  team_scores = {}
+  home_team_points = []
+  away_team_points = []
+
+  game_hash[:home][:players].each { |player|
+    player.map { |stat, value|
+      if stat == :points
+        home_team_points << value
+      end
+    }
+  }
+  team_scores[:home] = home_team_points.inject(0, :+)
+
+  charlotte_points = []
+  game_hash[:away][:players].each { |player|
+    player.map { |stat, value|
+      if stat == :points
+        away_team_points << value
+      end
+    }
+  }
+  team_scores[:away] = away_team_points.inject(0, :+)
+
+  teams_sorted = team_scores.sort_by { |team, score| score }
+  winning_team = teams_sorted.last[0] == :home ? "Brooklyn Nets" : "Charlotte Hornets"
+  winning_score = teams_sorted.last[1]
+  puts "The winning team is the #{winning_team} with a score of #{winning_score}!"
+end
+
+winning_team
+
+def player_with_the_longest_name
+  length_of_names = {}
+  get_all_players.each { |player|
+    length_of_names[player[:player_name]] = player[:player_name].size
+  }
+  names_sorted = length_of_names.sort_by { |name, length| length }
+  @the_longest_name = names_sorted.last[0]
+  length_of_the_longest_name = names_sorted.last[1]
+  puts "The player with the longest name is #{@the_longest_name} with #{length_of_the_longest_name} characters in it!"
+end
+
+player_with_the_longest_name
+
+def long_name_steals_a_ton?
+  steals_per_player = {}
+  get_all_players.each { |player|
+    steals_per_player[player[:player_name]] = player[:steals]
+  }
+  steals_sorted = steals_per_player.sort_by { |name, steals| steals }
+  player_with_most_steals = steals_sorted.last[0]
+  number_of_steals = steals_sorted.last[1]
+
+  if @the_longest_name == player_with_most_steals
+    puts "Random fact! He also has the most steals!"
+  else
+    return false
+  end
+end
+
+long_name_steals_a_ton?
