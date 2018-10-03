@@ -177,5 +177,13 @@ end
 def winning_team
   home_points = points_data(:home).inject(:+)
   away_points = points_data(:away).inject(:+)
+
   home_points > away_points ? game_hash[:home][:team_name] : game_hash[:away][:team_name]
+end
+
+def player_with_longest_name
+  home_names = game_hash[:home][:players].keys.sort{|playerA, playerB| playerA.length <=> playerB.length}.reverse
+  away_names = game_hash[:away][:players].keys.sort{|playerA, playerB| playerA.length <=> playerB.length}.reverse
+
+  home_names[0].length > away_names[0].length ? home_names[0] : away_names[0]
 end
