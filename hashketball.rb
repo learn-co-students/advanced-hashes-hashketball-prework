@@ -126,6 +126,13 @@ def jersey_data(team)
   jersey_numbers
 end
 
+def points_data(team)
+  points = []
+  game_hash[team][:players].each{|player_name, player_stat| points << player_stat[:points]}
+
+  points
+end
+
 #-- METHODS --#
 
 def num_points_scored(player_name)
@@ -165,4 +172,10 @@ def most_points_scored
   away_player =  game_hash[:away][:players].select{|player_name, player_stat| player_stat[:points] === away[:points]}
 
   home[:points] > away[:points] ? home_player.select{|player_name, player_stat| return player_name} : away_player.select{|player_name, player_stat| return player_name}
+end
+
+def winning_team
+  home_points = points_data(:home).inject(:+)
+  away_points = points_data(:away).inject(:+)
+  home_points > away_points ? game_hash[:home][:team_name] : game_hash[:away][:team_name]
 end
