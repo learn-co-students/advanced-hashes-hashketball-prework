@@ -89,61 +89,61 @@ describe 'hashketball' do
 
   end
 
-  describe '#player_stats' do
+   describe '#player_stats' do
 
-    let(:jeff_stats) {
-      {
-        :number => 4,
-        :shoe => 18,
-        :points => 10,
-        :rebounds => 1,
-        :assists => 1,
-        :steals => 2,
-        :blocks => 7,
-        :slam_dunks => 2
-      }
-    }
-
-    let(:bismak_stats) {
-      {
-        :number => 0,
-        :shoe => 16,
-        :points => 12,
-        :rebounds => 4,
-        :assists => 7,
-        :steals => 7,
-        :blocks => 15,
-        :slam_dunks => 10
-      }
-    }
-
-    let(:desagna_stats) {
-      {
-        :number => 2,
-        :shoe => 14,
-        :points => 24,
-        :rebounds => 12,
-        :assists => 12,
-        :steals => 4,
-        :blocks => 5,
-        :slam_dunks => 5
-      }
-    }
-
-    let(:ben_stats) {
-      {
-        :number => 8,
-        :shoe => 15,
-        :points => 33,
-        :rebounds => 3,
-        :assists => 2,
-        :steals => 1,
-        :blocks => 1,
-        :slam_dunks => 0
+     let(:jeff_stats) {
+       {
+         :number => 4,
+         :shoe => 18,
+         :points => 10,
+         :rebounds => 1,
+         :assists => 1,
+         :steals => 2,
+         :blocks => 7,
+         :slam_dunks => 2
        }
-    }
+     }
 
-    let(:brendan_stats) {
+     let(:bismak_stats) {
+       {
+         :number => 0,
+         :shoe => 16,
+         :points => 12,
+         :rebounds => 4,
+         :assists => 7,
+         :steals => 7,
+         :blocks => 15,
+         :slam_dunks => 10
+       }
+     }
+
+     let(:desagna_stats) {
+       {
+         :number => 2,
+         :shoe => 14,
+         :points => 24,
+         :rebounds => 12,
+         :assists => 12,
+         :steals => 4,
+         :blocks => 5,
+         :slam_dunks => 5
+       }
+     }
+
+     let(:ben_stats) {
+       {
+         :number => 8,
+         :shoe => 15,
+         :points => 33,
+         :rebounds => 3,
+         :assists => 2,
+         :steals => 1,
+         :blocks => 1,
+         :slam_dunks => 0
+        }
+     }
+
+     let(:brendan_stats) {
       {
         :number => 33,
         :shoe => 15,
@@ -160,14 +160,14 @@ describe 'hashketball' do
       {
         :number => 0,
         :shoe => 16,
-        :points => 22,
-        :rebounds => 12,
-        :assists => 12,
-        :steals => 3,
-        :blocks => 1,
-        :slam_dunks => 1
-      }
-    }
+         :points => 22,
+         :rebounds => 12,
+         :assists => 12,
+         :steals => 3,
+         :blocks => 1,
+         :slam_dunks => 1
+       }
+     }
 
     let(:reggie_stats) {
       {
@@ -246,25 +246,25 @@ describe 'hashketball' do
 
 end
 
-# If you'd like to work on the bonus, uncomment these tests.
+#If you'd like to work on the bonus, uncomment these tests.
 
 # describe 'bonus' do
 
-#   describe '#most_points_scored' do
+  describe '#most_points_scored' do
 
-#     it 'returns Ben Gordon' do
-#       expect(most_points_scored).to eq("Ben Gordon")
-#     end
+    it 'returns Ben Gordon' do
+      expect(most_points_scored).to eq("Ben Gordon")
+    end
 
-#   end
+  end
 
-#   describe '#winning_team' do
+  describe '#winning_team' do
 
-#     it 'returns the Brooklyn Nets' do
-#       expect(winning_team).to eq("Brooklyn Nets")
-#     end
+    it 'returns the Brooklyn Nets' do
+      expect(winning_team).to eq("Brooklyn Nets")
+    end
 
-#   end
+  end
 
 #   describe '#player_with_longest_name' do
 
