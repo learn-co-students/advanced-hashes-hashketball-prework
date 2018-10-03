@@ -156,3 +156,13 @@ def big_shoe_rebounds
 
   home[:shoe] > away[:shoe] ? home[:rebounds] : away[:rebounds] 
 end
+
+def most_points_scored
+  home = game_hash[:home][:players].values.sort{|playerA, playerB| playerA[:points] <=> playerB[:points]}.reverse[0]
+  away = game_hash[:away][:players].values.sort{|playerA, playerB| playerA[:points] <=>  playerB[:points]}.reverse[0]
+ 
+  home_player =  game_hash[:home][:players].select{|player_name, player_stat| player_stat[:points] === home[:points]}
+  away_player =  game_hash[:away][:players].select{|player_name, player_stat| player_stat[:points] === away[:points]}
+
+  home[:points] > away[:points] ? home_player.select{|player_name, player_stat| return player_name} : away_player.select{|player_name, player_stat| return player_name}
+end
