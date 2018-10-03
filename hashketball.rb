@@ -187,3 +187,13 @@ def player_with_longest_name
 
   home_names[0].length > away_names[0].length ? home_names[0] : away_names[0]
 end
+
+
+def long_name_steals_a_ton?
+  most_home_steals = game_hash[:home][:players].values.sort{|playerA, playerB| playerA[:steals] <=> playerB[:steals]}.reverse[0][:steals]
+  most_away_steals = game_hash[:away][:players].values.sort{|playerA, playerB| playerA[:steals] <=> playerB[:steals]}.reverse[0][:steals]
+
+  most_steals = [most_home_steals, most_away_steals].sort[1]
+  
+  player_stats( player_with_longest_name)[:steals] == most_steals
+end
