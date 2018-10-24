@@ -193,27 +193,43 @@ def player_numbers(team)
 end
 
 def player_stats(player)
-  #returns all stats for a given player
   game_hash.each do |location, team_data|
     team_data.each do |key, value|
         if key == :players
           value.each do |data_array|
             data_array.each do |attribute, data|
               if data == player
-
-                  return data_array    
+                return data_array.reject {|key| key == :player_name }
               end 
             end 
-          end
+          end 
         end 
       end 
+  end 
+end 
+
+
+def big_shoe_rebounds
+  largest_shoe = nil
+  
+  player_rebounds = nil
+  
+  game_hash[:away][:players].each do |player|
+    if largest_shoe == nil || player[:shoe] > largest_shoe
+      largest_shoe = player[:shoe]
+      player_rebounds = player[:rebounds]
+      
     end 
   end 
-
-
-# def big_shoe_rebounds
-#   game
-# end 
+  
+  game_hash[:home][:players].each do |player|
+    if largest_shoe == nil || player[:shoe] > largest_shoe
+      largest_shoe = player[:shoe]
+      player_rebounds = player[:rebounds]
+    end 
+  end 
+  player_rebounds 
+end 
 
 
 
