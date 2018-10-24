@@ -4,7 +4,7 @@ def game_hash
   hashketball_hash = { 
     :away => {
       :team_name => "Charlotte Hornets",
-      :colors => ["Turqoise", "Purple"],
+      :colors => ["Turquoise", "Purple"],
       :players => [
         { :player_name => "Jeff Adrien",
           :number => 4,
@@ -113,8 +113,12 @@ def num_points_scored(player)
         if key == :players
           value.each do |data_array|
             data_array.each do |attribute, data|
-              if attribute == player
-                
+              if data == player
+                data_array.collect do |attribute, points|
+                  if attribute == :points
+                    return points
+                end 
+              end 
             end 
           end
         end 
@@ -123,39 +127,93 @@ def num_points_scored(player)
   end 
 end 
 
-num_points_scored
 
-def shoe_size
-  #knows the shoe size of each player
-end 
-
-def team_colors
+def shoe_size(player)
+  #knows the number of points scored by each player
   game_hash.each do |location, team_data|
     team_data.each do |key, value|
+        if key == :players
+          value.each do |data_array|
+            data_array.each do |attribute, data|
+              if data == player
+                data_array.collect do |attribute, shoe_size|
+                  if attribute == :shoe
+                    return shoe_size
+                end 
+              end 
+            end 
+          end
+        end 
+      end 
+    end 
+  end 
+end 
+
+
+def team_colors(team_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |key, value|
+      if value == team_name
+        team_data.each do |key, value|
       if key == :colors
-        puts value
+        return value
+        end
+       end 
       end 
     end 
   end
 end 
 
-team_colors
+
 
 def team_names
-  #returns the team names
+  team_name_array = []
+  game_hash.each do |location, team_data|
+    team_data.each do |key, value|
+      if key == :team_name
+        team_name_array << value
+      end   
+    end 
+  end 
+  return team_name_array
 end
 
-def player_numbers
-  #returns the player jersey numbers
+def player_numbers(team)
+  player_number_array = []
+  game_hash.each do |location, team_data|
+    team_data.each do |key, value|
+      if value == team
+        game_hash[location][:players].each do |player|
+          player_number_array.push(player[:number])
+        end 
+      end 
+    end
+  end
+  return player_number_array
 end
 
-def player_stats
+def player_stats(player)
   #returns all stats for a given player
-end 
+  game_hash.each do |location, team_data|
+    team_data.each do |key, value|
+        if key == :players
+          value.each do |data_array|
+            data_array.each do |attribute, data|
+              if data == player
 
-def big_shoe_rebounds
-  #returns the number of rebounds of the player with the biggest shoe size
-end 
+                  return data_array    
+              end 
+            end 
+          end
+        end 
+      end 
+    end 
+  end 
+
+
+# def big_shoe_rebounds
+#   game
+# end 
 
 
 
