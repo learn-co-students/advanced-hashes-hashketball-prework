@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require "pry"
 describe 'hashketball' do
 
   describe '#game_hash' do
@@ -28,6 +28,7 @@ describe 'hashketball' do
     it 'knows the number of points scored by each player' do
       expect(num_points_scored("Jeff Adrien")).to eq(10)
       expect(num_points_scored("Bismak Biyombo")).to eq(12)
+
       expect(num_points_scored("DeSagna Diop")).to eq(24)
       expect(num_points_scored("Ben Gordon")).to eq(33)
       expect(num_points_scored("Brendan Haywood")).to eq(6)
