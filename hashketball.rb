@@ -118,88 +118,72 @@ def game_hash
 end
 
 def num_points_scored(players_name)
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, value|
-      if attribute == :players
-        value.each do |name, players_info|
+  # points = 0
+  game_hash.each do |location, team_info|
+    team_info.each do |team_attributes, values|
+      if team_attributes == :players
+        values.each do |name, stats|
           if name == players_name
-            return players_info[:points]
+            return points = stats[:points]
           end
         end
       end
+      # if players_name == values[:players_name]
+      #   points = values[:points]
+      # end
+      # binding.pry
     end
   end
+  # points
 end
 
 def shoe_size(players_name)
-  game_hash.each do |location, team_data|
-    team_data.each do |attributes, value|
-      if attributes == :players
-        value.each do |name, players_info|
-          if name == players_name
-            return players_info[:shoe]
-          end
-        end
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if name == players_name
+        return stats[:shoe]
       end
     end
   end
 end
 
-def team_colors(team_name)
-  game_hash.each do |location, data|
-    data.each do |attributes, info|
-      # binding.pry
-      if info == team_name
-        return data[:colors]
-      end
+def team_colors(name)
+  game_hash.each do |location, team_info|
+    if name == team_info[:team_name]
+      return team_info[:colors]
     end
   end
 end
 
 def team_names
-  team_names = []
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
-      # binding.pry
-      if attribute == :team_name
-        team_names << data
+  names_array = []
+  game_hash.each do |location, team_info|
+      team_info.each do |team_attributes, values|
+        if team_attributes == :team_name
+          names_array << values
+        end
       end
-    end
-    # binding.pry
   end
-  # binding.pry
-  team_names
+  names_array
 end
 
 def player_numbers(team_name)
-  jersey_array = []
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
-      # binding.pry
-      if data == team_name
-        team_data.each do |attribute, data|
-          if attribute == :players
-            data.each do |player, stats|
-              jersey_array << stats[:number]
-            end
-          end
-        end
+  numbers_array = []
+  game_hash.each do |location, team_info|
+    if team_info[:team_name] == team_name
+      team_info[:players].each do |name, stats|
+        numbers_array << stats[:number]
       end
     end
   end
-  jersey_array
+  numbers_array
 end
 
 def player_stats(players_name)
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, info|
-      if attribute == :players
-        info.each do |name, stats|
-          if name == players_name
-            # binding.pry
-            return stats
-          end
-        end
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if name == players_name
+        return stats
       end
     end
   end
@@ -207,36 +191,74 @@ end
 
 def big_shoe_rebounds
   largest_size = 0
-  player_name = ""
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
-      if attribute == :players
-        data.each do |name, info|
-          if shoe_size(name) > largest_size
-            largest_size = shoe_size(name)
-            player_name = name
-            # binding.pry
-          end
-          # binding.pry
-        end
-
+  players_name = ""
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if stats[:shoe] > largest_size
+        largest_size = stats[:shoe]
+        players_name = name
       end
-      # binding.pry
     end
-    # binding.pry
+    return team_info[:players][players_name][:rebounds]
   end
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, data|
-      if attribute == :players
-        data.each do |name, info|
-          if name == player_name
-            # binding.pry
-            return info[:rebounds]
+end
 
-          end
-        end
+def most_points_scored
+  biggest_points = 0
+  players_name = ""
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if stats[:points] > biggest_points
+        biggest_points = stats[:points]
+        players_name = name
       end
     end
   end
+  players_name
+end
 
+def winning_team
+  home_scores = 0
+  away_scores = 0
+  game_hash[:home][:players].each do |name, stats|
+    home_scores += stats[:points]
+  end
+  game_hash[:away][:players].each do |name, stats|
+    away_scores += stats[:points]
+  end
+  if home_scores > away_scores
+    game_hash[:home][:team_name]
+  else
+    game_hash[:away][:team_name]
+  end
+end
+
+def player_with_longest_name
+  length = 0
+  players_name = ""
+
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if name.length > length
+        length = name.length
+        players_name = name
+      end
+    end
+  end
+players_name
+end
+
+def long_name_steals_a_ton?
+  steals = 0
+  players_name = ""
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, stats|
+      if stats[:steals] > steals
+        steals = stats[:steals]
+        players_name = name
+      end
+    end
+  end
+binding.pry
+player_with_longest_name == players_name
 end
