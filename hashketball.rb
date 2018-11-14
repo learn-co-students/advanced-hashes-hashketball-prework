@@ -1,4 +1,5 @@
 # Write your code here!
+require 'pry'
 def game_hash
   nba_hash = {
     :home => {
@@ -117,24 +118,42 @@ def game_hash
   nba_hash
 end
 
-def num_points_scored
+def num_points_scored(player_name)
   game_hash.each do |home_away, data|
-    data.each do |team_info, player|
-      player.each do |stats_names, stats|
-        if stats_names == :points 
-          return player :points
-        end
+    data.each do |team_info, team_values|
+     if team_info == :players
+      team_values.each do |name, stats|
+       if player_name == name
+         return stats[:points]
+       end
       end
+     end
     end
   end
 end
 
-def shoe_size
-
+def shoe_size(player_name)
+ game_hash.each do |home_away, data|
+    data.each do |team_info, team_values|
+     if team_info == :players
+      team_values.each do |name, stats|
+       if player_name == name
+         return stats[:shoe]
+       end
+      end
+     end
+    end
+  end
 end
 
-def team_colors
-
+def team_colors(team)
+  game_hash.each do |home_away, data|
+    data.each do |team_info, team_values|
+      if team_values == team
+        return team_info[:colors]
+      end
+    end
+  end  
 end
 
 def team_names
