@@ -58,58 +58,58 @@ def game_hash
         }
       }
     :away => {
-      :team_name => " ",
-      :colors => ["",""],
+      :team_name => "Charlotte Hornets",
+      :colors => ["Turquoise","Purple"],
       :players => {
-        "Alan Anderson" => {
-          :number => 23,
+        "Jeff Adrien" => {
+          :number => 4,
           :shoe => 18,
-          :points => 100,
-          :rebounds => 15,
-          :assists => 8,
-          :steals => 11,
-          :blocks => 5,
-          :slam_dunks => 999
+          :points => 10,
+          :rebounds => 1,
+          :assists => 1,
+          :steals => 2,
+          :blocks => 7,
+          :slam_dunks => 2
           }
-        "Reggie Evans" => {
-          :number => 23,
-          :shoe => 18,
-          :points => 100,
-          :rebounds => 15,
-          :assists => 8,
-          :steals => 11,
-          :blocks => 5,
-          :slam_dunks => 999
+        "Bismak Biyombo" => {
+          :number => 0,
+          :shoe => 16,
+          :points => 12,
+          :rebounds => 4,
+          :assists => 7,
+          :steals => 7,
+          :blocks => 15,
+          :slam_dunks => 10
           } 
-           "Brook Lopez" => {
-          :number => 23,
-          :shoe => 18,
-          :points => 100,
-          :rebounds => 15,
-          :assists => 8,
-          :steals => 11,
+           "DeSagna Diop" => {
+          :number => 2,
+          :shoe => 14,
+          :points => 24,
+          :rebounds => 12,
+          :assists => 12,
+          :steals => 4,
           :blocks => 5,
-          :slam_dunks => 999
+          :slam_dunks => 5
           }
-           "Mason Plumlee" => {
-          :number => 23,
-          :shoe => 18,
-          :points => 100,
-          :rebounds => 15,
-          :assists => 8,
-          :steals => 11,
-          :blocks => 5,
-          :slam_dunks => 999
+           "Ben Gordon" => {
+          :number => 8,
+          :shoe => 15,
+          :points => 33,
+          :rebounds => 3,
+          :assists => 2,
+          :steals => 1,
+          :blocks => 1,
+          :slam_dunks => 0
           }
-           "Jason Terry" => {
-          :number => 23,
-          :shoe => 18,
-          :points => 100,
-          :rebounds => 15,
-          :assists => 8,
-          :steals => 11,
+           "Brendan Haywood" => {
+          :number => 33,
+          :shoe => 15,
+          :points => 6,
+          :rebounds => 12,
+          :assists => 12,
+          :steals => 22,
           :blocks => 5,
-          :slam_dunks => 999
+          :slam_dunks => 12
           }
         }
       }
