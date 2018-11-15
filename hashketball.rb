@@ -50,7 +50,7 @@ def game_hash
          :number => 31,
          :shoe => 15,
          :points => 19,
-         :rebounds => 22,
+         :rebounds => 2,
          :assists => 2,
          :steals => 4,
          :blocks => 11,
@@ -72,7 +72,7 @@ def game_hash
           :blocks => 7,
           :slam_dunks => 2
         },
-        "Bismark Biyombo" => {
+        "Bismak Biyombo" => {
           :number => 0,
           :shoe => 16,
           :points => 12,
@@ -150,4 +150,79 @@ def num_points_scored(name)
     end
   end
   score
+end
+
+def shoe_size(name)
+  size = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |stat_key, stat_value|
+      if stat_key == :players
+        stat_value.each do |player_name, stat|
+          stat.each do |parameter, int|
+            if player_name == name && parameter == :shoe
+              size = int
+            end
+          end
+        end
+      end
+    end
+  end
+  size
+end
+
+def team_colors(team_name)
+  if team_name == "Brooklyn Nets"
+    game_hash[:home][:colors]
+  elsif team_name == "Charlotte Hornets"
+    game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  game_hash.collect do |location, team_data|
+    team_data[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  array = []
+  game_hash.each do |location, team_data|
+      if team_data[:team_name] == team_name
+         team_data.collect do |stat_key, stat_value|
+           if stat_key == :players
+             stat_value.collect do |player_name, stat|
+               array << stat[:number]
+             end
+           end
+         end
+       end
+     end
+  array
+end
+
+def player_stats(player_name)
+  stats = nil
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |name, stat_value|
+      if name == player_name
+        stats = stat_value
+      #binding.pry
+    end
+  end
+  end
+  stats
+end
+
+def big_shoe_rebounds
+  rebounds = 0
+  shoe = 0
+  game_hash.each do |location, team_data|
+     team_data[:players].each do |name, stat_value|
+       if stat_value[:shoe] > shoe
+         shoe = stat_value[:shoe]
+         rebounds = stat_value[:rebounds]
+       end
+      end
+  end
+ rebounds
 end
