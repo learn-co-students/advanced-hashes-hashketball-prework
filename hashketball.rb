@@ -140,19 +140,33 @@ def shoe_size(player_name)
           if player_name == name
             return stats[:shoe]
           end
+          team_values.each do |name, stats|
+            if player_name == name
+              return stats[:shoe]
+            end
+          end
         end
       end
     end
   end
 end
 
+
 def team_colors(team)
   game_hash.each do |home_away, data|
     if data[:team_name] == team
-#      binding.pry
-        return data[:colors]
-    end
-  end  
+  #      binding.pry
+          return data[:colors]
+      data.each do |team_info, team_values|
+        if team_info == :team_name
+          binding.pry
+          if :team_name == team
+            return :colors
+          end
+        end
+      end
+    end  
+  end
 end
 
 def team_names
@@ -166,16 +180,35 @@ end
 def player_numbers(team)
   game_hash.each do |home_away, data|
     data.each do |team_info, team_values|
- #     binding.pry
+#      binding.pry
       if data[:team_name] == team
-        return data[:number]
+#        binding.pry
+        numbers = []
+        data[:players].each do |player_names, player_values|
+#         binding.pry
+          numbers << player_values[:number]
+        end
+        return numbers
       end
     end
   end
 end
 
-def players_stats
-
+def player_stats(player)
+  game_hash.each do |home_away, data|
+    data.each do |team_info, team_values|
+#     binding.pry
+      if team_values == data[:players]
+#        binding.pry
+        team_values.each do |keys, values|
+          if keys == player
+#          binding.pry
+            return values
+          end
+        end
+      end
+    end
+  end
 end
 
 def big_shoe_rebounds
