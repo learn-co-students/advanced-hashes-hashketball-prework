@@ -223,8 +223,10 @@ def big_shoe_rebounds
           if values[:shoe] > shoe_size_initiator
             shoe_size_initiator = values[:shoe]
             biggest_shoe_player = keys
-          binding.pry
+ #         binding.pry
           end
+ #         binding.pry
+          return team_values[biggest_shoe_player][:rebounds]
         end
       end
     end
