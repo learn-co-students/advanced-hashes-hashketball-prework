@@ -179,7 +179,19 @@ def player_numbers(team_name_input)
   end 
   array
 end 
-
+def player_stats(player)
+    game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+        if contents.is_a?(Hash)
+          contents.each do |name, stats|
+            if name == player
+              return stats
+            end
+          end
+        end
+    end
+  end 
+end 
 
 
 
