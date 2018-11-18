@@ -155,14 +155,30 @@ def team_names
     info_category.each do |info, contents|
     if info == :team_name
       array << contents
-    end
     end 
+  end
   end
   array
 end 
-
-
-
+def player_numbers(team_name_input)
+  array = []
+  game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+     if info_category[:team_name] == team_name_input
+      if contents.is_a?(Hash)
+        contents.each do |name, stats|
+          stats.each do |statistic, value|
+            if statistic == :number
+              array << value
+            end
+          end
+        end
+      end
+     end
+    end
+  end 
+  array
+end 
 
 
 
