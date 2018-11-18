@@ -192,7 +192,26 @@ def player_stats(player)
     end
   end 
 end 
-
+def big_shoe_rebounds
+    max_rebounds = 0 
+    max_shoe = 0
+    game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+      if contents.is_a?(Hash)
+        contents.each do |name, stats|
+          stats.each do |statistic, value|
+            if statistic == :shoe && value > max_shoe
+              binding.pry
+              max_shoe = value
+              max_rebounds = [stats][:rebounds]
+            end 
+          end
+        end
+      end
+    end
+  end 
+  max_rebounds
+end 
 
 
 
