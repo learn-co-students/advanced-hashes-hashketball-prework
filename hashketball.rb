@@ -212,7 +212,23 @@ def big_shoe_rebounds
   end 
   max_rebounds
 end 
-
+def most_points_scored
+  player_name = ""
+  max_points = 0
+  game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+      if contents.is_a?(Hash)
+        contents.each do |name, stats|
+          stats.each do |statistic, value|
+            if statistic == :points && :points > max_points
+              binding.pry
+            end 
+          end
+        end
+      end
+    end
+  end 
+end 
 
 
 
