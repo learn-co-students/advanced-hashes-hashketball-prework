@@ -213,16 +213,16 @@ def big_shoe_rebounds
 end 
 def most_points_scored
   player_name = ""
-  max_points = -1
+  max_points = 0
   game_hash.each do |team, info_category|
     info_category.each do |info, contents|
       if contents.is_a?(Hash)
         contents.each do |name, stats|
           stats.each do |statistic, value|
-            binding.pry
+            #binding.pry
             if statistic == :points && value > max_points
                 player_name = name
-                max_points = statistic
+                max_points = value
             end 
           end
         end
@@ -231,6 +231,46 @@ def most_points_scored
   end 
   player_name
 end 
+def winning_team
+  team_points = {"Charlotte Hornets" => 0, "Brooklyn Nets" => 0}
+      game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+      if contents.is_a?(Hash)
+        contents.each do |name, stats|
+          stats.each do |statistic, value|
+            team_points[game_hash[team][:team_name]] = team_points[game_hash[team][:team_name]] + stats[:points]
+          end
+        end
+      end
+    end
+  end 
+  winner = ""
+  winning_points = 0
+  team_points.each do |team_name, total_points|
+    if total_points > winning_points
+      winner = team_name
+      winning_points = total_points
+    end
+  end
+  winner
+end 
+def player_with_longest_name
+  longest_name_length = 0 
+  longest_name = ""
+  game_hash.each do |team, info_category|
+    info_category.each do |info, contents|
+      if contents.is_a?(Hash)
+        contents.each do |name, stats|
+            if name.length > longest_name_length
+              longest_name_length = name.length 
+              longest_name = name
+            end
+        end
+      end
+    end
+  end 
+  longest_name
+end 
+def long_name_steals_a_ton?
 
-
-
+end
