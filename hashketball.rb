@@ -201,7 +201,6 @@ def big_shoe_rebounds
         contents.each do |name, stats|
           stats.each do |statistic, value|
             if statistic == :shoe && value > max_shoe
-              binding.pry
               max_shoe = value
               max_rebounds = stats[:rebounds]
             end 
@@ -214,20 +213,23 @@ def big_shoe_rebounds
 end 
 def most_points_scored
   player_name = ""
-  max_points = 0
+  max_points = -1
   game_hash.each do |team, info_category|
     info_category.each do |info, contents|
       if contents.is_a?(Hash)
         contents.each do |name, stats|
           stats.each do |statistic, value|
-            if statistic == :points && :points > max_points
-              binding.pry
+            binding.pry
+            if statistic == :points && value > max_points
+                player_name = name
+                max_points = statistic
             end 
           end
         end
       end
     end
   end 
+  player_name
 end 
 
 
