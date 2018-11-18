@@ -203,7 +203,7 @@ def big_shoe_rebounds
             if statistic == :shoe && value > max_shoe
               binding.pry
               max_shoe = value
-              max_rebounds = [stats][:rebounds]
+              max_rebounds = stats[:rebounds]
             end 
           end
         end
