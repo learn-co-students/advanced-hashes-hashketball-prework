@@ -181,6 +181,8 @@ def player_numbers(team_name)
   end
 end
 
+##above is wrong.. work on it.
+
 def player_stats(name)
   game_hash.each do |location, team_data|
     team_data.each do |attributes, data|
@@ -214,11 +216,62 @@ def big_shoe_rebounds
   end
 end
 
-#def most_points_scored
-#  most_points = nil
-#  player_with_most_points = nil
-#  game_hash.each do |location, team_data|
-#   team_data.each do |attributes, data|
+def all_players
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  total_players = home_players.merge(away_players)
+end
+
+def most_points_scored
+ most_points = nil
+ player_with_most_points = nil
+ all_players.each do |name, stats|
+  indiv_points = all_players[name][:points]
+    if most_points == nil || most_points < indiv_points
+      most_points = indiv_points
+      player_with_most_points = name
+    end
+ end
+ player_with_most_points
+end
+
+def winning_team
+  total_home_points = 0
+  total_away_points = 0
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  home_players.each do |name_home, stats_home|
+    indiv_points = all_players[name_home][:points]
+    total_home_points = total_home_points + indiv_points
+  end
+  away_players.each do |name_away, stats_away|
+    indiv_points = all_players[name_away][:points]
+    total_away_points = total_away_points + indiv_points
+  end
+  if total_away_points > total_home_points
+    game_hash[:away][:team_name]
+  else total_home_points > total_away_points
+    game_hash[:home][:team_name]
+end
+end
+
+def player_with_longest_name
+  player_names = all_players.keys
+  longest_name = 'a'
+  player_names.each do |name|
+    name.length
+    # binding.pry
+    if name.length == nil || name.length > longest_name.length
+      longest_name = name
+    end
+  end
+  longest_name
+end
+
+player_with_longest_name
+
+
+#     # if game_hash[location][:players]
 #      if data.is_a?(Hash)
 #        data.each do |items, stats|
 #          points = game_hash[location][attributes][items][:points]
@@ -227,8 +280,8 @@ end
 #            player_with_most_points = items
 #          end
 #        end
-#        return player_with_most_points
+#       player_with_most_points
 #      end
 #    end
-#  end
-#end
+# end
+# end
