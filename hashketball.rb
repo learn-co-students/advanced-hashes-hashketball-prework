@@ -1,4 +1,4 @@
-
+require "pry"
 def game_hash
   {
     home: {
@@ -117,50 +117,74 @@ def game_hash
 end
 
 def num_points_scored(name)
-  player = find_the_player(name)
-  player.fetch(:points)
+  game_hash.each do |team_name, team_stats|
+    team_stats[:players].each do |player_name, personal_stats|
+       if player_name == name
+        #  binding.pry
+      return personal_stats[:points]
+      end
+    end
+  end
 end
 
 def shoe_size(name)
-  player = find_the_player(name)
-  player.fetch(:shoe)
+  game_hash.each do |team_name, team_stats|
+    team_stats[:players].each do |player_name, personal_stats|
+      if player_name == name
+        return personal_stats[:shoe]
+      end
+    end
+  end
 end
 
 def team_colors(team_name)
-  team = find_the_team(team_name)
-  team.fetch(:colors)
+  game_hash.each do |team, team_stats|
+    # team.each do |info|
+    if team_stats[:team_name]== team_name
+     return  team_stats[:colors]
+    end
+  end
 end
 
+
 def team_names
-  teams.map{|t| t.fetch(:team_name)}
+  teams =[]
+  game_hash.each do |team, team_stats|
+    team = team_stats[:team_name]
+    teams << team
+  end
+  teams
 end
 
 def player_numbers(team_name)
-  find_the_team(team_name)[:players].map{ |player_name, stats| stats[:number] }
+jersey_nums =[]
+  game_hash.each do |team, team_stats|
+      team = team_stats[:team_name]
+      if team == team_name
+          team_stats[:players].each do |player_name, personal_stats|
+          jersey = personal_stats[:number]
+          jersey_nums << jersey
+          end
+      end
+  end
+  jersey_nums
 end
 
 def player_stats(player_name)
-  find_the_player(player_name)
+  game_hash.each do |team_name, team_stats|
+    team_stats[:players].each do |players_name, personal_stats|
+      if players_name == player_name
+        return personal_stats
+    end
+  end
+  end
 end
 
 def big_shoe_rebounds
-  player_biggest_shoe_size.fetch(:rebounds)
+  game_hash.each do |team_name, team_stats|
+    team_stats[:players].each do |players_name, personal_stats|
+  end
 end
-
-def teams
-  game_hash.values
-end
-
-def players
-  game_hash[:home][:players].merge(game_hash[:away][:players])
-end
-
-def find_the_team(team_name)
-  teams.find {|team| team.fetch(:team_name) == team_name}
-end
-
-def find_the_player(name)
-  players.fetch(name)
 end
 
 def player_biggest_shoe_size
