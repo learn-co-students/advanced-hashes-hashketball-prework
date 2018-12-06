@@ -92,11 +92,9 @@ def team_colors(team)
 end
 
 def team_names
-  teams = []
 
-  game_hash.each {|location, team_data| teams << team_data[:team_name]}
+  game_hash.collect {|location, team_data| team_data[:team_name]}
 
-  teams
 end
 
 
@@ -145,5 +143,4 @@ def big_shoe_rebounds
       end
     end
   end
-  #shoe
 end
