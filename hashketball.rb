@@ -124,15 +124,17 @@ def game_hash
   }
 end
 
-def num_points_scored(player_name)
-  game_hash.collect do |location, team_data|
+def num_points_scored(player_name) # method that takes in arg of player_name looking to return num of points of passed in player_name
+  game_hash.collect do |location, team_data| # iterate over game_hash using .collect with block variables location & team_data
     if team_data[:players].keys.include?(player_name)
-      return team_data[:players][player_name][:points]
+      # conditional statement checking to verify if players hash contains player_name(arg passed into method)
+      return team_data[:players][player_name][:points] #if above condition is true, will return points of player_name within players hash
+      # Once retirn statement is issued, it will stop executing method
     end
   end
 end
 
-def shoe_size (player_name)
+def shoe_size (player_name) # same logic as above code block
   game_hash.collect do |location, team_data|
     if team_data[:players].keys.include?(player_name)
       return team_data[:players][player_name][:shoe]
@@ -140,39 +142,41 @@ def shoe_size (player_name)
   end
 end
 
-def team_colors(team_name)
+def team_colors(team_name) # method that takes in an arg of team_name looking to return team_colors
   game_hash.collect do |location, team_data|
-    if team_data[:team_name] == team_name
-      return team_data[:colors]
+    if team_data[:team_name] == team_name # conditional statemnt checking to verify if value of team_name is equal to team_name passed in as arg
+      # This is a way to check if we are looking at away or home location
+      return team_data[:colors] #if above condition  is true, will return colors of team_name within team-data hash
     end
   end
 end
 
-def team_names
-  team_array = []
-game_hash.collect do |location, team_data|
- team_array << team_data[:team_name]
+def team_names # method that returns array of team names
+  team_array = [] # create empty array to push team names into
+game_hash.collect do |location, team_data| #iterate through game_hash with .collect
+ team_array << team_data[:team_name] # shovel or push values of team names into team array
   end
-  team_array
+  team_array # call team_array to retun array with values
 end
 
 def player_numbers(team_name)
-  number_array = []
+  number_array = [] # create empty array to push player_numbers into
   game_hash.collect do |location, team_data|
-    if team_data[:team_name] == team_name
-    team_data.collect do |k, v|
-      if k == :players
-      v.collect do |player_name, stats|
-        number_array << stats[:number]
+    if team_data[:team_name] == team_name # conditional statemnt checking to verify if value of team_name is equal to team_name passed in as arg
+      # This is a way to check if we are looking at away or home location
+    team_data.collect do |k, v| # iterate through second layer of hashes
+      if k == :players #conditional statement to verify if key is equal to players
+      v.collect do |player_name, stats| #iterate through v hash nested within the players key
+        number_array << stats[:number] #shovels blank array with each person's jersey num.
       end
     end
   end
   end
 end
-number_array
+number_array # return updated array of jersey nums
 end
 
-def player_stats(player_name)
+def player_stats(player_name) # same logic as shoe_size & num_points_scored
 game_hash.collect do |location, team_data|
   if team_data[:players].keys.include?(player_name)
     return team_data[:players][player_name]
@@ -181,15 +185,16 @@ end
 end
 
 def big_shoe_rebounds
-  shoe_size = 0
-  biggest_shoe_player = ""
+  shoe_size = 0 # assigning the lowest possible num to compare each player's shoe size to
+  biggest_shoe_player = "" # this variable will get reassigned once the largest shoe size is found
   game_hash.collect do |location, team_data|
     team_data.collect do |k, v|
       if k == :players
         v.collect do |player_name, stats|
-          if stats[:shoe] > shoe_size
-            shoe_size = stats[:shoe]
-            biggest_shoe_player = player_name
+          # done iterating down to player name and stats level
+          if stats[:shoe] > shoe_size # this will compare each players shoe size to the shoe variable assigned on 188
+            shoe_size = stats[:shoe] # reassigning shoe size variable
+            biggest_shoe_player = player_name # reassigning biggest_shoe_player if 195 true
           end
         end
       end
