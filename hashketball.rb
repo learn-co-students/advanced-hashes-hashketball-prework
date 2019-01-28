@@ -201,9 +201,3 @@ def big_shoe_rebounds
   hashketball.dig(:home, :players, player_name, :rebounds) || 
     hashketball.dig(:away, :players, player_name, :rebounds)
 end
-
-
-
-
-
-
