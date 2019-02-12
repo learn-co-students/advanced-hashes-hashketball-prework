@@ -30,18 +30,19 @@ def game_hash
 end
 
 def separate_data_with_name(target_name, target)
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, team_data|
-      if attribute == :players
-        team_data.each do |name, data|
-          if name.to_s == target_name
-            target = data[target]
-          end
-        end
-      end
-    end
-  end
-  return target
+  # game_hash.each do |location, team_data|
+  #   team_data.each do |attribute, team_data|
+  #     if attribute == :players
+  #       team_data.each do |name, data|
+  #         if name.to_s == target_name
+  #           target = data[target]
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
+  # return target
+  player_stats(target_name)[target]
 end
 
 def players_separate_datas(target)
@@ -107,6 +108,7 @@ def player_stats(player_name)
       if attribute == :players
         team_data.each do |name, data|
           if name.to_s == player_name
+            # binding.pry
             return data
           end
         end
@@ -114,18 +116,21 @@ def player_stats(player_name)
     end
   end
 end
+puts player_stats("Alan Anderson")
 
 def big_shoe_rebounds
   shoe_hash = players_separate_datas(:shoe)
-  largest_shoe = shoe_hash.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h
-  largest_shoe_name = largest_shoe.keys[0].to_s
-
+  # largest_shoe = shoe_hash.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h
+  # largest_shoe_name = largest_shoe.keys[0].to_s
+  largest_shoe_name = shoe_hash.max_by{|k, v| v}[0].to_s
   separate_data_with_name(largest_shoe_name, :rebounds)
 end
 
 def most_points_scored
-  players_points = players_separate_datas(:points)
-  most_pointer = players_points.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h.keys[0].to_s
+  # players_points = players_separate_datas(:points)
+  # most_pointer = players_points.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h.keys[0].to_s
+  # most_pointer = players_points.max_by{|k, v| v}[0].to_s
+  players_separate_datas(:points).max_by{|k, v| v}[0].to_s
 end
 
 def winning_team
@@ -174,12 +179,13 @@ def player_with_longest_name
       end
     end
   end
-  longest_name = longest_name_hash.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h.keys[0].to_s
+  # longest_name = longest_name_hash.group_by{|k, v| v}.max_by{|k, v| k}.last.to_h.keys[0].to_s
+  longest_name = longest_name_hash.max_by{|k, v| v}[0].to_s
 end
 
 def long_name_steals_a_ton?
   longest_name = player_with_longest_name
-  best_stealer = players_separate_datas(:steals).group_by{|k, v| v}.max_by{|k, v| k}.last.to_h.keys[0].to_s
+  best_stealer = players_separate_datas(:steals).max_by{|k, v| v}[0].to_s
 
   longest_name == best_stealer
 end
