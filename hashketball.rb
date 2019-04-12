@@ -10,6 +10,19 @@ require "pry"
 
 
 # Write your code here!
+
+
+
+
+
+
+
+
+
+
+
+
+
 def game_hash
    {
      :home => {
@@ -26,7 +39,7 @@ def game_hash
            :blocks => 1,
            :slam_dunks => 1
         },
-       "Reggie Evans" => {
+          "Reggie Evans" => {
            :number => 30,
            :shoe => 14,
            :points => 12,
@@ -128,86 +141,101 @@ def game_hash
      }
 
    }
+ end
 
-end
+ def num_points_scored(player_name)
+     game_hash.each do |location, data|
+       data[:players].each do |name, stat|
+         if player_name == name
+           return stat[:points]
+         end
+       end
+     end
+   end
+   p num_points_scored("Brendan Haywood")
 
-def num_points_scored(player)
-  away_players = game_hash[:away][:players]
-  if away_players.key?(player)
-    game_hash[:away][:players][player][:points]
-  else
-    game_hash[:home][:players][player][:points]
-  end
-  #def home_team_name
-  #  game_hash[:home][:team_name]
-  #end
-end
-def shoe_size(player)
-  away_players = game_hash[:away][:players]
-  if away_players.key?(player)
-    game_hash[:away][:players][player][:shoe]
-  else
-    game_hash[:home][:players][player][:shoe]
-
-  end
-end
-def team_colors(team_name)
-if game_hash[:home][:team_name] == team_name
-  game_hash[:home][:colors]
-else
-  game_hash[:away][:colors]
-  end
-end
-def team_names
-  game_hash.collect do |key, value|
-    game_hash[key][:team_name]
-  end
-
-end
-
-def player_numbers(team)
-  if game_hash[:home][:team_name] == team
-    game_hash[:home][:players].collect do |key, value|
-      value[:number]
-    end
-  else
-    game_hash[:away][:players].collect do |key, value|
-      value[:number]
-    end
-end
-
-
-end
-def player_stats(player)
-  away_players = game_hash[:away][:players]
-  if away_players.key?(player)
-    game_hash[:away][:players][player]
-  else
-    game_hash[:home][:players][player]
-  end
-
-end
-def big_shoe_rebounds
-  players = {}
-  highest_player = {
-    :highest_rebound => 0,
-    :highest_shoe => 0
-
-  }
-game_hash.each do |key, value|
-  value[:players].each do |key, value|
-  players[key] = {}
-  players[key][:shoe] = value[:shoe]
-  players[key][:rebounds] = value[:rebounds]
-  end
-  end
-
-  players.each do |key, value|
-    if value[:shoe] > highest_player[:highest_shoe]
-      highest_player[:highest_rebound] = value[:rebounds]
-      highest_player[:highest_shoe] = value[:shoe]
-      highest_player[:name] = key
+   def team_colors(name)
+    game_hash.each do |location, data|
+      if data[:team_name] == name
+       return data[:colors]
+      end
     end
   end
-  highest_player[:highest_rebound]
-end
+   p team_colors("Charlotte Hornets")
+
+   def shoe_size(player_name)
+     game_hash.each do |location, data|
+       data[:players].each do |name, stat|
+         if player_name == name
+           return stat[:shoe]
+         end
+       end
+     end
+   end
+   p shoe_size("Ben Gordon")
+
+ def team_names
+   teams = []
+   game_hash.each do |location, data|
+     teams << data[:team_name]
+   end
+   teams
+ end
+ p team_names
+
+   # def players_numbers(team)
+   #   numbers = []
+   #   game_hash.each do |location, data|
+
+   #     data[:players].each do |name, stat|
+   #      numbers << stat[:number]
+   #      end
+   #   end
+   # return numbers
+   # end
+   # p players_numbers("Brooklyn Nets")
+
+ def player_numbers(team)
+   if game_hash[:home][:team_name] == team
+     game_hash[:home][:players].map do |name, stat|
+       stat[:number]
+     end
+   else
+     game_hash[:away][:players].map do |name, stat|
+         stat[:number]
+     end
+   end
+ end
+ p player_numbers("Brooklyn Nets")
+ # p players_numbers("Charlotte Hornets")
+
+ def player_stats(player_name)
+   game_hash.each do |location, data|
+     data[:players].each do |name, stat|
+       if player_name == name
+         return stat
+       end
+     end
+   end
+ end
+ p player_stats("DeSagna Diop")
+
+ # start with a variable such as largest_shoe_size
+ # additional variable with players_stats
+ # need something like random shoe size to start to compare to all other players shoe size
+ # return largest shoe's rebounds
+ def big_shoe_rebounds
+   largest_shoe_size = game_hash[:home][:players].values.sample[:shoe]
+   player = nil
+
+   game_hash.each do |location, data|
+     data[:players].each do |name, stat|
+       if stat[:shoe] >= largest_shoe_size
+        largest_shoe_size = stat[:shoe]
+        player = stat
+       end
+     end
+   end
+   player[:rebounds]
+ end
+ p big_shoe_rebounds
