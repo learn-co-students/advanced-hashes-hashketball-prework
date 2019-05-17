@@ -159,11 +159,14 @@ def player_numbers(team_name)
         team.map do |attribute, data|
             if data.include?(team_name)
             array << game_hash[location][attribute][team_name][:number]
+            binding.pry
             end 
             return array
         end 
     end 
 end 
+
+player_numbers("Brooklyn Nets")
 
 
 def player_stats(player_name)
