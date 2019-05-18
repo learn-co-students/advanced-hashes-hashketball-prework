@@ -95,7 +95,7 @@ def game_hash
           },
           "Ben Gordon" => {
             number: 8,
-            shoe: 15,
+            shoe: 15, #game_hash[:away][:players]["Ben Gordon"][:shoe]
             points: 33,
             rebounds: 3,
             assists: 2,
@@ -142,7 +142,7 @@ end
 def team_colors(name)
     game_hash.map do |location, team_data|
         if team_data[:team_name] == name
-             return team_data[:colors]
+            return team_data[:colors]
         end 
     end 
 end 
@@ -158,21 +158,59 @@ def player_numbers(team_name)
     game_hash.map do |location, team|
         team.map do |attribute, data|
             if data.include?(team_name)
-            array << game_hash[location][attribute][team_name][:number]
-            binding.pry
+                team[:players].each do |name, stats|
+                    stats.each do |k, v|
+                        if k == :number
+                            array << v
+                        end
+                    end 
+                end 
             end 
-            return array
         end 
     end 
+    array
 end 
 
-player_numbers("Brooklyn Nets")
-
-
 def player_stats(player_name)
+  var = ""
+  game_hash.map do |location, team|
+    team.map do |attribute, data|
+      if data.include?(player_name)
+        team[:players].map do |name, stats|
+          if name == player_name
+          var = stats
+          #return stats
+          #remember to try returning hashes without implicit returns!
+          #UPDATE: did it!
+          end
+        end
+      end
+    end
+  end
+  var
+end 
 
+#game_hash[:away][:players]["Ben Gordon"][:shoe]
+def big_shoe_rebounds_NO
+  dill = game_hash[:away][:players]["Ben Gordon"]
+  game_hash.map do |location, team|
+    team[:players].map do |name, player|
+      if player[:shoe] > dill[:shoe]
+        dill = player
+      end
+    end  
+  end 
+  dill[:rebounds] 
 end 
 
 def big_shoe_rebounds
-
-end 
+  dill = nil
+  game_hash.map do |location, team|
+    team[:players].map do |name, player| 
+      if dill.nil? || player[:shoe] > dill[:shoe]
+        dill = player
+      end
+    end  
+  end 
+  dill[:rebounds] 
+end
