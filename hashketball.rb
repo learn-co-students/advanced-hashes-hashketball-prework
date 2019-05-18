@@ -191,26 +191,26 @@ def player_stats(player_name)
 end 
 
 #game_hash[:away][:players]["Ben Gordon"][:shoe]
-def big_shoe_rebounds_NO
-  dill = game_hash[:away][:players]["Ben Gordon"]
+def big_shoe_rebounds_first_attempt
+  big_foot = game_hash[:away][:players]["Ben Gordon"]
   game_hash.map do |location, team|
     team[:players].map do |name, player|
-      if player[:shoe] > dill[:shoe]
-        dill = player
+      if player[:shoe] > big_foot[:shoe]
+        big_foot = player
       end
     end  
   end 
-  dill[:rebounds] 
+  big_foot[:rebounds] 
 end 
 
 def big_shoe_rebounds
-  dill = nil
+  big_foot = nil
   game_hash.map do |location, team|
     team[:players].map do |name, player| 
-      if dill.nil? || player[:shoe] > dill[:shoe]
-        dill = player
+      if big_foot.nil? || player[:shoe] > big_foot[:shoe]
+        big_foot = player
       end
     end  
   end 
-  dill[:rebounds] 
+  big_foot[:rebounds] 
 end
