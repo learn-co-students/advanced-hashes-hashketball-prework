@@ -1,8 +1,9 @@
+require"pry"
 def game_hash 
 {
   :home => {
-    :team_name => "Brooklyn Nets"
-    :colors => ["Black", "White"]
+    :team_name => "Brooklyn Nets",
+    :colors => ["Black", "White"],
     :players => { 
       "Alan_Anderson" => {
         
@@ -13,7 +14,7 @@ def game_hash
        :assists => 12,
        :steals => 3,
        :blocks => 1,
-       :slam_dunks => 1
+       :slam_dunks => 1,
     },
   
       "Reggie_Evans" => {
@@ -25,7 +26,7 @@ def game_hash
         :assists => 12,
         :steals => 12,
         :blocks => 12,
-        :slam_dunks => 7 
+        :slam_dunks => 7, 
     },
        "Brook_Lopez" => {
          
@@ -36,7 +37,7 @@ def game_hash
         :assists => 10,
         :steals => 3,
         :blocks =>  1,
-        :slam_dunks => 15 
+        :slam_dunks => 15, 
     },
       "Mason_Plumlee" => {
         
@@ -47,7 +48,7 @@ def game_hash
         :assists => 6,
         :steals => 3,
         :blocks => 8,  
-        :slam_dunks => 5
+        :slam_dunks => 5,
     },
       "Jason_terry" => {
       
@@ -59,12 +60,12 @@ def game_hash
         :assists => 2,
         :steals => 4,
         :blocks =>  11,
-        :slam_dunks => 1
+        :slam_dunks => 1,
     },
-  }
+  },
       :away => {
-        :team_name => "Charlotte Hornets"
-        :colors => ["Turquoise, Purple"]
+        :team_name => "Charlotte Hornets",
+        :colors => ["Turquoise, Purple"],
         :players => {
         
       "Jeff Adrien" => {
@@ -76,7 +77,7 @@ def game_hash
         :assists => 1,
         :steals => 2,
         :blocks => 7,
-        :slam_dunks => 2
+        :slam_dunks => 2,
     },
       "Bismack Biyombo" => {
       
@@ -87,7 +88,7 @@ def game_hash
         :assists => 7,
         :steals => 7,
         :blocks =>  15,
-        :slam_dunks => 10
+        :slam_dunks => 10,
    },
       "DeSagna Diop" => {
       
@@ -98,7 +99,7 @@ def game_hash
         :assists => 12,
         :steals => 4,
         :blocks =>  5,
-        :slam_dunks => 5
+        :slam_dunks => 5,
    },
       "Ben Gordon" => {
         :number => 8,
@@ -108,7 +109,7 @@ def game_hash
         :assists => 2,
         :steals => 1,
         :blocks =>  1,
-        :slam_dunks => 0
+        :slam_dunks => 0,
     },
       "Brendan Haywood" =>  {
         :number => 33, 
@@ -118,15 +119,22 @@ def game_hash
         :assists => 12,
         :steals => 22,
         :blocks => 5,
-        :slam_dunks => 12
+        :slam_dunks => 12,
+        },
+      }
     }
-  } 
+  }
 }
 end
 
+def num_points_scored(players)
+  #binding.pry
+  game_hash.each do |players, points|
+    
+  
+end
 
-
-
+end
 
 
 
