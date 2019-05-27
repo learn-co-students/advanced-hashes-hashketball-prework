@@ -130,9 +130,7 @@ end
 def num_points_scored(players)
   #binding.pry
   game_hash.each do |players, points|
-    
   
-end
 
 end
 
