@@ -108,7 +108,18 @@ def game_hash
 
 
 end
-def num_points_scored(player)
+
+
+
+
+
+
+
+
+
+
+
+=begin def num_points_scored(player)
   points = ""
    game_hash.each do |key, value|
     value.each do |k, v|
@@ -128,5 +139,5 @@ end
 
 end
  points
-end
+= end end
 
