@@ -27,7 +27,7 @@ describe 'hashketball' do
 
     it 'knows the number of points scored by each player' do
       expect(num_points_scored("Jeff Adrien")).to eq(10)
-      expect(num_points_scored("Bismak Biyombo")).to eq(12)
+      expect(num_points_scored("Bismack Biyombo")).to eq(12)
       expect(num_points_scored("DeSagna Diop")).to eq(24)
       expect(num_points_scored("Ben Gordon")).to eq(33)
       expect(num_points_scored("Brendan Haywood")).to eq(6)
@@ -44,7 +44,7 @@ describe 'hashketball' do
 
     it 'knows the shoe size of each player' do
       expect(shoe_size("Jeff Adrien")).to eq(18)
-      expect(shoe_size("Bismak Biyombo")).to eq(16)
+      expect(shoe_size("Bismack Biyombo")).to eq(16)
       expect(shoe_size("DeSagna Diop")).to eq(14)
       expect(shoe_size("Ben Gordon")).to eq(15)
       expect(shoe_size("Brendan Haywood")).to eq(15)

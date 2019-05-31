@@ -109,35 +109,13 @@ def game_hash
 
 end
 
-
-
-
-
-
-
-
-
-
-
-=begin def num_points_scored(player)
-  points = ""
-   game_hash.each do |key, value|
-    value.each do |k, v|
-      if k == :players
-      v.each do |name, stats|
-        if name == player 
-          stats.each do |keys, values|
-        if keys == :points
-          points = values
-   #binding.pry
-     end
+def num_points_scored(players_name)
+  game_hash.each do |location, value|
+    value[:players].each do |attribute, value|
+       if attribute == players_name
+         return value[:points]
+       end 
    end
-  end
+  end 
 end
-end
-end
-
-end
- points
-= end end
 
