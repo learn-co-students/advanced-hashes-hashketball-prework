@@ -140,18 +140,17 @@ def team_colors(team_name)
 end
 
 def team_names
-  game_hash.each do |key|
-    key.each do |k, v|
-      if team_names == v 
-        return value[:team_name]
-        
-      end 
-    end 
+  game_hash.collect do |location, value|
+    value[:team_name]   
+  end
+end
+def players_numbers(team_name)
+  game_hash.each do |key, value|
+  value.collect do |k, v|
+    if players == v 
+      return value[:numbers]
+    
+    end
   end 
-end
-        
-        
-        
-        
-
-end
+ end
+end 
