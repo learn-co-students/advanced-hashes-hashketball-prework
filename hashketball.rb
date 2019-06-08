@@ -145,7 +145,7 @@ def team_names
   end
 end
 def player_numbers(team_name)
-  game_hash.each do |location, value|
+=begin  game_hash.each do |location, value|
   value[:players].collect do |attribute, v|
     if value[:team_name] == team_name
       # shovel jersey number into array 
@@ -154,5 +154,5 @@ def player_numbers(team_name)
          return array
     end
   end 
- end
+=end end
 end
