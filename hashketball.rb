@@ -144,13 +144,15 @@ def team_names
     value[:team_name]   
   end
 end
-def players_numbers(team_name)
-  game_hash.each do |key, value|
-  value.collect do |k, v|
-    if players == v 
-      return value[:numbers]
-    
+def player_numbers(team_name)
+  game_hash.each do |location, value|
+  value[:players].collect do |attribute, v|
+    if value[:team_name] == team_name
+      # shovel jersey number into array 
+       v[:number].collect(player_numbers)
+       array << player_numbers
+         return array
     end
   end 
  end
-end 
+end
