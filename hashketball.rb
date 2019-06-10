@@ -173,5 +173,15 @@ def player_stats(players_name)
 return stats_hash
 end
 def big_shoe_rebounds
-  
-end 
+  largest_shoe = {}
+  game_hash.each do |location, value|
+   value[:players].each do |k, v|
+     v[:shoe].each do |shoe_size|
+       if shoe_size == :shoe 
+         var = v[:shoe].max.collect(shoe_size)
+    end    
+   end     
+  end 
+ end 
+end
+
