@@ -150,20 +150,33 @@ def player_numbers(team_name)
      if value[:team_name] == team_name
        var = value[:players].collect do |attribute, v|
        v[:number] 
-    end
-  end 
-end
-  var
-end
-def player_stats(players_name)
- game_hash.each do |location, value|
-   value.each do |k, v|
-     if k == :players
-       v.each do |name, stats|
-     binding.pry
-  
-        end
       end
     end 
-  end 
+  end
+     var
+end
+
+def merge_players
+  game_hash[:home][:players].merge
+  (game_hash[:away][:players])
+end
+def player_stats(players_name)
+  merge_players[players_name]
+  
+ binding.pry
+#     stats_hash = nil
+#     game_hash.each do |location, value|
+#     value.each do |k, v|
+#       if k == :players
+#       v.each do |name, stats|
+#       if players_name == name  
+#             #binding.pry
+#             stats_hash = stats
+#           end
+#         end
+#       end
+#     end 
+#   end 
+  
+# return stats_hash
 end
