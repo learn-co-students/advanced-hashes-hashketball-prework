@@ -5,10 +5,11 @@
 
 
 def game_hash 
-  home = {
+  {
+  :home => {
     :team_name => "Brooklyn Nets", 
     :colors => ["Black", "White"],
-    :players => [
+    :players => {
       :Alan_Anderson => {
         :number => "0", 
         :shoe => "16", 
@@ -54,12 +55,12 @@ def game_hash
         :steals => "4", 
         :blocks => "11", 
         :slam_dunks => "1"}
-      ]
+    }
   },
-  away = {
+  :away => {
     :team_name => "Charlotte Hornets", 
     :colors => ["Turquoise", "Purple"], 
-    :players => [
+    :players => {
       :Jeff_Adrien => {
         :number => "4", 
         :shoe => "18", 
@@ -107,20 +108,11 @@ def game_hash
       :steals => "7", 
        :blocks => "5", 
        :slam_dunks => "12"}
-      ]}
+      }
+}
+}
+end
 
-end 
-
-
-#method #2 
-
-def num_points_scored (player_name)
-  game_hash.collect do |place, team, person, data_name, data|
-   if person == player_name
-     return data[:points]
-   end 
- end 
- end 
 
 
 
