@@ -177,7 +177,7 @@ end
   
 # Method 7
 def player_stats(name)
-  stats_hash = {}
+  stats = {}
   game_hash.map do |place, team|
     team.each do |info, property|
       next unless info == :players
@@ -185,20 +185,19 @@ def player_stats(name)
       game_hash[place][info].each do |player|
         next unless player[:player_name] == name
 
-        stats_hash = player.delete_if do |key, value|
+        stats = player.delete_if do |key, value|
           key == :player_name
         end
       end
     end
   end
-  stats_hash
+  stats
 end
 
 # Method 8
 def big_shoe_rebounds
   shoes = 0
   rebounds = 0
-
   game_hash.each do |team, info|
     info[:players].each do |player|
       if player[:shoe] > shoes
@@ -211,4 +210,18 @@ def big_shoe_rebounds
   rebounds
 end
 
+  def most_points_scored 
+    most_points = []
+  game_hash.each do |location, team_data|
+        team_data[:players].each do |player, player_stats|
+          if player_stats == [:points]
+            most_points >> player_stats[:points]
+        most_points.sort 
+        most_points[-1]
+      end
+    end 
+  end 
+end 
+
       
+    
