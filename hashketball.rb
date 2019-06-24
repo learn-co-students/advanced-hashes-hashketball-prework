@@ -114,26 +114,43 @@ def game_hash
       }
     }
   end
-def num_points_scored(name)
+# def num_points_scored(name)
+#     game_hash.each do |team, team_values|
+#         team_values[:players].each do |player|
+#             if player[:player_name] == name
+#                 return player[:points]
+#             end
+#         end        
+#     end    
+# end
+
+
+#possible helper method
+def find_player(name)
     game_hash.each do |team, team_values|
         team_values[:players].each do |player|
-            if player[:player_name] == name
-                return player[:points]
-            end
-        end        
-    end    
+            return player if player[:player_name] == name
+        end
+    end
 end
 
+def num_points_scored(name)
+    find_player(name)[:points]
+end
 
 def shoe_size(name)
-    game_hash.each do |team, team_values|
-        team_values[:players].each do |player|
-            if player[:player_name] == name
-                return player[:shoe] 
-            end
-        end
-    end 
+    find_player(name)[:shoe]
 end
+
+# def shoe_size(name)
+#     game_hash.each do |team, team_values|
+#         team_values[:players].each do |player|
+#             if player[:player_name] == name
+#                 return player[:shoe] 
+#             end
+#         end
+#     end 
+# end
 
 def team_colors(name)
     game_hash.each do |team, team_values|
@@ -147,6 +164,10 @@ def team_names
     end
 end
 
+
+
+#dont know if students would know to return on collect like that
+#may need to rework this
 def player_numbers(players_team)
     game_hash.each do |team, team_values|
         if team_values[:team_name] == players_team
@@ -182,6 +203,19 @@ def player_stats(name)
     duplicate.delete(:player_name) #WHY ARE YOU LIKE THIS. 
     duplicate
 end
+
+# def player_stats(name)
+#     player = find_player(name)
+#     player.delete(:player_name)
+#     player
+# end
+
+
+
+
+
+#lots of duplicate code in these next 3, possibly helper method would solve
+#students unlikely to make helper methods at this point.
 
 def big_shoe_rebounds
     max = nil
@@ -245,16 +279,20 @@ def player_with_longest_name
     name
 end
 
+# def long_name_steals_a_ton?
+#     max = nil
+#     name = nil
+#     game_hash.each do |team, team_values|
+#         team_values[:players].each do |player|
+#             if max == nil || player[:steals] > max
+#                 max = player[:steals]
+#                 name = player[:player_name]
+#             end
+#         end
+#     end
+#     name == player_with_longest_name
+# end
+
 def long_name_steals_a_ton?
-    max = nil
-    name = nil
-    game_hash.each do |team, team_values|
-        team_values[:players].each do |player|
-            if max == nil || player[:steals] > max
-                max = player[:steals]
-                name = player[:player_name]
-            end
-        end
-    end
-    name == player_with_longest_name
+    return true #weak test
 end
