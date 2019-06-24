@@ -157,31 +157,31 @@ def player_numbers(players_team)
     end
 end
 
+# def player_stats(name)
+#     result = {}
+#     game_hash.each do |team, team_values|
+#       team_values[:players].each do |player|
+#         if player[:player_name] == name
+#           player.each do |key, value|
+#             result[key] = value unless key == :player_name
+#           end
+#         end
+#       end
+#     end
+#     result
+#   end
 def player_stats(name)
-        result = {}
+    duplicate = nil
     game_hash.each do |team, team_values|
         team_values[:players].each do |player|
             if player[:player_name] == name
-                player.each do |key, value|
-                     result[key] = value unless result[key] == player_name.to_sym
-                 end
+                duplicate = player
             end
         end
-    end
-  result
+    end 
+    duplicate.delete(:player_name) #WHY ARE YOU LIKE THIS. 
+    duplicate
 end
-# def player_stats(name)
-#     duplicate = nil
-#     game_hash.each do |team, team_values|
-#         team_values[:players].each do |player|
-#             if player[:player_name] == name
-#                 duplicate = player
-#             end
-#         end
-#     end 
-#     duplicate.delete(:player_name)
-#     duplicate
-# end
 
 def big_shoe_rebounds
     max = nil
@@ -232,4 +232,29 @@ end
 
 
 def player_with_longest_name
+    max = nil
+    name = nil
+    game_hash.each do |team, team_values|
+        team_values[:players].each do |player|
+            if max == nil || player[:player_name].length > max
+                max = player[:player_name].length
+                name = player[:player_name]
+            end
+        end
+    end
+    name
+end
+
+def long_name_steals_a_ton?
+    max = nil
+    name = nil
+    game_hash.each do |team, team_values|
+        team_values[:players].each do |player|
+            if max == nil || player[:steals] > max
+                max = player[:steals]
+                name = player[:player_name]
+            end
+        end
+    end
+    name == player_with_longest_name
 end
