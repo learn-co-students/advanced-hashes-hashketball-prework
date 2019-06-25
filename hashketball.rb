@@ -114,42 +114,46 @@ def game_hash
       }
     }
   end
-# def num_points_scored(name)
-#     game_hash.each do |team, team_values|
-#         team_values[:players].each do |player|
-#             if player[:player_name] == name
-#                 return player[:points]
-#             end
-#         end        
-#     end    
-# end
-
-
-#possible helper method
-def find_player(name)
-    game_hash.each do |team, team_values|
-        team_values[:players].each do |player|
-            return player if player[:player_name] == name
-        end
-    end
-end
 
 def num_points_scored(name)
-    find_player(name)[:points]
+    game_hash.each do |team, team_values|
+        team_values[:players].each do |player|
+            if player[:player_name] == name
+                return player[:points]
+            end
+        end        
+    end    
 end
+
 
 def shoe_size(name)
-    find_player(name)[:shoe]
+    game_hash.each do |team, team_values|
+        team_values[:players].each do |player|
+            if player[:player_name] == name
+                return player[:shoe] 
+            end
+        end
+    end 
 end
 
-# def shoe_size(name)
+
+#possible alternatives using helper method. I wouldnt expect students to be able to write or understand
+#the purpose of helper methods at this point
+
+# def find_player(name)
 #     game_hash.each do |team, team_values|
 #         team_values[:players].each do |player|
-#             if player[:player_name] == name
-#                 return player[:shoe] 
-#             end
+#             return player if player[:player_name] == name
 #         end
-#     end 
+#     end
+# end
+
+# def num_points_scored(name)
+#     find_player(name)[:points]
+# end
+
+# def shoe_size(name)
+#     find_player(name)[:shoe]
 # end
 
 def team_colors(name)
@@ -204,6 +208,8 @@ def player_stats(name)
     duplicate
 end
 
+
+#using the helper method
 # def player_stats(name)
 #     player = find_player(name)
 #     player.delete(:player_name)
