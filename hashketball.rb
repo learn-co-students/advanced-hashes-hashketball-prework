@@ -1,11 +1,13 @@
 # Write your code here!
+require 'pry'
+
 def game_hash
     {
         :home =>{
-            :team_name => "Brooklyn Nets"
+            :team_name => "Brooklyn Nets",
             :colors => ["Black", "White"],
             :players => [
-                :Alan_Anderson => {
+                {   :player_name => "Alan Anderson",
                     :number => 0,
                     :shoe => 16,
                     :points => 22,
@@ -15,7 +17,7 @@ def game_hash
                     :blocks => 1,
                     :slam_dunks => 1
                 },
-                :Reggie_Evans => {
+                {   :player_name => "Reggie Evans",
                     :number => 30,
                     :shoe => 14,
                     :points => 12,
@@ -25,7 +27,7 @@ def game_hash
                     :blocks => 12,
                     :slam_dunks => 1
                 },
-                :Brook_Lopez => {
+                {   :player_name => "Brook Lopez",
                     :number => 11,
                     :shoe => 17,
                     :points => 17,
@@ -35,7 +37,7 @@ def game_hash
                     :blocks => 1,
                     :slam_dunks => 15
                 },
-                :Jason_Terry => {
+                {   :player_name => "Jason Terry",
                     :number => 31,
                     :shoe => 15,
                     :points => 19,
@@ -45,7 +47,7 @@ def game_hash
                     :blocks => 11,
                     :slam_dunks => 1
                 },
-                :Mason_Plumlee => {
+                {   :player_name => "Mason Plumlee",
                     :number => 1,
                     :shoe => 19,
                     :points => 26,
@@ -58,64 +60,70 @@ def game_hash
             ]
         },
         :away => {
-            :team_name => "Charlotte Hornets"
+            :team_name => "Charlotte Hornets",
             :colors => ["Turquoise", "Purple"],
             :players => [
-                {:Jeff_Adrien => {
-                    :number => 
-                    :shoe =>
-                    :points =>
-                    :rebounds => 
-                    :assists => 
-                    :steals =>
-                    :blocks =>
-                    :slam_dunks =>
-                    }
+                :Jeff_Adrien => {
+                    :number => 4,
+                    :shoe => 18,
+                    :points => 10,
+                    :rebounds => 1,
+                    :assists => 1,
+                    :steals => 2,
+                    :blocks => 7,
+                    :slam_dunks => 2
+                    },
+                :Bismack_Biyombo => {
+                    :number => 0,
+                    :shoe => 16,
+                    :points => 12,
+                    :rebounds => 4,
+                    :assists => 7,
+                    :steals => 22,
+                    :blocks => 15,
+                    :slam_dunks => 10
+                    },
+                :DeSagna_Diop => {
+                    :number => 2,
+                    :shoe => 14,
+                    :points => 24,
+                    :rebounds => 12,
+                    :assists => 12,
+                    :steals => 4,
+                    :blocks => 5,
+                    :slam_dunks => 5
+                    },
+                :Ben_Gordon => {
+                    :number => 8,
+                    :shoe => 15,
+                    :points => 33,
+                    :rebounds => 3,
+                    :assists => 2,
+                    :steals => 1,
+                    :blocks => 1,
+                    :slam_dunks => 0
                 },
-                {:Alan_Anderson => {
-                    :number => 
-                    :shoe =>
-                    :points =>
-                    :rebounds => 
-                    :assists => 
-                    :steals =>
-                    :blocks =>
-                    :slam_dunks =>
-                    }
-                },
-                {:Alan_Anderson => {
-                    :number => 
-                    :shoe =>
-                    :points =>
-                    :rebounds => 
-                    :assists => 
-                    :steals =>
-                    :blocks =>
-                    :slam_dunks =>
-                                }                },
-                :Alan_Anderson => {
-                    :number => 
-                    :shoe =>
-                    :points =>
-                    :rebounds => 
-                    :assists => 
-                    :steals =>
-                    :blocks =>
-                    :slam_dunks =>
-                },
-                :Alan_Anderson => {
-                    :number => 
-                    :shoe =>
-                    :points =>
-                    :rebounds => 
-                    :assists => 
-                    :steals =>
-                    :blocks =>
-                    :slam_dunks =>
+                :Kemba_Walker => {
+                    :number => 33,
+                    :shoe => 15,
+                    :points => 6,
+                    :rebounds => 12,
+                    :assists => 12,
+                    :steals => 7,
+                    :blocks => 5,
+                    :slam_dunks => 12
                 }
             ]
         }
     }
+end
+
+def num_points_scored(name)
+    game_hash.each do |team, team_info|
+        team_info[:players].each do |player|
+           if player[:player_name] == name
+        end
+    end
 end
 
 
