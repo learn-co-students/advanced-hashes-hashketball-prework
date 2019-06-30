@@ -276,7 +276,7 @@ describe 'bonus' do
 
 end
 
-describe 'super bonus' do
+ describe 'super bonus' do
 
   describe '#long_name_steals_a_ton?' do
 
