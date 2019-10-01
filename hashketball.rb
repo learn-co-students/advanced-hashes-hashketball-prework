@@ -137,6 +137,39 @@ def num_points_scored(player_name)
   end
 end
 
+def shoe_size(player_name)
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+    team[:players].each do |player_stats|
+      if player_stats[:player_name] == player_name
+        return player_stats[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  array = []
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+    next if team[:team_name] != team_name    
+    array = team[:colors]      
+  end
+  array
+end
+
+def player_numbers(player_name)
+  array = []
+  game_hash = game_hash()
+  game_hash.each do |place, team|     
+    next if team[:team_name] != team_name    
+    team[:players].each do |player_numbers|
+      array.push(player_numbers[:number])
+    end  
+  end
+  array
+end
+
 def most_points_scored()
   hash = {}
   game_hash = game_hash()
