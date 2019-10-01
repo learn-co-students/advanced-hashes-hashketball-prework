@@ -35,7 +35,7 @@ def game_hash()
                             :number => 1,
                             :shoe => 19,
                             :points => 26,
-                            :rebounds => 12,
+                            :rebounds => 11,
                             :assists => 6,
                             :steals => 3,
                             :blocks => 8,
@@ -68,7 +68,7 @@ def game_hash()
                     :points => 12,
                     :rebounds => 4,
                     :assists => 7,
-                    :steals => 7,
+                    :steals => 22,
                     :blocks => 15,
                     :slam_dunks => 10},
                    {:player_name => "DeSagna Diop",
@@ -95,7 +95,7 @@ def game_hash()
                     :points => 6,
                     :rebounds => 12,
                     :assists => 12,
-                    :steals => 22,
+                    :steals => 7,
                     :blocks => 5,
                     :slam_dunks => 12}]
     }
@@ -210,20 +210,17 @@ def most_points_scored()
 end
 
 def winning_team()
-  hash = {}
-  points = 0
+  point_hash = {}
+  total = 0
   game_hash = game_hash()
-  game_hash.each do |place, team| 
-    team.each do |key, value|
-      if key == :players          
-        value.each do |data|  
-        points += data[:points]                               
-        end
-         hash[team[:team_name]]  =   points
-      end      
-    end
-  end
-  return hash.max_by{|k,v| v}[0]
+  game_hash.each do |place, team|                
+    team[:players].each do |stats|            
+       total += stats[:points]           
+    end  
+    point_hash[team[:team_name]] = total
+  end  
+  
+  point_hash.key(point_hash.values.max)
 end
 
 
