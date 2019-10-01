@@ -149,6 +149,7 @@ def shoe_size(player_name)
 end
 
 def team_colors(team_name)
+ =begin
   array = []
   game_hash = game_hash()
   game_hash.each do |place, team| 
@@ -156,6 +157,7 @@ def team_colors(team_name)
     array = team[:colors]      
   end
   array
+  =end
 end
 
 def team_names()
@@ -211,9 +213,10 @@ end
 
 def winning_team()
   point_hash = {}
-  total = 0
+  
   game_hash = game_hash()
-  game_hash.each do |place, team|                
+  game_hash.each do |place, team|      
+    total = 0
     team[:players].each do |stats|            
        total += stats[:points]           
     end  
@@ -221,6 +224,45 @@ def winning_team()
   end  
   
   point_hash.key(point_hash.values.max)
+end
+
+def player_with_longest_name()
+  player_hash = {}
+  total = 0
+  game_hash = game_hash()
+  game_hash.each do |place, team|                
+    team[:players].each do |stats|            
+       player_hash[stats[:player_name]] = stats[:player_name].length     
+    end  
+    
+  end  
+  
+  player_hash.key(player_hash.values.max)
+end
+
+def most_steals()
+hash = {}
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+    team.each do |key, value|
+      if key == :players          
+        value.each do |data|  
+          hash[data[:player_name]]  = data[:steals]
+        end
+      end      
+    end
+  end
+  return hash.max_by{|k,v| v}[0]
+end
+
+def long_name_steals_a_ton?
+  most_steals = most_steals()
+  player_with_longest_name = player_with_longest_name()
+
+
+  if player_with_longest_name == most_steals
+    return true  
+  end  
 end
 
 
