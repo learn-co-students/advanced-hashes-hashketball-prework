@@ -62,7 +62,7 @@ def game_hash()
                     :steals => 2,
                     :blocks => 7,
                     :slam_dunks => 2},
-                   {:player_name => "Bismak Biyombo",
+                   {:player_name => "Bismack Biyombo",
                     :number => 0,
                     :shoe => 16,
                     :points => 12,
@@ -89,7 +89,7 @@ def game_hash()
                     :steals => 1,
                     :blocks => 1,
                     :slam_dunks => 0},
-                   {:player_name => "Brendan Haywood",
+                   {:player_name => "Kemba Walker",
                     :number => 33,
                     :shoe => 15,
                     :points => 6,
@@ -158,16 +158,40 @@ def team_colors(team_name)
   array
 end
 
-def player_numbers(player_name)
+def team_names()
+  array = []
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+    array.push(team[:team_name]) 
+  end
+  array
+end
+
+def player_numbers(team_name)
   array = []
   game_hash = game_hash()
   game_hash.each do |place, team|     
     next if team[:team_name] != team_name    
-    team[:players].each do |player_numbers|
-      array.push(player_numbers[:number])
+    team[:players].each do |player|
+      array.push(player[:number])
     end  
   end
   array
+end
+
+def player_stats(player_name)
+  player_hash = {}
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+        
+       
+    team[:players].each do |player|
+      next if player[:player_name] != player_name 
+      player_hash = player
+      player_hash.delete(:player_name)
+    end  
+  end
+  player_hash
 end
 
 def most_points_scored()
