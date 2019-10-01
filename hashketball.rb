@@ -149,15 +149,15 @@ def shoe_size(player_name)
 end
 
 def team_colors(team_name)
- =begin
   array = []
   game_hash = game_hash()
   game_hash.each do |place, team| 
     next if team[:team_name] != team_name    
-    array = team[:colors]      
+    array = team[:colors]   
+    # another way of writing using collect
+    # return team[:colors].collect do |color| color 
   end
   array
-  =end
 end
 
 def team_names()
@@ -194,6 +194,26 @@ def player_stats(player_name)
     end  
   end
   player_hash
+end
+
+def big_shoe_rebounds()
+  hash = {}
+  game_hash = game_hash()
+  game_hash.each do |place, team| 
+    team[:players].each do |players|
+    # puts players[:player_name]
+      hash[players[:player_name]] = players[:shoe]
+    end      
+  end
+
+  player_name = ""
+  player_name = hash.key(hash.values.max)
+  game_hash.each do |place, team| 
+    team[:players].each do |player|
+      next if player[:player_name] != player_name
+      return player[:rebounds]
+    end
+  end
 end
 
 def most_points_scored()
