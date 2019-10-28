@@ -102,38 +102,28 @@ def game_hash
   }
 end
 
-#def num_points_scored(player_name)
-#  game_hash.index(player_name)
-  
-  
-  
-#end
+=begin
 
+def num_points_scored(player_name)
+  game_hash.each.do |home_away, team|
+    team.each do |team_thing, team_thing_value|
+      
+      if team_thing = :players
+        team_thing_value.each do |p_thing, p_thing_value|
+          p_thing_value.each do |key, value|
+            
+            if p_thing_value == player_name
+              return team_thing[:points]
+            end
+            
+          end
+        end
+      end
+      
+    end
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=end
 
 
 
@@ -223,6 +213,8 @@ def big_shoe_rebounds
   num_rebounds
 end
 
+=begin
+
 # # Bonus Questions
 
 # # Since there are multiple bonus questions that ask me
@@ -287,3 +279,5 @@ end
 def long_name_steals_a_ton?
   player_with_most_of(:steals) == player_with_most_of(:player_name)
 end
+
+=end
