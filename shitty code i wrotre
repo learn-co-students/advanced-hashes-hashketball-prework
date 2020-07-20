@@ -1,0 +1,55 @@
+def num_points_scored(player_name)
+
+
+  
+  all_players = game_hash.values.collect do |team|
+    team[players:]
+  end.flatten
+  
+  all_players.each do |player|
+  return player[points:] if player[player_name:] == player_name
+  
+end
+
+end
+
+
+def team_colors(name)
+  game_hash.each do |location, team_data|
+  if game_hash.values.include?[name]
+    
+    team_data.each do |attribute, value| 
+      
+      if attribute == [:colors]
+        
+        return value 
+      end 
+    end 
+  end 
+end 
+end 
+
+
+
+
+
+def most_points_scored 
+   points_data = [] 
+   most_points = nil
+   
+   name = nil 
+      game_hash.each do |location, team_data|
+      team_data[:players].each do |attribute, data|
+      points_data.push(data[:points])
+      most_points = points_data.sort(-1)
+    end 
+  end 
+  game_hash.each do |location, team_data|
+    name = team_data[:players].each do |name, stats|
+      if stats[:points] == most_points
+     return name 
+   end 
+ end 
+ end 
+end 
+
