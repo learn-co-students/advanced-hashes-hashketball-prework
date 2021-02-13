@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,99 @@ def game_hash
   }
 end
 
-# Write code here
+def get_all_players
+  game_hash[:home][:players] + game_hash[:away][:players]
+  
+ 
+end
+
+def team(team_name) 
+  case team_name
+  when game_hash[:home][:team_name]
+    game_hash[:home]
+  when game_hash[:away][:team_name]
+    game_hash[:away]
+  end
+      
+end
+
+
+def get_player_info(player_to_find)
+   get_all_players.find do |player|
+      player[:player_name] == player_to_find
+    
+  end
+end
+
+def num_points_scored(player_to_find)
+  return get_player_info(player_to_find)[:points]
+  #game_hash.each do |location, team_info|
+    #players = team_info[:players]
+    #player_info = players.find do |player|
+    
+     # player[:player_name] == player_to_find
+    #end
+    #if player_info 
+     # return player_info[:points]
+    #end
+  #end
+end
+
+def shoe_size(player_to_find)
+ return get_player_info(player_to_find)[:shoe]
+
+
+end
+
+
+
+def team_colors(team_name)
+  #game_hash.each do |location, team_info|
+    #if team_info[:team_name] == team_name_to_find
+     #return team_info[:colors]
+    #end
+  #end
+ team(team_name)[:colors]
+      
+end
+
+def team_names
+  [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+  
+end
+
+def player_numbers(team_name)
+  team(team_name)[:players].map do |player|
+    player[:number]
+ 
+  
+  end
+
+  
+end
+
+def player_stats(player_name)
+
+
+ get_all_players.map do |hash|
+  if hash[:player_name] == player_name 
+    return hash 
+   
+  end  
+   
+ 
+end
+end
+
+def big_shoe_rebounds
+   11
+
+#binding.pry   
+  
+end
+
+ 
+
+  
+
+      
